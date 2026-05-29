@@ -1,149 +1,118 @@
-﻿# Rice Box Online Operations Manual
+# Rice Box Online Operations Manual
 
-## Operating Principle
+This manual is written for a home-based online rice box shop selling from 09:00 to 15:00.
 
-Every box must be hot, clean, correct, attractive, and delivered within the promised time window. Speed matters, but consistency matters more because the business depends on repeat orders and investor trust.
+## Daily Working Hours
 
-## Daily Timeline
+The store is open to customers from 09:00 to 15:00, but kitchen work starts earlier.
 
-### 05:00 Ingredient Receiving
+| Time | Task |
+| --- | --- |
+| 04:45 | Wake up, check pre-orders, check cash, open the shopping list. |
+| 05:00 | Buy ingredients from market, Makro, or selected supplier. |
+| 06:00 | Return home, sanitize kitchen, separate raw and dry goods. |
+| 06:30 | Cook rice. Start with 3.3 kg raw rice for a 30-box plan. |
+| 06:45 | Wash vegetables, pick basil, chop garlic and chili, prepare sauces. |
+| 07:15 | Portion pork and eggs by menu. |
+| 08:00 | Prepare cooking stations, labels, boxes, bags, and online menu stock. |
+| 08:45 | Open daily menu on LINE/Facebook/platform. Confirm prices and stock. |
+| 09:00 | Start selling. Accept only the order volume the kitchen can finish safely. |
+| 10:30 | First QC round: weight, appearance, cleanliness, label, and seal. |
+| 11:00 | Delivery or rider pickup for lunch orders. |
+| 12:00 | Short break, check remaining ingredients, prepare afternoon batch. |
+| 13:00 | Continue afternoon orders. Hide menu items that are nearly out of stock. |
+| 14:00 | Stop taking slow or fried-heavy menu items. |
+| 14:30 | Last normal order cut-off. |
+| 15:00 | Close shop, summarize sales, platform fee, waste, and tomorrow purchase list. |
+| 15:30 | Clean kitchen, sanitize surfaces, store safe ingredients using FIFO. |
 
-- Check supplier name, delivery time, temperature, weight, and visible quality.
-- Reject damaged packaging or ingredients with abnormal smell, color, or texture.
-- Record lot number or delivery note.
-- Store ingredients using FIFO.
+## Core Menu
 
-### 06:00 Prep Setup
+Start with only 4 menus. Do not launch too many menus on day one.
 
-- Sanitize prep tables, tools, containers, and scales.
-- Assign stations: rice, protein, vegetables, sauce, packing, QC.
-- Confirm production forecast from order count and expected walk-in demand.
+1. Krapao Moo Sap Kai Dao - ข้าวกะเพราหมูสับไข่ดาว
+2. Moo Pad Nam Mun Hoy - ข้าวหมูผัดน้ำมันหอย
+3. Khao Pad Moo - ข้าวผัดหมู
+4. Moo Kratiem Kai Dao - ข้าวหมูกระเทียมไข่ดาว
 
-### 07:00 Cooking Preparation
+## 30-Box Daily Production Mix
 
-- Cook rice in planned batches.
-- Prepare sauces and marinades.
-- Pre-portion vegetables and proteins.
-- Keep raw and cooked ingredients separated.
+| Menu | Boxes |
+| --- | ---: |
+| Krapao Moo Sap Kai Dao | 10 |
+| Moo Pad Nam Mun Hoy | 7 |
+| Khao Pad Moo | 8 |
+| Moo Kratiem Kai Dao | 5 |
+| Total | 30 |
 
-### 09:30 Production Window
+This mix is balanced for a home kitchen because the ingredients overlap and the cooking methods are familiar.
 
-- Prepare boxes according to order list.
-- Use portion control tools for cost consistency.
-- Keep finished food in safe holding temperature.
-- Move completed boxes to QC station.
+## Daily Shopping List for 30 Boxes
 
-### 10:30 Quality Control
+| Item | Quantity | Budget |
+| --- | ---: | ---: |
+| Jasmine rice or white rice | 3.3 kg | 125 THB |
+| Minced pork and sliced pork | 2.9 kg | 500 THB |
+| Eggs size 2-3 | 26 eggs | 135 THB |
+| Basil, chili, garlic | 1 large set | 160 THB |
+| Vegetables, onion, carrot, spring onion, cucumber | 4-5 kg total | 250 THB |
+| Oil, oyster sauce, soy sauce, fish sauce, sugar | Daily average | 220 THB |
+| Rice boxes, lids, spoons, bags, paper liner | 35 sets | 230 THB |
+| Gas, electricity, water, ice, small supplies | Daily average | 180 THB |
+| Buffer for price increase or extra orders | Reserve | 200 THB |
+| Recommended cash to carry |  | 2,000 THB |
 
-QC must check:
+## Station Setup
 
-- Correct menu and add-ons.
-- Portion weight.
-- Visual presentation.
-- Sauce placement.
-- Packaging cleanliness.
-- Label correctness.
-- Seal quality.
+### Rice Station
 
-### 10:45 Route Packing
+- Cook enough rice for 30 boxes plus 10% buffer.
+- Keep rice covered.
+- Do not mix old rice with fresh rice unless using it for fried rice within safe handling rules.
 
-- Group orders by building, office, and delivery route.
-- Assign rider and delivery batch.
-- Use insulated delivery bags.
-- Confirm customer contact and delivery note.
+### Protein Station
 
-### 11:15-12:00 Delivery Window
+- Separate minced pork and sliced pork.
+- Portion pork by menu before service starts.
+- Keep raw pork cold until cooking.
 
-- Deliver within the promised lunch window.
-- Notify customer when the rider is near.
-- Record late delivery causes.
+### Sauce Station
 
-### 13:00 Review
+- Prepare a standard sauce base for speed.
+- Keep sauce bottles labelled.
+- Do not let raw meat utensils touch cooked food or sauce containers.
 
-- Record sold boxes, unsold food, refunds, complaints, and customer feedback.
-- Update menu notes for next production day.
+### Packing Station
 
-## Hygiene Standards
+- Keep boxes, lids, spoons, tissue, bags, and labels ready before opening.
+- Pack one order at a time.
+- Check customer name and channel before handing off.
 
-- Staff must wear hair cover, mask, apron, and gloves.
-- Wash hands before starting work and after touching raw ingredients, phone, cash, trash, or face.
-- Separate cutting boards for raw meat, cooked food, and vegetables.
-- Sanitize high-touch surfaces every 4 hours.
-- Keep food covered when not actively preparing.
+## Quality Control Checklist
 
-## Inventory Rules
+Every box must pass:
 
-- Use FIFO.
-- Keep daily stock count.
-- Track high-cost ingredients separately.
-- Record waste by menu and reason.
-- Keep backup suppliers for rice, protein, packaging, and vegetables.
+- Correct menu.
+- Correct add-ons.
+- Correct channel price.
+- Rice portion looks full but not overpacked.
+- Protein portion is consistent.
+- Box is clean outside.
+- Lid is sealed.
+- Spoon and tissue are included.
+- Customer name or order code is attached.
 
-## Order Handling
+## Daily Closing Checklist
 
-1. Receive order from the PWA or admin channel.
-2. Confirm menu, customer name, delivery address, phone number, and time window.
-3. Generate kitchen ticket.
-4. Prepare and QC.
-5. Seal and label.
-6. Assign route.
-7. Deliver and mark complete.
-8. Ask for feedback.
+- Count total boxes sold.
+- Separate direct sales and platform sales.
+- Record platform fee estimate.
+- Count food waste.
+- Record ingredient prices for the day.
+- Plan tomorrow's purchase list.
+- Clean kitchen and tools.
+- Put cash profit into the store account.
 
-## Customer Service Policy
+## Practical Rule
 
-- Reply to customer messages within 3 minutes during business hours.
-- If a box is wrong or unsafe, replace it or refund it.
-- If delivery is late beyond the accepted threshold, offer a recovery coupon.
-- Record every complaint with root cause and corrective action.
-
-## Pilot Staffing
-
-For 50-100 boxes per day:
-
-- 1 kitchen lead.
-- 1 rice and protein prep staff.
-- 1 packing and QC staff.
-- 1 admin/order coordinator.
-- 1-2 riders depending on route density.
-
-## Launch Readiness Checklist
-
-- Menu cost sheet is complete.
-- Supplier list and backup supplier list are complete.
-- Packaging stock is ready for at least 7 production days.
-- Kitchen hygiene checklist is printed.
-- QC checklist is visible at packing station.
-- Delivery route plan is tested.
-- Customer feedback form is ready.
-- Daily reporting template is ready.
-
-## Incident Response
-
-For food safety incidents:
-
-1. Stop selling the affected menu.
-2. Identify ingredient lot and production batch.
-3. Contact affected customers if needed.
-4. Document root cause.
-5. Correct process before reopening the menu.
-
-For delivery failures:
-
-1. Contact customer immediately.
-2. Offer replacement, refund, or coupon.
-3. Record rider, route, and delay reason.
-4. Adjust future route planning.
-
-## Daily Report Template
-
-- Date:
-- Total orders:
-- Revenue:
-- Average order value:
-- Top menu:
-- Late deliveries:
-- Complaints:
-- Refunds:
-- Waste:
-- Notes for tomorrow:
+If the shop cannot finish orders while keeping the kitchen clean, reduce the number of available menus or close the platform temporarily. Consistency is more important than taking every order.

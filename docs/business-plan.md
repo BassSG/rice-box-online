@@ -1,135 +1,131 @@
-﻿# Rice Box Online Business Plan
+# Rice Box Online Business Plan
 
-## Executive Summary
+## Concept
 
-Rice Box Online is a premium Thai rice box delivery concept built around a Progressive Web App (PWA). The business focuses on office workers, health-conscious customers, meetings, seminars, and small corporate catering. The product promise is simple: hot food, clean preparation, clear nutrition, predictable delivery, and a purchase flow that feels like a mobile app without requiring an app store download.
+Rice Box Online is a home-based online rice box shop focused on familiar Thai menus that can be cooked repeatedly from a small kitchen. The first goal is not to look like a large restaurant. The first goal is to sell reliably, control cost, collect repeat customers, and prove that the owner can run the operation every day.
 
-The first commercial objective is to validate demand in a focused delivery zone before scaling. The website demonstrates the core customer journey, menu positioning, operating plan, investor narrative, and launch checklist.
+## Sales Window
 
-## Target Customers
+- Customer-facing sales time: 09:00-15:00.
+- Kitchen preparation starts: 04:45.
+- Recommended last order: 14:30.
+- Operating days for forecast: 26 days per month.
 
-1. Office workers who need reliable lunch delivery during a short lunch break.
-2. Health-conscious customers who want visible calories, clean ingredients, and balanced portions.
-3. Corporate teams that need recurring lunch sets or meeting meals.
-4. Event and seminar organizers who need attractive, consistent, easy-to-distribute boxed meals.
+## Starting Position
 
-## Value Proposition
+The business should start with 30 boxes per day. This is small enough for a home kitchen but large enough to test real demand.
 
-- Premium rice boxes that look professional enough for corporate use.
-- App-like ordering through a PWA that can be installed on mobile devices.
-- Custom rice box builder with transparent price and calorie calculation.
-- Standard operating procedures for kitchen preparation, quality control, packing, and route planning.
-- Eco-friendly packaging as a brand and procurement advantage.
+## Menu Strategy
 
-## Product Line
+The first menu set uses familiar Thai dishes:
 
-### Core Menu
+- ข้าวกะเพราหมูสับไข่ดาว
+- ข้าวหมูผัดน้ำมันหอย
+- ข้าวผัดหมู
+- ข้าวหมูกระเทียมไข่ดาว
 
-- Chicken Teriyaki Rice Box: accessible, high-protein, low-risk launch item.
-- Japanese Beef Rice Box: premium ticket item for margin and positioning.
-- Grilled Salmon Rice Box: premium health-oriented menu for corporate and investor presentation.
+These menus share ingredients such as rice, pork, egg, garlic, sauces, and vegetables. This keeps purchasing simple and reduces waste.
 
-### Custom Box
+## Channel Strategy
 
-Customers can choose rice, main dish, side dishes, and add-ons. The system should eventually save preferences, repeat orders, and subscription plans.
+Use two price systems:
 
-### Subscription
+1. Direct sales via LINE, Facebook, phone, or nearby customers.
+2. Platform sales via delivery apps.
 
-Weekly and monthly lunch plans can reduce decision fatigue for office customers and improve production forecasting.
+Platform prices must be higher because the shop receives less money after commission and VAT on platform fees. The planning baseline uses a 32.1% platform deduction assumption.
 
-## Revenue Model
+## Pricing Principle
 
-- On-demand individual orders.
-- Weekly and monthly lunch subscriptions.
-- Corporate bulk orders.
-- Meeting and seminar packages.
-- Future upsells: drinks, soup, dessert, premium packaging, and branded corporate labels.
+The shop should not use the same price on direct channels and platforms.
 
-## Pricing Assumptions
+Example:
 
-- Entry item: 89 THB.
-- Premium items: 119-149 THB.
-- Average order target: 109 THB.
-- Gross margin target after food and packaging: 45-55%.
-- Waste target during pilot: below 5%.
+- Direct price: 69-79 THB.
+- Platform price: 99-119 THB.
 
-These numbers are planning assumptions and should be validated during the pilot.
+This protects margin while still keeping prices understandable to customers.
 
-## Pilot Plan
+## Startup Capital Recommendation
 
-### Phase 1: Validation
+Recommended starting capital: 150,000 THB.
 
-- Area: 1-2 office zones.
-- Volume target: 50-100 boxes per day.
-- Duration: 4-6 weeks.
-- Goals: validate repeat order rate, delivery punctuality, menu feedback, waste, and margin.
+| Category | Budget |
+| --- | ---: |
+| Main kitchen equipment | 42,500 THB |
+| QC and measuring tools | 6,500 THB |
+| Initial packaging | 6,800 THB |
+| First ingredient stock | 13,500 THB |
+| Marketing and menu photos | 7,500 THB |
+| One-month working capital | 57,000 THB |
+| Emergency reserve | 20,000 THB |
+| Total recommended capital | 153,800 THB |
 
-### Phase 2: Controlled Scale
+150,000 THB is the practical target. If capital is lower, start with 15-20 boxes per day and buy packaging in smaller lots.
 
-- Volume target: 300 boxes per day.
-- Add subscription plans and corporate packages.
-- Introduce production forecasting and route batching.
-- Improve menu based on feedback and margin data.
+## Forecast Summary
 
-### Phase 3: Expansion
+| Period | Boxes per day | Gross sales | Net after platform fees | Cost and fixed expenses | Cash before tax |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Month 1 Pilot | 30 | 71,100 THB | 55,500 THB | 43,200 THB | 12,300 THB |
+| Month 3 Stable | 60 | 143,500 THB | 112,300 THB | 82,500 THB | 29,800 THB |
+| Month 6 Scale | 100 | 247,000 THB | 195,000 THB | 136,000 THB | 59,000 THB |
 
-- Expand delivery zones.
-- Add central kitchen capacity.
-- Add B2B sales pipeline.
-- Build backend order dashboard, payment integration, and inventory control.
-
-## Operations Strategy
-
-The business must not depend only on good food. It needs repeatable operations:
-
-- Morning ingredient receiving with supplier lot records.
-- FIFO inventory.
-- Station-based preparation.
-- QC before sealing every box.
-- Batch labels for route assignment.
-- Rider handoff checklist.
-- Customer feedback loop within 1 hour after delivery.
-
-## Marketing Strategy
-
-- Short-form food preparation videos for TikTok, Instagram, and Facebook.
-- Office-zone launch campaigns with first-order offers.
-- Referral program for team orders.
-- Corporate sample boxes for HR/admin teams.
-- Case studies showing punctual delivery and customer feedback.
+The forecast is before owner salary and tax. It should be updated using actual daily sales.
 
 ## Key Metrics
 
-- Daily order count.
-- Repeat order rate.
-- Average order value.
-- Gross margin per menu.
-- Food waste percentage.
-- Delivery punctuality.
-- Customer satisfaction score.
-- Subscription conversion rate.
-- Corporate lead pipeline.
+Track these every day:
 
-## Funding Use
+- Boxes sold.
+- Direct sales vs platform sales.
+- Platform fee.
+- Ingredient cost.
+- Packaging cost.
+- Waste.
+- Late orders.
+- Customer complaints.
+- Repeat customers.
+- Cash balance.
 
-Initial funding should be allocated to:
+## 30-Day Goal
 
-- Kitchen equipment and food safety tools.
-- First inventory cycle and packaging.
-- Product photography and brand materials.
-- PWA improvement and future backend dashboard.
-- Pilot marketing budget.
-- Rider bags and delivery workflow.
+The first month should answer these questions:
 
-## Investor Narrative
+1. Which menu sells fastest?
+2. Which menu has the best gross profit?
+3. What time do customers order most?
+4. Can the kitchen handle 30 boxes without losing quality?
+5. Can direct customers be moved into repeat orders?
 
-Rice Box Online is not only a food idea. It is a repeatable lunch operating system. The PWA lowers adoption friction, the menu is simple enough to operationalize, and the business can scale from small office-zone validation into subscription and corporate bulk orders.
+## 90-Day Goal
 
-## Immediate Next Steps
+By month 3, the shop should target:
 
-1. Finalize pilot menu cost sheet.
-2. Select 2-3 suppliers and backup suppliers.
-3. Run product photo session and taste test.
-4. Prepare pilot delivery zone.
-5. Collect early customer feedback.
-6. Track daily metrics for investor reporting.
+- 60 boxes per day.
+- A repeat customer list.
+- A simple daily sales sheet.
+- A fixed purchase routine.
+- One or two nearby office/customer clusters.
+
+## 180-Day Goal
+
+By month 6, the shop can consider:
+
+- 100 boxes per day.
+- Extra helper during peak hours.
+- Separate packing station.
+- More direct orders to reduce platform fee.
+- Corporate lunch packages.
+
+## Risk Notes
+
+- Ingredient prices change often.
+- Delivery platform fees differ by contract.
+- Home kitchens can become overloaded quickly.
+- Too many menu items increase waste.
+- Promotions can destroy margin if platform GP is not included in pricing.
+
+## Next Expansion
+
+After this static PWA, the next software step should be a real order form connected to a spreadsheet or database. The shop needs to capture customer name, phone, address, menu, channel, price, and payment status.

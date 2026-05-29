@@ -1,7 +1,7 @@
 {
-  "name": "Rice Box Online - Premium Rice Box Delivery",
+  "name": "Rice Box Online - Home Kitchen Plan",
   "short_name": "RiceBox",
-  "description": "เว็บ PWA สำหรับธุรกิจข้าวกล่องพรีเมียม พร้อมเมนู ระบบสั่งซื้อจำลอง แผนธุรกิจ และคู่มือปฏิบัติงาน",
+  "description": "เว็บ PWA สำหรับเปิดร้านข้าวออนไลน์ที่บ้าน พร้อมตารางงาน เมนู ต้นทุน รายการซื้อของ เงินทุน และ forecast",
   "start_url": "/rice-box-online/",
   "scope": "/rice-box-online/",
   "display": "standalone",

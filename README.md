@@ -1,18 +1,18 @@
 # Rice Box Online
 
-Investor-ready static PWA demo for a premium Thai rice box delivery business.
+Home-kitchen operating website and static PWA for launching a Thai online rice box shop.
 
 ## What This Website Includes
 
-- Premium responsive landing page.
+- Responsive website for desktop and mobile.
 - Mobile app-like bottom navigation.
 - Installable PWA manifest and service worker.
-- Generated hero food image.
-- Signature menu section.
-- Interactive rice box builder with price and calorie calculation.
-- Operations timeline.
-- Investor snapshot.
-- Launch checklist.
+- Generated food images for the Thai core menu.
+- Daily 09:00-15:00 operating schedule.
+- Practical shopping list for 30 boxes per day.
+- Menu cost, direct price, platform price, and gross profit.
+- Startup capital and reserve plan.
+- 1, 3, and 6 month forecast.
 - Proposal-ready documentation.
 
 ## Live Deployment
@@ -25,15 +25,16 @@ https://basssg.github.io/rice-box-online/
 
 - [Business Plan](docs/business-plan.md)
 - [Operations Manual](docs/ops-manual.md)
+- [Costing and Forecast](docs/costing-forecast.md)
 
 ## Current Scope
 
-This is a polished static PWA prototype. It does not include a real backend, payment gateway, order database, inventory database, or rider tracking API yet.
+This is a polished static PWA and operating plan. It does not include a real backend, payment gateway, order database, inventory database, or rider tracking API yet.
 
 ## Recommended Next PRs
 
 1. Add a real order form that can submit to Google Sheets, Airtable, Supabase, or a backend API.
-2. Add payment flow with a provider such as Stripe or a local Thai payment provider.
-3. Add admin dashboard for kitchen tickets, QC, and delivery status.
-4. Add menu cost sheet and investor financial model as a spreadsheet.
-5. Add real product photography and customer testimonials after pilot testing.
+2. Add a daily sales and ingredient-cost spreadsheet.
+3. Add payment flow with a local Thai payment provider or QR payment workflow.
+4. Add admin dashboard for kitchen tickets, QC, and delivery status.
+5. Replace generated menu photos with real product photography after pilot testing.

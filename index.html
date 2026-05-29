@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Rice Box Online เว็บ PWA สำหรับธุรกิจข้าวกล่องพรีเมียม พร้อมแผนธุรกิจ คู่มือปฏิบัติงาน และระบบสั่งซื้อจำลอง">
-  <title>Rice Box Online | Investor Ready PWA</title>
+  <meta name="description" content="Rice Box Online คู่มือเปิดร้านข้าวออนไลน์ที่บ้าน พร้อมตารางงาน เมนูไทย ต้นทุน รายการซื้อของ เงินทุน และ forecast">
+  <title>Rice Box Online | Home Kitchen Launch Plan</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#c76b1a">
+  <meta name="theme-color" content="#7c2d12">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,148 +17,386 @@
         extend: {
           fontFamily: { sans: ['Kanit', 'sans-serif'] },
           colors: {
-            rice: { ink: '#20150f', cocoa: '#4d2b19', clay: '#9d4f20', gold: '#d8892f', leaf: '#557846', cream: '#fff8ed', paper: '#fffdf8' }
+            shop: {
+              ink: '#1f160f',
+              soy: '#4a2717',
+              chili: '#a13b16',
+              wok: '#c97822',
+              leaf: '#476a37',
+              cream: '#fff6e8',
+              paper: '#fffdfa',
+              line: '#ead7bd'
+            }
           },
-          boxShadow: { soft: '0 18px 60px rgba(77, 43, 25, .12)', lift: '0 24px 80px rgba(157, 79, 32, .20)' }
+          boxShadow: {
+            soft: '0 18px 60px rgba(74, 39, 23, .12)',
+            lift: '0 28px 90px rgba(124, 45, 18, .20)'
+          }
         }
       }
     }
   </script>
   <style>
     html { scroll-behavior: smooth; }
-    body { font-family: 'Kanit', sans-serif; background: #fff8ed; color: #20150f; }
-    .glass { background: rgba(255, 253, 248, .88); backdrop-filter: blur(18px); }
-    .hero-mask { mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 94%, transparent 100%); }
-    .option-card:has(input:checked) { border-color: #d8892f; background: #fff8ed; box-shadow: 0 12px 30px rgba(216,137,47,.16); }
-    @media (prefers-reduced-motion: no-preference) { .floaty { animation: floaty 6s ease-in-out infinite; } @keyframes floaty { 50% { transform: translateY(-10px); } } }
+    body { font-family: 'Kanit', sans-serif; background: #fff6e8; color: #1f160f; }
+    .glass { background: rgba(255, 253, 250, .9); backdrop-filter: blur(18px); }
+    .tabular { font-variant-numeric: tabular-nums; }
+    .menu-card img { transition: transform .35s ease; }
+    .menu-card:hover img { transform: scale(1.04); }
+    .calc-option:has(input:checked) { border-color: #c97822; background: #fff6e8; box-shadow: 0 10px 28px rgba(201, 120, 34, .16); }
   </style>
 </head>
 <body class="min-h-screen overflow-x-hidden">
-  <div id="offline-indicator" class="hidden bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white">Offline mode: หน้าเว็บหลักยังใช้งานได้จาก cache แต่คำสั่งซื้อจริงควรเชื่อมต่ออินเทอร์เน็ตก่อนส่งออเดอร์</div>
-  <div id="online-indicator" class="hidden bg-rice-leaf px-4 py-2 text-center text-sm font-semibold text-white">กลับมาออนไลน์แล้ว ระบบพร้อมรับออเดอร์และอัปเดตข้อมูลล่าสุด</div>
+  <div id="offline-indicator" class="hidden bg-red-700 px-4 py-2 text-center text-sm font-semibold text-white">Offline mode: เปิดดูแผนและเมนูที่ cache ไว้ได้ แต่การรับออเดอร์จริงต้องกลับมาออนไลน์ก่อน</div>
+  <div id="online-indicator" class="hidden bg-shop-leaf px-4 py-2 text-center text-sm font-semibold text-white">กลับมาออนไลน์แล้ว พร้อมรับออเดอร์และอัปเดตข้อมูลร้าน</div>
 
-  <header class="sticky top-0 z-50 border-b border-rice-gold/20 glass">
+  <header class="sticky top-0 z-50 border-b border-shop-line glass">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
       <a href="#top" class="flex items-center gap-3">
-        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-rice-ink text-xl font-extrabold text-white shadow-soft">ข</span>
-        <span><span class="block text-lg font-extrabold leading-tight">Rice Box Online</span><span class="block text-xs font-medium text-rice-clay">Premium PWA Food Delivery</span></span>
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-shop-ink text-xl font-extrabold text-white shadow-soft">ข</span>
+        <span>
+          <span class="block text-lg font-extrabold leading-tight">Rice Box Online</span>
+          <span class="block text-xs font-medium text-shop-chili">Home Kitchen Operating Plan</span>
+        </span>
       </a>
-      <nav class="hidden items-center gap-7 text-sm font-semibold text-rice-cocoa lg:flex">
-        <a href="#menu" class="hover:text-rice-clay">Menu</a><a href="#builder" class="hover:text-rice-clay">Build Box</a><a href="#operations" class="hover:text-rice-clay">Operations</a><a href="#investor" class="hover:text-rice-clay">Investor Plan</a><a href="#launch" class="hover:text-rice-clay">Launch</a>
+      <nav class="hidden items-center gap-6 text-sm font-semibold text-shop-soy lg:flex">
+        <a href="#schedule" class="hover:text-shop-chili">Schedule</a>
+        <a href="#menu" class="hover:text-shop-chili">Menu Cost</a>
+        <a href="#shopping" class="hover:text-shop-chili">Shopping</a>
+        <a href="#capital" class="hover:text-shop-chili">Capital</a>
+        <a href="#forecast" class="hover:text-shop-chili">Forecast</a>
+        <a href="#platform" class="hover:text-shop-chili">Platform Fee</a>
       </nav>
-      <div class="flex items-center gap-2"><button id="install-btn" class="hidden rounded-full bg-rice-ink px-4 py-2 text-sm font-bold text-white shadow-soft">Install App</button><a href="#proposal" class="rounded-full bg-rice-gold px-4 py-2 text-sm font-bold text-rice-ink shadow-soft">ขอ Proposal</a></div>
+      <div class="flex items-center gap-2">
+        <button id="install-btn" class="hidden rounded-full bg-shop-ink px-4 py-2 text-sm font-bold text-white shadow-soft">Install App</button>
+        <a href="#launch" class="rounded-full bg-shop-wok px-4 py-2 text-sm font-bold text-shop-ink shadow-soft">เปิดร้านตามแผน</a>
+      </div>
     </div>
   </header>
 
   <main id="top">
-    <section class="relative overflow-hidden bg-rice-paper">
-      <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-10 lg:grid-cols-[.95fr_1.05fr] lg:px-8 lg:pb-20 lg:pt-16">
+    <section class="relative overflow-hidden bg-shop-paper">
+      <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-14 pt-10 lg:grid-cols-[.95fr_1.05fr] lg:px-8 lg:pb-20 lg:pt-16">
         <div class="relative z-10">
-          <p class="mb-4 max-w-fit rounded-full border border-rice-gold/30 bg-white px-4 py-2 text-sm font-bold text-rice-clay">เปิดร้านข้าวกล่องพรีเมียมแบบพร้อมทำงาน</p>
-          <h1 class="max-w-3xl text-4xl font-extrabold leading-tight text-rice-ink md:text-6xl">ข้าวกล่องร้อน ส่งตรงเวลา พร้อมระบบสั่งซื้อและแผนปฏิบัติงานที่นักลงทุนอ่านรู้เรื่อง</h1>
-          <p class="mt-6 max-w-2xl text-lg leading-8 text-rice-cocoa">Rice Box Online คือเว็บ PWA สำหรับเดโมธุรกิจข้าวกล่องพรีเมียม ครอบคลุมหน้าร้านออนไลน์ เมนู สร้างกล่องข้าวเอง แพ็กเกจรายเดือน ขั้นตอนครัว QC โลจิสติกส์ และเอกสารสำหรับยื่น proposal.</p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a href="#builder" class="rounded-2xl bg-rice-ink px-6 py-4 text-center font-bold text-white shadow-lift">ลองสร้างกล่องข้าว</a><a href="#investor" class="rounded-2xl border border-rice-gold/40 bg-white px-6 py-4 text-center font-bold text-rice-ink shadow-soft">ดูแผนสำหรับนักลงทุน</a></div>
-          <div class="mt-8 grid max-w-xl grid-cols-3 gap-3">
-            <div class="rounded-2xl bg-white p-4 shadow-soft"><strong class="block text-2xl text-rice-clay">30-40</strong><span class="text-xs text-rice-cocoa">นาทีส่งถึงลูกค้า</span></div>
-            <div class="rounded-2xl bg-white p-4 shadow-soft"><strong class="block text-2xl text-rice-clay">69+</strong><span class="text-xs text-rice-cocoa">บาทราคาเริ่มต้น</span></div>
-            <div class="rounded-2xl bg-white p-4 shadow-soft"><strong class="block text-2xl text-rice-clay">PWA</strong><span class="text-xs text-rice-cocoa">ติดตั้งบนมือถือได้</span></div>
+          <p class="mb-4 max-w-fit rounded-full border border-shop-line bg-white px-4 py-2 text-sm font-bold text-shop-chili">แผนเปิดร้านข้าวออนไลน์ที่บ้าน ขาย 09:00-15:00</p>
+          <h1 class="max-w-3xl text-4xl font-extrabold leading-tight text-shop-ink md:text-6xl">ตื่นกี่โมง ซื้ออะไร ใช้เงินเท่าไหร่ ขายราคาไหน ให้เห็นครบในเว็บเดียว</h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-shop-soy">แผนนี้ออกแบบสำหรับเริ่มขายข้าวกล่องออนไลน์จากครัวที่บ้าน โดยใช้เมนูไทยที่ทำซ้ำง่าย: กะเพรา หมูผัดน้ำมันหอย ข้าวผัด และหมูกระเทียม พร้อมต้นทุนต่อกล่อง ราคา direct ราคาแพลตฟอร์ม รายการซื้อของ และ forecast 1/3/6 เดือน</p>
+          <div class="mt-8 grid max-w-2xl grid-cols-2 gap-3 md:grid-cols-4">
+            <div class="rounded-2xl bg-white p-4 shadow-soft"><span class="text-xs text-shop-soy">ทุนแนะนำ</span><strong class="tabular block text-2xl text-shop-chili">150k</strong><span class="text-xs text-shop-soy">บาท</span></div>
+            <div class="rounded-2xl bg-white p-4 shadow-soft"><span class="text-xs text-shop-soy">เริ่มขาย</span><strong class="tabular block text-2xl text-shop-chili">30</strong><span class="text-xs text-shop-soy">กล่อง/วัน</span></div>
+            <div class="rounded-2xl bg-white p-4 shadow-soft"><span class="text-xs text-shop-soy">เวลาขาย</span><strong class="tabular block text-2xl text-shop-chili">09-15</strong><span class="text-xs text-shop-soy">น.</span></div>
+            <div class="rounded-2xl bg-white p-4 shadow-soft"><span class="text-xs text-shop-soy">กันค่า GP</span><strong class="tabular block text-2xl text-shop-chili">32.1%</strong><span class="text-xs text-shop-soy">สมมติฐาน</span></div>
+          </div>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#schedule" class="rounded-2xl bg-shop-ink px-6 py-4 text-center font-bold text-white shadow-lift">ดูตารางวันทำงาน</a>
+            <a href="#capital" class="rounded-2xl border border-shop-line bg-white px-6 py-4 text-center font-bold text-shop-ink shadow-soft">ดูเงินทุนและเงินสำรอง</a>
           </div>
         </div>
         <div class="relative">
-          <div class="absolute -inset-6 rounded-[3rem] bg-rice-gold/20 blur-3xl"></div>
-          <img src="assets/hero-rice-box.png" alt="Premium rice boxes ready for delivery" class="relative aspect-[4/3] w-full rounded-[2rem] object-cover shadow-lift hero-mask">
-          <div class="floaty absolute bottom-5 left-5 rounded-3xl bg-white/95 p-4 shadow-lift"><p class="text-xs font-bold uppercase text-rice-clay">Today Kitchen Status</p><p class="mt-1 text-xl font-extrabold text-rice-ink">พร้อมผลิต 180 กล่อง</p><p class="text-sm text-rice-cocoa">QC, pack, route พร้อมก่อน 10:45</p></div>
+          <div class="absolute -inset-6 rounded-[3rem] bg-shop-wok/20 blur-3xl"></div>
+          <img src="assets/hero-rice-box.png" alt="Rice box delivery setup" class="relative aspect-[4/3] w-full rounded-[2rem] object-cover shadow-lift">
+          <div class="absolute bottom-5 left-5 max-w-xs rounded-3xl bg-white/95 p-4 shadow-lift">
+            <p class="text-xs font-bold uppercase text-shop-chili">Today target</p>
+            <p class="mt-1 text-xl font-extrabold text-shop-ink">30 กล่องแรก ไม่เร่งเกินครัว</p>
+            <p class="text-sm text-shop-soy">เน้นขายจริง คุมของเสีย และเก็บ feedback</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="bg-rice-cream px-4 py-10 lg:px-8">
-      <div class="mx-auto grid max-w-7xl gap-4 md:grid-cols-4">
-        <div class="rounded-3xl bg-rice-ink p-6 text-white shadow-soft md:col-span-2"><h2 class="text-2xl font-extrabold">Business concept</h2><p class="mt-3 leading-7 text-white/80">ขายข้าวกล่องพรีเมียมให้พนักงานออฟฟิศ งานประชุม และลูกค้าสุขภาพ ผ่านระบบสั่งซื้อเร็ว ติดตั้งได้เหมือนแอป และมีมาตรฐานการผลิตซ้ำได้ทุกวัน</p></div>
-        <div class="rounded-3xl bg-white p-6 shadow-soft"><h3 class="font-extrabold">Customer promise</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">ร้อน สะอาด ตรงเวลา คำนวณราคาและแคลอรีชัดเจน</p></div>
-        <div class="rounded-3xl bg-white p-6 shadow-soft"><h3 class="font-extrabold">Investor angle</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">เริ่มเล็กได้ วัดผลได้ ขยายเป็น subscription และ corporate bulk order</p></div>
+    <section id="schedule" class="bg-shop-cream px-4 py-16 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-8 lg:grid-cols-[.75fr_1.25fr]">
+          <div>
+            <h2 class="text-3xl font-extrabold md:text-4xl">Daily operating schedule</h2>
+            <p class="mt-3 leading-8 text-shop-soy">เป้าหมายคือเปิดรับออเดอร์ 09:00-15:00 แต่การทำงานจริงต้องเริ่มตั้งแต่เช้ามืด เพื่อซื้อของ เตรียมครัว หุงข้าว ทำ mise en place และเปิดระบบให้ทันเวลา</p>
+            <div class="mt-6 rounded-3xl bg-white p-5 shadow-soft">
+              <h3 class="font-extrabold">Cut-off ที่แนะนำ</h3>
+              <p class="mt-2 text-sm leading-6 text-shop-soy">รับออเดอร์ปกติถึง 14:30 และปิดรับเมนูทอด/ทำยาก 14:00 เพื่อไม่ให้ของค้างและไม่หลุด QC ตอนท้ายวัน</p>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded-[2rem] bg-white shadow-soft">
+            <div class="grid grid-cols-[88px_1fr] border-b border-shop-line bg-shop-ink px-5 py-3 text-sm font-bold text-white">
+              <span>เวลา</span><span>งานที่ต้องทำ</span>
+            </div>
+            <div id="schedule-list" class="divide-y divide-shop-line"></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="menu" class="bg-white px-4 py-16 lg:px-8">
       <div class="mx-auto max-w-7xl">
-        <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><h2 class="text-3xl font-extrabold md:text-4xl">Signature menu</h2><p class="mt-3 max-w-2xl text-rice-cocoa">เมนูหลักสำหรับเริ่มขายจริง คุมต้นทุนง่าย ถ่ายรูปขึ้นคอนเทนต์ได้ และเหมาะกับการทำซ้ำในครัวกลาง</p></div><a href="#proposal" class="font-bold text-rice-clay">ขอราคา bulk order</a></div>
-        <div class="mt-8 grid gap-5 md:grid-cols-3">
-          <article class="rounded-3xl border border-rice-gold/20 bg-rice-paper p-5 shadow-soft"><div class="grid aspect-[4/3] place-items-center rounded-2xl bg-gradient-to-br from-amber-200 to-orange-400 text-7xl">ไก่</div><h3 class="mt-5 text-xl font-extrabold">ข้าวอกไก่ย่างเทอริยากิ</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">โปรตีนสูง ไขมันต่ำ เหมาะกับลูกค้าออฟฟิศและสายสุขภาพ</p><div class="mt-5 flex items-end justify-between"><span><strong class="text-2xl text-rice-clay">89 บาท</strong><small class="block text-rice-cocoa">450 kcal</small></span><button onclick="quickOrder('ข้าวอกไก่ย่างเทอริยากิ', 89, 450)" class="rounded-2xl bg-rice-ink px-4 py-3 text-sm font-bold text-white">สั่งเลย</button></div></article>
-          <article class="rounded-3xl border border-rice-gold/20 bg-rice-paper p-5 shadow-soft"><div class="grid aspect-[4/3] place-items-center rounded-2xl bg-gradient-to-br from-orange-200 to-red-400 text-7xl">เนื้อ</div><h3 class="mt-5 text-xl font-extrabold">ข้าวหน้าเนื้อซอสญี่ปุ่น</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">เมนู premium ticket สำหรับเพิ่มกำไรต่อกล่องและใช้ใน proposal</p><div class="mt-5 flex items-end justify-between"><span><strong class="text-2xl text-rice-clay">119 บาท</strong><small class="block text-rice-cocoa">620 kcal</small></span><button onclick="quickOrder('ข้าวหน้าเนื้อซอสญี่ปุ่น', 119, 620)" class="rounded-2xl bg-rice-ink px-4 py-3 text-sm font-bold text-white">สั่งเลย</button></div></article>
-          <article class="rounded-3xl border border-rice-gold/20 bg-rice-paper p-5 shadow-soft"><div class="grid aspect-[4/3] place-items-center rounded-2xl bg-gradient-to-br from-rose-100 to-orange-300 text-7xl">ปลา</div><h3 class="mt-5 text-xl font-extrabold">ข้าวแซลมอนย่างเกลือ</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">ภาพลักษณ์พรีเมียม เหมาะกับงานประชุม ลูกค้าองค์กร และเซ็ตสุขภาพ</p><div class="mt-5 flex items-end justify-between"><span><strong class="text-2xl text-rice-clay">139 บาท</strong><small class="block text-rice-cocoa">520 kcal</small></span><button onclick="quickOrder('ข้าวแซลมอนย่างเกลือ', 139, 520)" class="rounded-2xl bg-rice-ink px-4 py-3 text-sm font-bold text-white">สั่งเลย</button></div></article>
+        <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <h2 class="text-3xl font-extrabold md:text-4xl">Core menu, cost, and selling price</h2>
+            <p class="mt-3 max-w-3xl text-shop-soy">ใช้เมนูที่ทำจากครัวบ้านได้จริง ซื้อวัตถุดิบซ้ำง่าย และตั้งราคาสองแบบ: ราคาขายตรง กับราคาแพลตฟอร์มที่บวกค่า GP ไว้แล้ว</p>
+          </div>
+          <a href="#calculator" class="font-bold text-shop-chili">ลองคำนวณกำไรต่อกล่อง</a>
         </div>
+        <div id="menu-grid" class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4"></div>
       </div>
     </section>
 
-    <section id="builder" class="bg-rice-cream px-4 py-16 lg:px-8">
-      <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.95fr_1.05fr]">
+    <section id="calculator" class="bg-shop-paper px-4 py-16 lg:px-8">
+      <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]">
         <div>
-          <h2 class="text-3xl font-extrabold md:text-4xl">Build your rice box</h2><p class="mt-3 text-rice-cocoa">ลูกค้าเลือกข้าว กับข้าว เครื่องเคียง และแพ็กเกจได้เอง ระบบคำนวณราคาและแคลอรีทันทีเพื่อช่วยตัดสินใจเร็วขึ้น</p>
-          <div class="mt-8 space-y-5">
-            <div><h3 class="mb-3 font-extrabold">1. เลือกข้าว</h3><div class="grid gap-3"><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="radio" name="rice" value="ข้าวหอมมะลิ" data-price="0" data-cal="250" checked> ข้าวหอมมะลิ <span class="float-right text-rice-cocoa">ฟรี / 250 kcal</span></label><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="radio" name="rice" value="ข้าวกล้องไรซ์เบอร์รี" data-price="10" data-cal="210"> ข้าวกล้องไรซ์เบอร์รี <span class="float-right text-rice-clay">+10 / 210 kcal</span></label></div></div>
-            <div><h3 class="mb-3 font-extrabold">2. เลือกกับข้าวหลัก</h3><div class="grid gap-3"><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="radio" name="main" value="อกไก่ย่างสมุนไพร" data-price="0" data-cal="180" checked> อกไก่ย่างสมุนไพร <span class="float-right text-rice-cocoa">ฟรี / 180 kcal</span></label><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="radio" name="main" value="หมูทงคัตสึ" data-price="20" data-cal="380"> หมูทงคัตสึ <span class="float-right text-rice-clay">+20 / 380 kcal</span></label><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="radio" name="main" value="แซลมอนเทอริยากิ" data-price="45" data-cal="240"> แซลมอนเทอริยากิ <span class="float-right text-rice-clay">+45 / 240 kcal</span></label></div></div>
-            <div><h3 class="mb-3 font-extrabold">3. เครื่องเคียง</h3><div class="grid gap-3"><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="checkbox" name="side" value="ไข่ต้มยางมะตูม" data-price="12" data-cal="70"> ไข่ต้มยางมะตูม <span class="float-right text-rice-clay">+12</span></label><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="checkbox" name="side" value="ผักย่างรวม" data-price="15" data-cal="60"> ผักย่างรวม <span class="float-right text-rice-clay">+15</span></label><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="checkbox" name="side" value="ซุปมิโสะ" data-price="18" data-cal="45"> ซุปมิโสะ <span class="float-right text-rice-clay">+18</span></label></div></div>
+          <h2 class="text-3xl font-extrabold md:text-4xl">Profit calculator</h2>
+          <p class="mt-3 leading-8 text-shop-soy">เลือกเมนูและช่องทางขายเพื่อดูว่าเงินเข้าร้านจริงเท่าไหร่หลังหัก GP แพลตฟอร์ม ตัวเลขนี้ช่วยกันไม่ให้ตั้งราคาถูกจนขายดีแต่ไม่เหลือเงิน</p>
+          <div class="mt-6 grid gap-3">
+            <label class="font-bold" for="menu-select">เลือกเมนู</label>
+            <select id="menu-select" class="rounded-2xl border border-shop-line bg-white px-4 py-4 font-semibold shadow-soft"></select>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="calc-option rounded-2xl border border-shop-line bg-white p-4 font-bold"><input type="radio" name="channel" value="direct" checked class="mr-2 accent-shop-wok"> ขายตรง LINE/Facebook</label>
+              <label class="calc-option rounded-2xl border border-shop-line bg-white p-4 font-bold"><input type="radio" name="channel" value="platform" class="mr-2 accent-shop-wok"> ขายบนแพลตฟอร์ม</label>
+            </div>
           </div>
         </div>
-        <aside class="lg:sticky lg:top-24 lg:self-start"><div class="rounded-[2rem] bg-rice-ink p-6 text-white shadow-lift"><h3 class="text-2xl font-extrabold">Order preview</h3><div class="mt-6 space-y-4 rounded-3xl bg-white/10 p-5 text-sm"><p class="flex justify-between gap-4"><span>ข้าว</span><strong id="selected-rice">ข้าวหอมมะลิ (+0 บาท)</strong></p><p class="flex justify-between gap-4"><span>กับข้าว</span><strong id="selected-main">อกไก่ย่างสมุนไพร (+0 บาท)</strong></p><p><span class="block text-white/60">เครื่องเคียง</span><strong id="selected-sides">ไม่มีเพิ่มเติม</strong></p></div><div class="mt-6 grid grid-cols-2 gap-3"><div class="rounded-3xl bg-white p-5 text-rice-ink"><span class="text-sm text-rice-cocoa">ราคา</span><strong id="total-price" class="block text-3xl">69 บาท</strong></div><div class="rounded-3xl bg-white p-5 text-rice-ink"><span class="text-sm text-rice-cocoa">พลังงาน</span><strong id="total-calories" class="block text-3xl">430</strong><span class="text-sm">kcal</span></div></div><button onclick="orderCustomBox()" class="mt-5 w-full rounded-2xl bg-rice-gold px-5 py-4 font-extrabold text-rice-ink shadow-soft">ยืนยันออเดอร์จำลอง</button><p class="mt-4 text-xs leading-5 text-white/60">Demo นี้ยังไม่ตัดเงินจริง เหมาะสำหรับนำเสนอ flow ให้ลูกค้า นักลงทุน หรือทีมปฏิบัติการ</p></div></aside>
+        <div class="rounded-[2rem] bg-shop-ink p-6 text-white shadow-lift">
+          <h3 class="text-2xl font-extrabold">ผลคำนวณต่อ 1 กล่อง</h3>
+          <div class="mt-6 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">ราคาขาย</span><strong id="calc-price" class="tabular block text-3xl">0</strong></div>
+            <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">เงินเข้าร้านหลัง GP</span><strong id="calc-net" class="tabular block text-3xl">0</strong></div>
+            <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">ต้นทุนอาหาร+แพ็ก</span><strong id="calc-cost" class="tabular block text-3xl">0</strong></div>
+            <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">กำไรขั้นต้น</span><strong id="calc-profit" class="tabular block text-3xl">0</strong></div>
+          </div>
+          <p id="calc-note" class="mt-5 text-sm leading-6 text-white/70"></p>
+        </div>
       </div>
     </section>
 
-    <section id="operations" class="bg-white px-4 py-16 lg:px-8"><div class="mx-auto max-w-7xl"><h2 class="text-3xl font-extrabold md:text-4xl">Operating system ready for a small launch</h2><p class="mt-3 max-w-3xl text-rice-cocoa">ลำดับงานตั้งแต่รับวัตถุดิบถึงส่งถึงมือลูกค้า ถูกเขียนให้ทีมเล็กเริ่มทำจริงได้ และใช้เป็นเอกสารอธิบายนักลงทุนได้</p><div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4"><div class="rounded-3xl bg-rice-cream p-6"><b>05:00</b><h3 class="mt-2 font-extrabold">รับวัตถุดิบ</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">ตรวจอุณหภูมิ น้ำหนัก วันหมดอายุ และบันทึก supplier lot</p></div><div class="rounded-3xl bg-rice-cream p-6"><b>07:00</b><h3 class="mt-2 font-extrabold">เตรียมครัว</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">หุงข้าว หมักโปรตีน เตรียมซอส แยก station ลดการปนเปื้อน</p></div><div class="rounded-3xl bg-rice-cream p-6"><b>09:30</b><h3 class="mt-2 font-extrabold">ผลิตและ QC</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">แพ็กตามใบสั่ง ตรวจหน้าตา น้ำหนัก ซีล และ label delivery batch</p></div><div class="rounded-3xl bg-rice-cream p-6"><b>10:45</b><h3 class="mt-2 font-extrabold">จัด route</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">แยกตามอาคาร/โซน ส่งด้วยกระเป๋าเก็บความร้อนภายในช่วง 11:15-12:00</p></div></div></div></section>
+    <section id="shopping" class="bg-white px-4 py-16 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-8 lg:grid-cols-[.78fr_1.22fr]">
+          <div>
+            <h2 class="text-3xl font-extrabold md:text-4xl">Daily shopping list for 30 boxes</h2>
+            <p class="mt-3 leading-8 text-shop-soy">รายการนี้คำนวณจาก mix เริ่มต้น 30 กล่องต่อวัน: กะเพรา 10, น้ำมันหอย 7, ข้าวผัด 8, หมูกระเทียม 5 พร้อม buffer ประมาณ 10% สำหรับของเสียและ order เพิ่ม</p>
+            <div class="mt-6 rounded-3xl bg-shop-cream p-5">
+              <h3 class="font-extrabold">เงินสดที่ควรพกไปซื้อของ</h3>
+              <p class="mt-2 text-3xl font-extrabold text-shop-chili">2,000 บาท/วัน</p>
+              <p class="mt-2 text-sm leading-6 text-shop-soy">ต้นทุนซื้อของประมาณ 1,600 บาท และกัน buffer 400 บาท สำหรับราคาผัก/หมูขึ้นหรือออเดอร์เพิ่ม</p>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded-[2rem] border border-shop-line bg-shop-paper shadow-soft">
+            <div class="grid grid-cols-[1.1fr_.7fr_.7fr] bg-shop-ink px-5 py-3 text-sm font-bold text-white">
+              <span>รายการ</span><span>ปริมาณ</span><span>งบประมาณ</span>
+            </div>
+            <div id="shopping-list" class="divide-y divide-shop-line"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section id="investor" class="bg-rice-ink px-4 py-16 text-white lg:px-8"><div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.85fr_1.15fr]"><div><h2 class="text-3xl font-extrabold md:text-4xl">Investor-ready snapshot</h2><p class="mt-4 leading-8 text-white/75">เป้าหมายคือพิสูจน์ demand ในพื้นที่เล็กก่อน แล้วค่อยขยายด้วย order subscription, bulk order องค์กร และครัวกลางที่มี SOP ชัดเจน</p><div class="mt-6 flex gap-3"><a href="docs/business-plan.md" target="_blank" class="rounded-2xl bg-white px-5 py-3 font-bold text-rice-ink">Business Plan</a><a href="docs/ops-manual.md" target="_blank" class="rounded-2xl border border-white/25 px-5 py-3 font-bold text-white">Ops Manual</a></div></div><div class="grid gap-4 md:grid-cols-2"><div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Phase 1</span><h3 class="mt-2 text-xl font-extrabold">Pilot 50-100 boxes/day</h3><p class="mt-2 text-sm leading-6 text-white/70">ขายใน 1-2 office zones เก็บ feedback และคุม waste ต่ำกว่า 5%</p></div><div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Phase 2</span><h3 class="mt-2 text-xl font-extrabold">Scale 300 boxes/day</h3><p class="mt-2 text-sm leading-6 text-white/70">เพิ่ม subscription, corporate deals, route batching และ production forecast</p></div><div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Revenue</span><h3 class="mt-2 text-xl font-extrabold">89-149 THB/order</h3><p class="mt-2 text-sm leading-6 text-white/70">เฉลี่ย ticket 109 บาท พร้อม gross margin target 45-55% หลังคุมต้นทุน</p></div><div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Funding use</span><h3 class="mt-2 text-xl font-extrabold">Kitchen, packaging, growth</h3><p class="mt-2 text-sm leading-6 text-white/70">ใช้เงินกับอุปกรณ์ครัว วัตถุดิบรอบแรก บรรจุภัณฑ์ ภาพถ่าย และ marketing test</p></div></div></div></section>
+    <section id="capital" class="bg-shop-cream px-4 py-16 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <h2 class="text-3xl font-extrabold md:text-4xl">Startup capital and reserve</h2>
+            <p class="mt-3 max-w-3xl text-shop-soy">ถ้าจะเปิดจริงไม่ควรมีแค่เงินซื้อวัตถุดิบวันแรก ต้องมีเงินสำรองให้พอ 1 เดือน เพราะแพลตฟอร์มอาจโอนเงินล่าช้า ยอดขายยังไม่นิ่ง และวัตถุดิบอาจขึ้นราคา</p>
+          </div>
+          <div class="rounded-3xl bg-shop-ink p-5 text-white shadow-soft">
+            <span class="text-sm text-white/65">เงินตั้งต้นที่แนะนำ</span>
+            <strong class="tabular block text-4xl">150,000 บาท</strong>
+          </div>
+        </div>
+        <div class="mt-8 grid gap-5 lg:grid-cols-3">
+          <div class="rounded-[2rem] bg-white p-6 shadow-soft lg:col-span-2">
+            <h3 class="text-xl font-extrabold">Budget breakdown</h3>
+            <div id="capital-list" class="mt-5 divide-y divide-shop-line"></div>
+          </div>
+          <div class="rounded-[2rem] bg-shop-ink p-6 text-white shadow-lift">
+            <h3 class="text-xl font-extrabold">Reserve rule</h3>
+            <p class="mt-4 leading-7 text-white/75">เก็บเงินสำรองอย่างน้อย 1 เดือนของต้นทุนผันแปร + ค่าใช้จ่ายประจำ ถ้าขาย 30 กล่อง/วัน ควรมีเงินหมุนเวียน 55,000-60,000 บาท แยกจากเงินซื้ออุปกรณ์</p>
+            <div class="mt-5 rounded-3xl bg-white/10 p-5">
+              <span class="text-sm text-white/60">ห้ามใช้ปนกับเงินส่วนตัว</span>
+              <strong class="mt-1 block text-2xl">เปิดบัญชีร้านแยก</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section id="launch" class="bg-rice-paper px-4 py-16 lg:px-8"><div class="mx-auto max-w-7xl"><h2 class="text-3xl font-extrabold md:text-4xl">Launch checklist</h2><div class="mt-8 grid gap-4 md:grid-cols-3"><div class="rounded-3xl bg-white p-6 shadow-soft"><h3 class="font-extrabold">Before opening</h3><ul class="mt-3 space-y-2 text-sm text-rice-cocoa"><li>✓ Supplier list and backup supplier</li><li>✓ Menu cost sheet per box</li><li>✓ Packaging and label stock</li><li>✓ Food safety checklist</li></ul></div><div class="rounded-3xl bg-white p-6 shadow-soft"><h3 class="font-extrabold">Daily operation</h3><ul class="mt-3 space-y-2 text-sm text-rice-cocoa"><li>✓ Order cut-off time</li><li>✓ Batch production board</li><li>✓ QC before seal</li><li>✓ Route and rider assignment</li></ul></div><div class="rounded-3xl bg-white p-6 shadow-soft"><h3 class="font-extrabold">Investor evidence</h3><ul class="mt-3 space-y-2 text-sm text-rice-cocoa"><li>✓ Daily sales report</li><li>✓ Repeat order rate</li><li>✓ Customer feedback</li><li>✓ Waste and margin tracking</li></ul></div></div></div></section>
+    <section id="forecast" class="bg-white px-4 py-16 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="text-3xl font-extrabold md:text-4xl">1, 3, and 6 month forecast</h2>
+        <p class="mt-3 max-w-3xl leading-8 text-shop-soy">Forecast นี้เป็นแผนเงินสดแบบระวังตัว ใช้สมมติฐานขาย 26 วันต่อเดือน และยังไม่หักภาษี/เงินเดือนเจ้าของร้าน ตัวเลขจริงต้องอัปเดตจากยอดขายทุกวัน</p>
+        <div class="mt-8 overflow-hidden rounded-[2rem] border border-shop-line shadow-soft">
+          <div class="grid min-w-[920px] grid-cols-[.9fr_.75fr_.9fr_.9fr_.9fr_.9fr] bg-shop-ink px-5 py-3 text-sm font-bold text-white">
+            <span>ช่วง</span><span>กล่อง/วัน</span><span>ยอดขายรวม</span><span>เงินเข้าหลัง GP</span><span>ต้นทุน+ค่าใช้จ่าย</span><span>เงินเหลือก่อนภาษี</span>
+          </div>
+          <div id="forecast-list" class="min-w-[920px] divide-y divide-shop-line bg-shop-paper"></div>
+        </div>
+      </div>
+    </section>
 
-    <section id="proposal" class="bg-white px-4 py-16 lg:px-8"><div class="mx-auto max-w-5xl rounded-[2rem] bg-rice-clay p-8 text-white shadow-lift md:p-12"><h2 class="text-3xl font-extrabold md:text-4xl">พร้อมนำเสนอเป็น proposal</h2><p class="mt-4 max-w-3xl leading-8 text-white/85">เว็บนี้ออกแบบให้เปิดให้นักลงทุน ลูกค้าองค์กร หรือทีมงานดูได้ทันที โดยเห็นทั้งผลิตภัณฑ์ วิธีสั่งซื้อ แผนการทำงาน และทิศทางการเติบโตของธุรกิจ</p><div class="mt-8 grid gap-3 sm:grid-cols-3"><a href="docs/business-plan.md" target="_blank" class="rounded-2xl bg-white px-5 py-4 text-center font-bold text-rice-ink">อ่านแผนธุรกิจ</a><a href="docs/ops-manual.md" target="_blank" class="rounded-2xl bg-white/15 px-5 py-4 text-center font-bold text-white">อ่านคู่มือทำงาน</a><button onclick="showProposalSummary()" class="rounded-2xl bg-rice-gold px-5 py-4 font-bold text-rice-ink">ดูสรุปนำเสนอ</button></div></div></section>
+    <section id="platform" class="bg-shop-ink px-4 py-16 text-white lg:px-8">
+      <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]">
+        <div>
+          <h2 class="text-3xl font-extrabold md:text-4xl">Platform fee pricing rule</h2>
+          <p class="mt-4 leading-8 text-white/75">การขายผ่าน delivery platform ต้องตั้งราคาแยกจากขายตรง เพราะค่า GP เฉลี่ยอาจอยู่แถว 30% และมักมี VAT บนค่าบริการนั้น แผนนี้จึงใช้สมมติฐานกันไว้ 32.1% ของยอดขายแพลตฟอร์ม</p>
+          <p class="mt-4 text-sm leading-6 text-white/60">สูตรใช้งาน: ราคาแพลตฟอร์มขั้นต่ำ = ราคาขายตรง ÷ 0.679 แล้วปัดขึ้นเป็น 99, 109, 119 หรือ 129 บาท เพื่อให้ลูกค้าจำง่าย</p>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Direct price</span><strong class="mt-2 block text-3xl">69-79 บาท</strong><p class="mt-2 text-sm leading-6 text-white/70">เหมาะกับ LINE OA, Facebook, ลูกค้าใกล้บ้าน และลูกค้าประจำ</p></div>
+          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Platform price</span><strong class="mt-2 block text-3xl">99-119 บาท</strong><p class="mt-2 text-sm leading-6 text-white/70">บวก GP และ VAT บน GP เพื่อรักษากำไรต่อกล่อง</p></div>
+          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Best practice</span><strong class="mt-2 block text-2xl">ไม่ทำโปรเองถ้า margin ต่ำ</strong><p class="mt-2 text-sm leading-6 text-white/70">โปรลดราคาให้ใช้เฉพาะเมนูต้นทุนต่ำหรือช่วงเปิดร้านเท่านั้น</p></div>
+          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Source check</span><strong class="mt-2 block text-2xl">ตรวจค่าจริงตอนสมัคร</strong><p class="mt-2 text-sm leading-6 text-white/70">เงื่อนไขแต่ละแพลตฟอร์มเปลี่ยนตามแคมเปญและประเภทสัญญา</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="launch" class="bg-shop-paper px-4 py-16 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="text-3xl font-extrabold md:text-4xl">Launch checklist before selling</h2>
+        <div class="mt-8 grid gap-5 md:grid-cols-3">
+          <div class="rounded-[2rem] bg-white p-6 shadow-soft"><h3 class="font-extrabold">ก่อนเปิดร้าน 7 วัน</h3><ul class="mt-4 space-y-3 text-sm leading-6 text-shop-soy"><li>ทำ cost sheet ทั้ง 4 เมนู</li><li>ถ่ายรูปเมนูจริงในกล่องที่จะขาย</li><li>เลือก supplier หมู ไข่ ข้าว กล่อง</li><li>ทำ LINE OA และ Google Form สำรอง</li></ul></div>
+          <div class="rounded-[2rem] bg-white p-6 shadow-soft"><h3 class="font-extrabold">วันทดลองขาย</h3><ul class="mt-4 space-y-3 text-sm leading-6 text-shop-soy"><li>ขายเฉพาะ 20-30 กล่อง</li><li>จดเวลา prep/pack ต่อกล่อง</li><li>ถ่าย feedback ลูกค้า</li><li>วัดของเหลือและของเสีย</li></ul></div>
+          <div class="rounded-[2rem] bg-white p-6 shadow-soft"><h3 class="font-extrabold">หลังขายทุกวัน</h3><ul class="mt-4 space-y-3 text-sm leading-6 text-shop-soy"><li>สรุปยอดขาย เงินเข้า และค่า GP</li><li>อัปเดตราคาวัตถุดิบ</li><li>เช็กเมนูขายดี/กำไรดี</li><li>วางแผนซื้อของวันถัดไป</li></ul></div>
+        </div>
+        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+          <a href="docs/ops-manual.md" target="_blank" class="rounded-2xl bg-shop-ink px-5 py-4 text-center font-bold text-white shadow-soft">อ่านคู่มือปฏิบัติงาน</a>
+          <a href="docs/costing-forecast.md" target="_blank" class="rounded-2xl bg-shop-wok px-5 py-4 text-center font-bold text-shop-ink shadow-soft">อ่านต้นทุนและ Forecast</a>
+          <a href="docs/business-plan.md" target="_blank" class="rounded-2xl border border-shop-line bg-white px-5 py-4 text-center font-bold text-shop-ink shadow-soft">อ่านแผนธุรกิจ</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white px-4 py-12 lg:px-8">
+      <div class="mx-auto max-w-7xl rounded-[2rem] bg-shop-cream p-6 shadow-soft">
+        <h2 class="text-2xl font-extrabold">Assumptions and references</h2>
+        <p class="mt-3 leading-7 text-shop-soy">ตัวเลขในเว็บเป็น planning baseline สำหรับเริ่มจริง ไม่ใช่ราคาตลาดถาวร ต้องเช็กราคาหมู ไข่ ข้าว น้ำมัน และค่าธรรมเนียมแพลตฟอร์มทุกสัปดาห์ แหล่งอ้างอิงที่ใช้ประกอบ ได้แก่ <a class="font-bold text-shop-chili underline" href="https://www.grab.com/th/en/blog/askgrab-merchant-commission/" target="_blank">Grab merchant commission</a>, <a class="font-bold text-shop-chili underline" href="https://www.grab.com/th/en/terms-policies/general-terms-and-conditions-of-grabfood-merchant-contract/" target="_blank">Grab merchant terms</a>, <a class="font-bold text-shop-chili underline" href="https://www.thainamthip.co.th/en/food-service/foodpanda" target="_blank">foodpanda partner fee note</a> และ <a class="font-bold text-shop-chili underline" href="https://checkraka.app/" target="_blank">CheckRaka</a> สำหรับติดตามราคาวัตถุดิบ</p>
+      </div>
+    </section>
   </main>
 
-  <footer class="bg-rice-ink px-4 pb-24 pt-10 text-white lg:px-8 lg:pb-10"><div class="mx-auto flex max-w-7xl flex-col justify-between gap-5 md:flex-row"><div><h3 class="text-xl font-extrabold">Rice Box Online</h3><p class="mt-2 max-w-xl text-sm leading-6 text-white/65">Investor-ready PWA demo for a premium Thai rice box delivery business.</p></div><div class="text-sm text-white/65"><a class="block hover:text-white" href="https://github.com/BassSG/rice-box-online" target="_blank">GitHub Repository</a><span class="mt-2 block">© 2026 Rice Box Online</span></div></div></footer>
+  <footer class="bg-shop-ink px-4 pb-24 pt-10 text-white lg:px-8 lg:pb-10">
+    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-5 md:flex-row">
+      <div><h3 class="text-xl font-extrabold">Rice Box Online</h3><p class="mt-2 max-w-xl text-sm leading-6 text-white/65">แผนเปิดร้านข้าวออนไลน์ที่บ้าน พร้อมตัวเลขต้นทุน ตารางงาน และ forecast สำหรับเริ่มขายจริง</p></div>
+      <div class="text-sm text-white/65"><a class="block hover:text-white" href="https://github.com/BassSG/rice-box-online" target="_blank">GitHub Repository</a><span class="mt-2 block">© 2026 Rice Box Online</span></div>
+    </div>
+  </footer>
 
-  <nav class="fixed bottom-0 left-0 right-0 z-50 border-t border-rice-gold/20 bg-white/95 px-2 py-2 shadow-lift backdrop-blur lg:hidden"><div class="mx-auto grid max-w-md grid-cols-5 text-center text-[11px] font-bold text-rice-cocoa"><a class="rounded-2xl px-1 py-2 text-rice-clay" href="#top">Home</a><a class="rounded-2xl px-1 py-2" href="#menu">Menu</a><a class="rounded-2xl px-1 py-2" href="#builder">Order</a><a class="rounded-2xl px-1 py-2" href="#operations">Ops</a><a class="rounded-2xl px-1 py-2" href="#investor">Plan</a></div></nav>
-
-  <div id="modal-box" class="fixed inset-0 z-[60] hidden items-center justify-center bg-rice-ink/70 p-4 backdrop-blur"><div id="modal-content" class="max-w-md scale-95 rounded-[2rem] bg-white p-7 text-center opacity-0 shadow-lift transition"><div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-rice-cream text-3xl">✓</div><h3 id="modal-title" class="mt-5 text-2xl font-extrabold">รับออเดอร์จำลองแล้ว</h3><p id="modal-desc" class="mt-3 text-sm leading-7 text-rice-cocoa"></p><button onclick="closeModal()" class="mt-6 w-full rounded-2xl bg-rice-ink px-5 py-4 font-bold text-white">ตกลง</button></div></div>
+  <nav class="fixed bottom-0 left-0 right-0 z-50 border-t border-shop-line bg-white/95 px-2 py-2 shadow-lift backdrop-blur lg:hidden">
+    <div class="mx-auto grid max-w-md grid-cols-5 text-center text-[11px] font-bold text-shop-soy">
+      <a class="rounded-2xl px-1 py-2 text-shop-chili" href="#top">Home</a>
+      <a class="rounded-2xl px-1 py-2" href="#schedule">Time</a>
+      <a class="rounded-2xl px-1 py-2" href="#menu">Menu</a>
+      <a class="rounded-2xl px-1 py-2" href="#shopping">Buy</a>
+      <a class="rounded-2xl px-1 py-2" href="#capital">Money</a>
+    </div>
+  </nav>
 
   <script>
-    const basePrice = 69;
-    const riceRadios = document.querySelectorAll('input[name="rice"]');
-    const mainRadios = document.querySelectorAll('input[name="main"]');
-    const sideCheckboxes = document.querySelectorAll('input[name="side"]');
-    const totalCalEl = document.getElementById('total-calories');
-    const totalPriceEl = document.getElementById('total-price');
-    const selectedRiceEl = document.getElementById('selected-rice');
-    const selectedMainEl = document.getElementById('selected-main');
-    const selectedSidesEl = document.getElementById('selected-sides');
-    const modalBox = document.getElementById('modal-box');
-    const modalContent = document.getElementById('modal-content');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDesc = document.getElementById('modal-desc');
-    function selectedInput(name) { return document.querySelector(`input[name="${name}"]:checked`); }
-    function updateSummary() {
-      let price = basePrice; let calories = 0;
-      const rice = selectedInput('rice'); const main = selectedInput('main');
-      price += Number(rice.dataset.price) + Number(main.dataset.price);
-      calories += Number(rice.dataset.cal) + Number(main.dataset.cal);
-      selectedRiceEl.textContent = `${rice.value} (+${rice.dataset.price} บาท)`;
-      selectedMainEl.textContent = `${main.value} (+${main.dataset.price} บาท)`;
-      const sides = [];
-      sideCheckboxes.forEach((side) => { if (side.checked) { price += Number(side.dataset.price); calories += Number(side.dataset.cal); sides.push(`${side.value} (+${side.dataset.price} บาท)`); } });
-      selectedSidesEl.textContent = sides.length ? sides.join(', ') : 'ไม่มีเพิ่มเติม';
-      totalPriceEl.textContent = `${price} บาท`; totalCalEl.textContent = calories;
+    const platformRate = 0.321;
+    const menus = [
+      { id: 'krapao', name: 'ข้าวกะเพราหมูสับไข่ดาว', img: 'assets/menu-krapao.png', cost: 41, direct: 69, platform: 99, kcal: 690, mix: 10, note: 'เมนูหลัก ขายง่าย กลิ่นหอม ทำซ้ำเร็ว' },
+      { id: 'oyster', name: 'ข้าวหมูผัดน้ำมันหอย', img: 'assets/menu-oyster-pork.png', cost: 39, direct: 75, platform: 109, kcal: 620, mix: 7, note: 'รสกลาง กินง่าย เหมาะกับลูกค้าทั่วไป' },
+      { id: 'fried-rice', name: 'ข้าวผัดหมู', img: 'assets/menu-fried-rice.png', cost: 37, direct: 69, platform: 99, kcal: 650, mix: 8, note: 'ใช้วัตถุดิบคุมง่าย เหมาะกับช่วงเริ่มร้าน' },
+      { id: 'garlic', name: 'ข้าวหมูกระเทียมไข่ดาว', img: 'assets/menu-garlic-pork.png', cost: 40, direct: 75, platform: 109, kcal: 700, mix: 5, note: 'เมนูมาตรฐาน ทำ batch ได้ดี' }
+    ];
+    const schedule = [
+      ['04:45', 'ตื่น เช็กยอดพรีออเดอร์ เช็กเงินสดซื้อของ เปิดไฟล์ shopping list'],
+      ['05:00', 'ไปตลาด/Makro ซื้อหมู ข้าว ไข่ ผัก กะเพรา กระเทียม พริก กล่อง ช้อน ถุง'],
+      ['06:00', 'กลับถึงบ้าน ล้างมือ ฆ่าเชื้อโต๊ะ แยกวัตถุดิบสดและของแห้ง ชั่งของเข้าสต็อก'],
+      ['06:30', 'หุงข้าวรอบแรก 3.3 กก. ดิบสำหรับ 30 กล่อง พร้อมกันข้าวสำรอง 10%'],
+      ['06:45', 'ล้างผัก เด็ดกะเพรา สับกระเทียม/พริก หั่นแตงกวา เตรียมซอสกลาง'],
+      ['07:15', 'สับ/แบ่งหมูเป็นถุงตามเมนู เตรียมไข่ดาวและ station ทอด'],
+      ['08:00', 'ทำ mise en place ทุกเมนู เปิดเตา ทดสอบกล่อง label ช้อน ถุง และถ่ายรูปเมนูประจำวัน'],
+      ['08:45', 'โพสต์เปิดร้านใน LINE/Facebook เปิดแอปแพลตฟอร์ม เช็กว่าราคาและสต็อกถูกต้อง'],
+      ['09:00', 'เริ่มรับออเดอร์ ทำออเดอร์ชุดแรกทันที ไม่รับเกินกำลังครัว'],
+      ['10:30', 'QC รอบแรก เช็กน้ำหนัก ข้าวไม่แฉะ กล่องสะอาด ปิดฝาแน่น'],
+      ['11:00', 'ส่งรอบเที่ยงหรือเรียกไรเดอร์ แยกถุงตามลูกค้าและช่องทางขาย'],
+      ['12:00', 'พักสั้น 15 นาที เช็กของเหลือ เติมข้าวหรือเตรียม batch รอบบ่าย'],
+      ['13:00', 'รับออเดอร์รอบบ่าย เน้นเมนูที่ยังมีวัตถุดิบพร้อม ไม่เปิดเมนูที่ใกล้หมด'],
+      ['14:00', 'ปิดรับเมนูทอด/เมนูใช้เวลานาน เริ่มเคลียร์วัตถุดิบสด'],
+      ['14:30', 'ปิดรับออเดอร์ใหม่ ยกเว้นลูกค้าใกล้บ้านที่ทำทันจริง'],
+      ['15:00', 'ปิดร้านออนไลน์ สรุปยอดขาย เงินเข้า ค่า GP ของเหลือ และรายการซื้อพรุ่งนี้'],
+      ['15:30', 'ล้างครัว ฆ่าเชื้อ เก็บของ FIFO ทิ้งของเสี่ยงเสีย ไม่เก็บอาหารสุกข้ามวัน']
+    ];
+    const shopping = [
+      ['ข้าวสารหอมมะลิ/ข้าวขาว', '3.3 กก.', '125 บาท'],
+      ['หมูบด/หมูชิ้นรวม', '2.9 กก.', '500 บาท'],
+      ['ไข่ไก่เบอร์ 2-3', '26 ฟอง', '135 บาท'],
+      ['กะเพรา พริก กระเทียม', '1 ชุดใหญ่', '160 บาท'],
+      ['ผักรวม หอมใหญ่ แครอต ต้นหอม แตงกวา', '4-5 กก. รวม', '250 บาท'],
+      ['น้ำมันพืช ซอสหอย ซีอิ๊ว น้ำปลา น้ำตาล', 'เฉลี่ยต่อวัน', '220 บาท'],
+      ['กล่องข้าว ฝา ช้อน ถุง กระดาษซับ', '35 ชุด', '230 บาท'],
+      ['แก๊ส/ไฟ/น้ำ/น้ำแข็ง/เบ็ดเตล็ด', 'เฉลี่ยต่อวัน', '180 บาท'],
+      ['Buffer ราคาขึ้นหรือออเดอร์เพิ่ม', 'สำรอง', '200 บาท']
+    ];
+    const capital = [
+      ['อุปกรณ์ครัวหลัก', 'หม้อหุงข้าวใหญ่ กระทะ เตาแก๊ส ถังแก๊ส ชั้นพักอาหาร', 42500],
+      ['อุปกรณ์ชั่ง ตวง QC', 'ตาชั่ง เทอร์โมมิเตอร์ กล่องแยกวัตถุดิบ label marker', 6500],
+      ['แพ็กเกจเริ่มต้น', 'กล่อง 300-500 ใบ ช้อน ถุง สติกเกอร์ กระดาษซับ', 6800],
+      ['วัตถุดิบรอบแรก', 'หมู ข้าว ไข่ ผัก เครื่องปรุง สำหรับ 5-7 วัน', 13500],
+      ['การตลาดและรูปภาพ', 'ถ่ายรูปเมนู โปรโมตเปิดร้าน คูปองทดลอง', 7500],
+      ['เงินหมุนเวียน 1 เดือน', 'ซื้อของรายวัน ค่าไรเดอร์ ค่าแก๊ส ค่าไฟ ช่วงเงินเข้าไม่ตรงวัน', 57000],
+      ['เงินฉุกเฉิน', 'ของเสีย อุปกรณ์เสีย ยอดขายต่ำกว่าคาด หรือแพลตฟอร์มโอนล่าช้า', 20000]
+    ];
+    const forecast = [
+      ['Month 1 Pilot', '30', '71,100', '55,500', '43,200', '12,300'],
+      ['Month 3 Stable', '60', '143,500', '112,300', '82,500', '29,800'],
+      ['Month 6 Scale', '100', '247,000', '195,000', '136,000', '59,000']
+    ];
+    function baht(value) { return `${Math.round(value).toLocaleString('th-TH')} บาท`; }
+    function renderMenu() {
+      const grid = document.getElementById('menu-grid');
+      grid.innerHTML = menus.map((menu) => {
+        const platformNet = menu.platform * (1 - platformRate);
+        return `
+          <article class="menu-card overflow-hidden rounded-[2rem] border border-shop-line bg-shop-paper shadow-soft">
+            <img src="${menu.img}" alt="${menu.name}" class="aspect-[4/3] w-full object-cover">
+            <div class="p-5">
+              <h3 class="text-xl font-extrabold">${menu.name}</h3>
+              <p class="mt-2 text-sm leading-6 text-shop-soy">${menu.note}</p>
+              <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+                <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">ต้นทุน</span><strong class="tabular block text-lg">${baht(menu.cost)}</strong></div>
+                <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">Direct</span><strong class="tabular block text-lg">${baht(menu.direct)}</strong></div>
+                <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">Platform</span><strong class="tabular block text-lg">${baht(menu.platform)}</strong></div>
+                <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">หลัง GP</span><strong class="tabular block text-lg">${baht(platformNet)}</strong></div>
+              </div>
+            </div>
+          </article>`;
+      }).join('');
     }
-    [...riceRadios, ...mainRadios, ...sideCheckboxes].forEach((input) => input.addEventListener('change', updateSummary)); updateSummary();
-    function showModal(title, description) { modalTitle.textContent = title; modalDesc.innerHTML = description; modalBox.classList.remove('hidden'); modalBox.classList.add('flex'); setTimeout(() => { modalContent.classList.remove('scale-95', 'opacity-0'); modalContent.classList.add('scale-100', 'opacity-100'); }, 30); }
-    function closeModal() { modalContent.classList.add('scale-95', 'opacity-0'); modalContent.classList.remove('scale-100', 'opacity-100'); setTimeout(() => { modalBox.classList.add('hidden'); modalBox.classList.remove('flex'); }, 150); }
-    function quickOrder(menuName, price, kcal) { showModal('รับออเดอร์จำลองแล้ว', `เมนู <strong>${menuName}</strong><br>ราคา ${price} บาท (${kcal} kcal)<br><br>ในระบบจริง ออเดอร์นี้จะถูกส่งเข้า kitchen dashboard, พิมพ์ label, และจัด route ส่งทันที`); }
-    function orderCustomBox() { showModal('กล่องข้าวของคุณพร้อมผลิต', `รายละเอียด: ${selectedRiceEl.textContent}, ${selectedMainEl.textContent}<br>${selectedSidesEl.textContent}<br><br>รวม ${totalPriceEl.textContent} (${totalCalEl.textContent} kcal)`); }
-    function showProposalSummary() { showModal('Investor proposal summary', 'โมเดลเริ่มจาก pilot 50-100 กล่อง/วัน วัด repeat order, margin, waste และ feedback ก่อนขยายเป็น subscription และ corporate bulk order. เอกสาร Business Plan และ Ops Manual พร้อมเปิดอ่านจากหน้าเว็บนี้'); }
+    function renderRows(target, rows, template) {
+      document.getElementById(target).innerHTML = rows.map(template).join('');
+    }
+    function updateCalculator() {
+      const menu = menus.find((item) => item.id === document.getElementById('menu-select').value);
+      const channel = document.querySelector('input[name="channel"]:checked').value;
+      const price = channel === 'platform' ? menu.platform : menu.direct;
+      const fee = channel === 'platform' ? price * platformRate : 0;
+      const net = price - fee;
+      const profit = net - menu.cost;
+      document.getElementById('calc-price').textContent = baht(price);
+      document.getElementById('calc-net').textContent = baht(net);
+      document.getElementById('calc-cost').textContent = baht(menu.cost);
+      document.getElementById('calc-profit').textContent = baht(profit);
+      document.getElementById('calc-note').textContent = channel === 'platform'
+        ? `ใช้สมมติฐานค่า GP รวม VAT บน GP ${Math.round(platformRate * 1000) / 10}% จึงต้องตั้งราคาแพลตฟอร์มสูงกว่าขายตรง`
+        : 'ขายตรงเหมาะกับลูกค้าประจำ เพราะไม่มี GP แพลตฟอร์มและเก็บข้อมูลลูกค้าเองได้';
+    }
+    renderMenu();
+    renderRows('schedule-list', schedule, ([time, task]) => `<div class="grid grid-cols-[88px_1fr] px-5 py-4"><strong class="tabular text-shop-chili">${time}</strong><span class="text-sm leading-6 text-shop-soy">${task}</span></div>`);
+    renderRows('shopping-list', shopping, ([item, qty, budget]) => `<div class="grid grid-cols-[1.1fr_.7fr_.7fr] px-5 py-4 text-sm"><strong>${item}</strong><span class="text-shop-soy">${qty}</span><span class="tabular font-bold text-shop-chili">${budget}</span></div>`);
+    renderRows('capital-list', capital, ([name, desc, amount]) => `<div class="flex items-start justify-between gap-4 py-4"><div><strong>${name}</strong><p class="mt-1 text-sm leading-6 text-shop-soy">${desc}</p></div><strong class="tabular whitespace-nowrap text-shop-chili">${baht(amount)}</strong></div>`);
+    renderRows('forecast-list', forecast, (row) => `<div class="grid grid-cols-[.9fr_.75fr_.9fr_.9fr_.9fr_.9fr] px-5 py-4 text-sm"><strong>${row[0]}</strong><span class="tabular">${row[1]}</span><span class="tabular">${row[2]}</span><span class="tabular">${row[3]}</span><span class="tabular">${row[4]}</span><strong class="tabular text-shop-chili">${row[5]}</strong></div>`);
+    document.getElementById('menu-select').innerHTML = menus.map((menu) => `<option value="${menu.id}">${menu.name}</option>`).join('');
+    document.getElementById('menu-select').addEventListener('change', updateCalculator);
+    document.querySelectorAll('input[name="channel"]').forEach((input) => input.addEventListener('change', updateCalculator));
+    updateCalculator();
     window.addEventListener('offline', () => { document.getElementById('offline-indicator').classList.remove('hidden'); document.getElementById('online-indicator').classList.add('hidden'); });
     window.addEventListener('online', () => { document.getElementById('offline-indicator').classList.add('hidden'); const online = document.getElementById('online-indicator'); online.classList.remove('hidden'); setTimeout(() => online.classList.add('hidden'), 3000); });
     let deferredPrompt; const installBtn = document.getElementById('install-btn');
     window.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredPrompt = event; installBtn.classList.remove('hidden'); });
     installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.classList.add('hidden'); });
-    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { const base = location.pathname.includes('/rice-box-online/') ? '/rice-box-online/' : './'; navigator.serviceWorker.register(`${base}sw.js`).catch(console.warn); }); }
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        const base = location.pathname.includes('/rice-box-online/') ? '/rice-box-online/' : './';
+        navigator.serviceWorker.register(`${base}sw.js`).catch(console.warn);
+      });
+    }
   </script>
 </body>
 </html>

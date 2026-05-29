@@ -1,14 +1,19 @@
-const CACHE_NAME = 'rice-box-online-v2';
-const BASE_PATH = '/rice-box-online/';
+const CACHE_NAME = 'rice-box-online-v3';
+const BASE_PATH = new URL(self.registration.scope).pathname;
 const ASSETS = [
   BASE_PATH,
   `${BASE_PATH}index.html`,
   `${BASE_PATH}manifest.json`,
   `${BASE_PATH}assets/hero-rice-box.png`,
+  `${BASE_PATH}assets/menu-krapao.png`,
+  `${BASE_PATH}assets/menu-oyster-pork.png`,
+  `${BASE_PATH}assets/menu-fried-rice.png`,
+  `${BASE_PATH}assets/menu-garlic-pork.png`,
   `${BASE_PATH}icons/icon-192.png`,
   `${BASE_PATH}icons/icon-512.png`,
   `${BASE_PATH}docs/business-plan.md`,
-  `${BASE_PATH}docs/ops-manual.md`
+  `${BASE_PATH}docs/ops-manual.md`,
+  `${BASE_PATH}docs/costing-forecast.md`
 ];
 
 self.addEventListener('install', (event) => {
