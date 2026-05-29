@@ -6,7 +6,7 @@ Home-kitchen operating website and static PWA for launching a Thai online rice b
 
 - Responsive website for desktop and mobile.
 - Mobile app-like bottom navigation.
-- Installable PWA manifest and service worker.
+- Installable PWA manifest, service worker, real app icons, Apple touch icon, maskable Android icon, and install screenshots.
 - Generated food images for the Thai core menu.
 - Daily 09:00-15:00 operating schedule.
 - Practical shopping list for 30 boxes per day.

@@ -1,26 +1,107 @@
 {
   "name": "Rice Box Online - Home Kitchen Plan",
   "short_name": "RiceBox",
-  "description": "เว็บ PWA สำหรับเปิดร้านข้าวออนไลน์ที่บ้าน พร้อมตารางงาน เมนู ต้นทุน รายการซื้อของ เงินทุน และ forecast",
+  "description": "Installable home-kitchen operating app for launching a Thai online rice box shop with schedule, menu costing, startup capital packages, shopping list, and forecast.",
+  "id": "/rice-box-online/",
   "start_url": "/rice-box-online/",
   "scope": "/rice-box-online/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#fff8ed",
-  "theme_color": "#c76b1a",
+  "background_color": "#fff6e8",
+  "theme_color": "#7c2d12",
   "categories": ["food", "business", "productivity"],
   "icons": [
+    {
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/app-screenshot-mobile.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile app view with launch budget, menu images, and bottom navigation"
+    },
+    {
+      "src": "assets/app-screenshot-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop app view with operating plan and recommended startup package"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Daily Schedule",
+      "short_name": "Schedule",
+      "description": "Open the daily kitchen operating schedule.",
+      "url": "/rice-box-online/#schedule",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Startup Capital",
+      "short_name": "Capital",
+      "description": "Open the Low, Mid, and High startup budget packages.",
+      "url": "/rice-box-online/#capital",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

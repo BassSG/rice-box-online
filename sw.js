@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rice-box-online-v3';
+const CACHE_NAME = 'rice-box-online-v4';
 const BASE_PATH = new URL(self.registration.scope).pathname;
 const ASSETS = [
   BASE_PATH,
@@ -9,8 +9,19 @@ const ASSETS = [
   `${BASE_PATH}assets/menu-oyster-pork.png`,
   `${BASE_PATH}assets/menu-fried-rice.png`,
   `${BASE_PATH}assets/menu-garlic-pork.png`,
+  `${BASE_PATH}assets/app-screenshot-mobile.png`,
+  `${BASE_PATH}assets/app-screenshot-desktop.png`,
+  `${BASE_PATH}icons/apple-touch-icon.png`,
+  `${BASE_PATH}icons/icon-72.png`,
+  `${BASE_PATH}icons/icon-96.png`,
+  `${BASE_PATH}icons/icon-128.png`,
+  `${BASE_PATH}icons/icon-144.png`,
+  `${BASE_PATH}icons/icon-152.png`,
+  `${BASE_PATH}icons/icon-180.png`,
   `${BASE_PATH}icons/icon-192.png`,
+  `${BASE_PATH}icons/icon-384.png`,
   `${BASE_PATH}icons/icon-512.png`,
+  `${BASE_PATH}icons/icon-maskable-512.png`,
   `${BASE_PATH}docs/business-plan.md`,
   `${BASE_PATH}docs/ops-manual.md`,
   `${BASE_PATH}docs/costing-forecast.md`
