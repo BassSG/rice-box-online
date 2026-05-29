@@ -11,7 +11,7 @@ Home-kitchen operating website and static PWA for launching a Thai online rice b
 - Daily 09:00-15:00 operating schedule.
 - Practical shopping list for 30 boxes per day.
 - Menu cost, direct price, platform price, and gross profit.
-- Startup capital and reserve plan.
+- Low / Mid / High startup capital packages for a kitchen that already has equipment.
 - 1, 3, and 6 month forecast.
 - Proposal-ready documentation.
 

@@ -46,22 +46,28 @@ Example:
 
 This protects margin while still keeping prices understandable to customers.
 
-## Startup Capital Recommendation
+## Startup Capital Packages
 
-Recommended starting capital: 150,000 THB.
+The owner already has kitchen equipment, so the launch budget should not assume a full kitchen purchase. Start with the smallest package that can run safely and upgrade only after repeat orders are proven.
 
-| Category | Budget |
-| --- | ---: |
-| Main kitchen equipment | 42,500 THB |
-| QC and measuring tools | 6,500 THB |
-| Initial packaging | 6,800 THB |
-| First ingredient stock | 13,500 THB |
-| Marketing and menu photos | 7,500 THB |
-| One-month working capital | 57,000 THB |
-| Emergency reserve | 20,000 THB |
-| Total recommended capital | 153,800 THB |
+| Package | Budget Range | Recommended Cash | Daily Volume | Best For |
+| --- | ---: | ---: | ---: | --- |
+| Low / Lean test | 12,000-18,000 THB | 15,000 THB | 15-20 boxes/day | Testing direct sales through LINE/Facebook with low risk. |
+| Mid / Recommended | 28,000-40,000 THB | 35,000 THB | 30-40 boxes/day | Practical starting point when kitchen equipment already exists. |
+| High / Small scale | 55,000-75,000 THB | 65,000 THB | 50-70 boxes/day | Starting with several channels and small corporate orders. |
 
-150,000 THB is the practical target. If capital is lower, start with 15-20 boxes per day and buy packaging in smaller lots.
+## What the Money Covers
+
+| Category | Low | Mid | High |
+| --- | ---: | ---: | ---: |
+| Ingredients | 4,500 THB | 8,000-12,000 THB | 18,000-25,000 THB |
+| Packaging | 1,200-2,000 THB | 3,000-4,500 THB | 6,000-8,000 THB |
+| Daily working cash | 5,000-7,000 THB | 10,000-14,000 THB | 20,000-28,000 THB |
+| Marketing | 1,000 THB | 2,000-3,000 THB | 5,000-8,000 THB |
+| Small missing tools | 0-1,500 THB | 0-3,000 THB | 0-5,000 THB |
+| Emergency reserve | 2,500-3,000 THB | 5,000 THB | 10,000 THB |
+
+The mid package is the most balanced recommendation. The low package is acceptable if the first goal is proof of demand rather than fast scale.
 
 ## Forecast Summary
 

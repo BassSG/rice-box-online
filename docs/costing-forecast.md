@@ -51,6 +51,18 @@ The platform assumption is conservative. Always check the real contract before s
 | 60 boxes/day | 3,600-4,000 THB/day | Owner plus 1 helper | Add separate packing station. |
 | 100 boxes/day | 6,000-6,500 THB/day | Owner plus 2 helpers or prep support | Needs stronger route planning and inventory control. |
 
+## Startup Budget Packages
+
+These packages assume the home kitchen already has main equipment such as stove, pans, rice cooker, knives, and basic storage.
+
+| Package | Prepare | Target Volume | What to Buy First |
+| --- | ---: | ---: | --- |
+| Low | 12,000-18,000 THB | 15-20 boxes/day | Ingredients for 3 days, 100-150 packaging sets, 5 days of working cash, 2,500-3,000 THB emergency reserve. |
+| Mid | 28,000-40,000 THB | 30-40 boxes/day | Ingredients for 5-7 days, 250-300 packaging sets, 10-14 days of working cash, small marketing budget, 5,000 THB emergency reserve. |
+| High | 55,000-75,000 THB | 50-70 boxes/day | Ingredients for 10-14 days, about 500 packaging sets, 3-4 weeks of working cash, larger marketing budget, 10,000 THB emergency reserve. |
+
+Do not buy bulk packaging or extra equipment before the menu sells repeatedly. Cash flow is more important than looking big.
+
 ## Monthly Forecast
 
 | Period | Boxes/day | Boxes/month | Gross sales | Net after platform fees | Variable cost | Fixed cost | Cash before tax |
