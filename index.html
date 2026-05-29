@@ -3,536 +3,162 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rice Box Online - ข้าวกล่องเดลิเวอรีพรีเมียม</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Manifest -->
+  <meta name="description" content="Rice Box Online เว็บ PWA สำหรับธุรกิจข้าวกล่องพรีเมียม พร้อมแผนธุรกิจ คู่มือปฏิบัติงาน และระบบสั่งซื้อจำลอง">
+  <title>Rice Box Online | Investor Ready PWA</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#FF9F1C">
-  <!-- Fonts & Icons -->
+  <meta name="theme-color" content="#c76b1a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Kanit', sans-serif;
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Kanit', 'sans-serif'] },
+          colors: {
+            rice: { ink: '#20150f', cocoa: '#4d2b19', clay: '#9d4f20', gold: '#d8892f', leaf: '#557846', cream: '#fff8ed', paper: '#fffdf8' }
+          },
+          boxShadow: { soft: '0 18px 60px rgba(77, 43, 25, .12)', lift: '0 24px 80px rgba(157, 79, 32, .20)' }
+        }
+      }
     }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Kanit', sans-serif; background: #fff8ed; color: #20150f; }
+    .glass { background: rgba(255, 253, 248, .88); backdrop-filter: blur(18px); }
+    .hero-mask { mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 94%, transparent 100%); }
+    .option-card:has(input:checked) { border-color: #d8892f; background: #fff8ed; box-shadow: 0 12px 30px rgba(216,137,47,.16); }
+    @media (prefers-reduced-motion: no-preference) { .floaty { animation: floaty 6s ease-in-out infinite; } @keyframes floaty { 50% { transform: translateY(-10px); } } }
   </style>
 </head>
-<body class="bg-amber-50 text-gray-800 min-h-screen flex flex-col">
+<body class="min-h-screen overflow-x-hidden">
+  <div id="offline-indicator" class="hidden bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white">Offline mode: หน้าเว็บหลักยังใช้งานได้จาก cache แต่คำสั่งซื้อจริงควรเชื่อมต่ออินเทอร์เน็ตก่อนส่งออเดอร์</div>
+  <div id="online-indicator" class="hidden bg-rice-leaf px-4 py-2 text-center text-sm font-semibold text-white">กลับมาออนไลน์แล้ว ระบบพร้อมรับออเดอร์และอัปเดตข้อมูลล่าสุด</div>
 
-  <!-- Network Status Bar -->
-  <div id="offline-indicator" class="bg-red-500 text-white text-center py-1.5 text-sm hidden font-medium transition-all duration-300">
-    ⚠️ คุณกำลังใช้งานในโหมดออฟไลน์ (Offline Mode) แต่แอปพลิเคชันยังคงทำงานและดูข้อมูลได้ปกติ!
-  </div>
-  <div id="online-indicator" class="bg-green-600 text-white text-center py-1.5 text-sm hidden font-medium transition-all duration-300">
-    ✨ เชื่อมต่ออินเทอร์เน็ตแล้ว! เมนูอัปเดตเป็นล่าสุดแล้วค่ะ
-  </div>
-
-  <!-- Navbar -->
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center space-x-2">
-        <span class="text-2xl">🌾</span>
-        <h1 class="text-xl md:text-2xl font-bold text-amber-600">Rice Box Online</h1>
-      </div>
-      <nav class="hidden md:flex space-x-6 font-medium text-gray-600">
-        <a href="#menu" class="hover:text-amber-500 transition">เมนูแนะนำ</a>
-        <a href="#builder" class="hover:text-amber-500 transition">ดีไซน์ข้าวกล่องเอง</a>
-        <a href="#about" class="hover:text-amber-500 transition">เกี่ยวกับเรา</a>
-        <a href="#docs" class="hover:text-amber-500 transition">แผนธุรกิจ</a>
+  <header class="sticky top-0 z-50 border-b border-rice-gold/20 glass">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
+      <a href="#top" class="flex items-center gap-3">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-rice-ink text-xl font-extrabold text-white shadow-soft">ข</span>
+        <span><span class="block text-lg font-extrabold leading-tight">Rice Box Online</span><span class="block text-xs font-medium text-rice-clay">Premium PWA Food Delivery</span></span>
+      </a>
+      <nav class="hidden items-center gap-7 text-sm font-semibold text-rice-cocoa lg:flex">
+        <a href="#menu" class="hover:text-rice-clay">Menu</a><a href="#builder" class="hover:text-rice-clay">Build Box</a><a href="#operations" class="hover:text-rice-clay">Operations</a><a href="#investor" class="hover:text-rice-clay">Investor Plan</a><a href="#launch" class="hover:text-rice-clay">Launch</a>
       </nav>
-      <div>
-        <button id="install-btn" class="hidden bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-full font-bold shadow text-sm transition transform hover:scale-105">
-          📲 ติดตั้งแอป
-        </button>
-      </div>
+      <div class="flex items-center gap-2"><button id="install-btn" class="hidden rounded-full bg-rice-ink px-4 py-2 text-sm font-bold text-white shadow-soft">Install App</button><a href="#proposal" class="rounded-full bg-rice-gold px-4 py-2 text-sm font-bold text-rice-ink shadow-soft">ขอ Proposal</a></div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-amber-500 to-orange-500 text-white py-16 px-4 text-center">
-    <div class="max-w-3xl mx-auto">
-      <h2 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-        ข้าวกล่องร้อนอร่อย สดใหม่<br class="hidden md:inline"> ส่งตรงถึงมือคุณทุกวัน
-      </h2>
-      <p class="text-lg md:text-xl mb-8 opacity-95">
-        คัดสรรวัตถุดิบพรีเมียม ปรุงด้วยใจ ดีต่อสุขภาพและสิ่งแวดล้อม กล่องชานอ้อยรักษ์โลกย่อยสลายได้ 100%
-      </p>
-      <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-        <a href="#builder" class="bg-white text-amber-600 hover:bg-amber-100 font-bold px-8 py-3.5 rounded-full shadow-lg text-lg transition duration-300 transform hover:scale-105">
-          🍱 ดีไซน์กล่องข้าวของคุณ
-        </a>
-        <a href="#menu" class="bg-amber-700 hover:bg-amber-800 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg text-lg border border-amber-400 transition duration-300">
-          🍛 ดูเมนูทั้งหมด
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- App Feature Cards -->
-  <section class="container mx-auto px-4 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100 flex flex-col items-center text-center">
-        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center text-3xl mb-4 text-amber-600">🥗</div>
-        <h3 class="text-lg font-bold mb-2 text-gray-800">วัตถุดิบออร์แกนิก</h3>
-        <p class="text-gray-600 text-sm">ผักสดปลอดภัยจากสวนอินทรีย์ และเนื้อสัตว์อนามัย ไม่ใส่ผงชูรส 100%</p>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100 flex flex-col items-center text-center">
-        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center text-3xl mb-4 text-orange-600">🛵</div>
-        <h3 class="text-lg font-bold mb-2 text-gray-800">อุ่นร้อนตลอดทาง</h3>
-        <p class="text-gray-600 text-sm">จัดส่งด้วยกระเป๋าควบคุมอุณหภูมิขจัดความเย็นชืด ข้าวถึงมือยังร้อนหอมกรุ่น</p>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100 flex flex-col items-center text-center">
-        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-3xl mb-4 text-red-600">📦</div>
-        <h3 class="text-lg font-bold mb-2 text-gray-800">กล่องรักษ์โลก 100%</h3>
-        <p class="text-gray-600 text-sm">ใช้บรรจุภัณฑ์ชานอ้อยธรรมชาติ ทนความร้อน เข้าไมโครเวฟได้ ไร้สารเคมีปนเปื้อน</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Recommended Menu Section -->
-  <section id="menu" class="bg-white py-16 px-4">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">🍛 เมนูเด่นยอดฮิตขายดีประจำสัปดาห์</h2>
-      <p class="text-center text-gray-500 mb-10">ข้าวกล่องคุณภาพพรีเมียมที่ทุกคนโหวตว่าอร่อยที่สุด</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Menu 1 -->
-        <div class="bg-amber-50/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-amber-100">
-          <div class="h-48 bg-amber-500 flex items-center justify-center text-white text-6xl font-bold relative">
-            🍗
-            <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Clean Choice</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-800 mb-1">ข้าวอกไก่ย่างถ่านเทริยากิ</h3>
-            <p class="text-sm text-gray-500 mb-3">แคลอรี่ต่ำ โปรตีนสูง เหมาะสำหรับคนรักสุขภาพ</p>
-            <div class="flex justify-between items-center">
-              <div>
-                <span class="text-2xl font-bold text-amber-600">89 ฿</span>
-                <span class="text-xs text-gray-400 block">450 kcal</span>
-              </div>
-              <button onclick="quickOrder('ข้าวอกไก่ย่างถ่านเทริยากิ', 89, 450)" class="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2 rounded-xl transition shadow text-sm">
-                สั่งซื้อเลย
-              </button>
-            </div>
+  <main id="top">
+    <section class="relative overflow-hidden bg-rice-paper">
+      <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-10 lg:grid-cols-[.95fr_1.05fr] lg:px-8 lg:pb-20 lg:pt-16">
+        <div class="relative z-10">
+          <p class="mb-4 max-w-fit rounded-full border border-rice-gold/30 bg-white px-4 py-2 text-sm font-bold text-rice-clay">เปิดร้านข้าวกล่องพรีเมียมแบบพร้อมทำงาน</p>
+          <h1 class="max-w-3xl text-4xl font-extrabold leading-tight text-rice-ink md:text-6xl">ข้าวกล่องร้อน ส่งตรงเวลา พร้อมระบบสั่งซื้อและแผนปฏิบัติงานที่นักลงทุนอ่านรู้เรื่อง</h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-rice-cocoa">Rice Box Online คือเว็บ PWA สำหรับเดโมธุรกิจข้าวกล่องพรีเมียม ครอบคลุมหน้าร้านออนไลน์ เมนู สร้างกล่องข้าวเอง แพ็กเกจรายเดือน ขั้นตอนครัว QC โลจิสติกส์ และเอกสารสำหรับยื่น proposal.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a href="#builder" class="rounded-2xl bg-rice-ink px-6 py-4 text-center font-bold text-white shadow-lift">ลองสร้างกล่องข้าว</a><a href="#investor" class="rounded-2xl border border-rice-gold/40 bg-white px-6 py-4 text-center font-bold text-rice-ink shadow-soft">ดูแผนสำหรับนักลงทุน</a></div>
+          <div class="mt-8 grid max-w-xl grid-cols-3 gap-3">
+            <div class="rounded-2xl bg-white p-4 shadow-soft"><strong class="block text-2xl text-rice-clay">30-40</strong><span class="text-xs text-rice-cocoa">นาทีส่งถึงลูกค้า</span></div>
+            <div class="rounded-2xl bg-white p-4 shadow-soft"><strong class="block text-2xl text-rice-clay">69+</strong><span class="text-xs text-rice-cocoa">บาทราคาเริ่มต้น</span></div>
+            <div class="rounded-2xl bg-white p-4 shadow-soft"><strong class="block text-2xl text-rice-clay">PWA</strong><span class="text-xs text-rice-cocoa">ติดตั้งบนมือถือได้</span></div>
           </div>
         </div>
-
-        <!-- Menu 2 -->
-        <div class="bg-amber-50/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-amber-100">
-          <div class="h-48 bg-orange-400 flex items-center justify-center text-white text-6xl font-bold relative">
-            🥩
-            <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Best Seller</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-800 mb-1">ข้าวหน้าเนื้อย่างซอสเทริยากิ</h3>
-            <p class="text-sm text-gray-500 mb-3">เนื้อสไลด์พรีเมียม ย่างซอสสูตรเด็ดญี่ปุ่น นุ่มละมุนลิ้น</p>
-            <div class="flex justify-between items-center">
-              <div>
-                <span class="text-2xl font-bold text-amber-600">119 ฿</span>
-                <span class="text-xs text-gray-400 block">620 kcal</span>
-              </div>
-              <button onclick="quickOrder('ข้าวหน้าเนื้อย่างซอสเทริยากิ', 119, 620)" class="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2 rounded-xl transition shadow text-sm">
-                สั่งซื้อเลย
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Menu 3 -->
-        <div class="bg-amber-50/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-amber-100">
-          <div class="h-48 bg-red-400 flex items-center justify-center text-white text-6xl font-bold relative">
-            🐟
-            <span class="absolute top-3 right-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Premium</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-800 mb-1">ข้าวแซลมอนย่างเกลือหอมมะลิ</h3>
-            <p class="text-sm text-gray-500 mb-3">เนื้อแซลมอนนอร์เวย์แท้ ย่างเกลือกรอบนอกนุ่มใน ดีต่อใจ</p>
-            <div class="flex justify-between items-center">
-              <div>
-                <span class="text-2xl font-bold text-amber-600">139 ฿</span>
-                <span class="text-xs text-gray-400 block">520 kcal</span>
-              </div>
-              <button onclick="quickOrder('ข้าวแซลมอนย่างเกลือหอมมะลิ', 139, 520)" class="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2 rounded-xl transition shadow text-sm">
-                สั่งซื้อเลย
-              </button>
-            </div>
-          </div>
+        <div class="relative">
+          <div class="absolute -inset-6 rounded-[3rem] bg-rice-gold/20 blur-3xl"></div>
+          <img src="assets/hero-rice-box.png" alt="Premium rice boxes ready for delivery" class="relative aspect-[4/3] w-full rounded-[2rem] object-cover shadow-lift hero-mask">
+          <div class="floaty absolute bottom-5 left-5 rounded-3xl bg-white/95 p-4 shadow-lift"><p class="text-xs font-bold uppercase text-rice-clay">Today Kitchen Status</p><p class="mt-1 text-xl font-extrabold text-rice-ink">พร้อมผลิต 180 กล่อง</p><p class="text-sm text-rice-cocoa">QC, pack, route พร้อมก่อน 10:45</p></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Interactive Custom Rice Box Builder Section -->
-  <section id="builder" class="bg-amber-100/50 py-16 px-4">
-    <div class="container mx-auto max-w-4xl">
-      <div class="text-center mb-10">
-        <span class="bg-amber-200 text-amber-800 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">Interactive App</span>
-        <h2 class="text-3xl font-bold text-gray-800 mt-2 mb-2">🍱 ดีไซน์กล่องข้าวของคุณเองได้ตามต้องการ</h2>
-        <p class="text-gray-500">เลือกข้าว กับข้าว และซอสราดได้ตามใจชอบ พร้อมคำนวณราคาและแคลอรี่ทันที!</p>
+    <section class="bg-rice-cream px-4 py-10 lg:px-8">
+      <div class="mx-auto grid max-w-7xl gap-4 md:grid-cols-4">
+        <div class="rounded-3xl bg-rice-ink p-6 text-white shadow-soft md:col-span-2"><h2 class="text-2xl font-extrabold">Business concept</h2><p class="mt-3 leading-7 text-white/80">ขายข้าวกล่องพรีเมียมให้พนักงานออฟฟิศ งานประชุม และลูกค้าสุขภาพ ผ่านระบบสั่งซื้อเร็ว ติดตั้งได้เหมือนแอป และมีมาตรฐานการผลิตซ้ำได้ทุกวัน</p></div>
+        <div class="rounded-3xl bg-white p-6 shadow-soft"><h3 class="font-extrabold">Customer promise</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">ร้อน สะอาด ตรงเวลา คำนวณราคาและแคลอรีชัดเจน</p></div>
+        <div class="rounded-3xl bg-white p-6 shadow-soft"><h3 class="font-extrabold">Investor angle</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">เริ่มเล็กได้ วัดผลได้ ขยายเป็น subscription และ corporate bulk order</p></div>
       </div>
+    </section>
 
-      <div class="bg-white rounded-3xl shadow-lg border border-amber-200 overflow-hidden grid grid-cols-1 md:grid-cols-2">
-        
-        <!-- Options Panel -->
-        <div class="p-8 space-y-6 border-b md:border-b-0 md:border-r border-gray-100">
-          
-          <!-- 1. Rice Selection -->
-          <div>
-            <h3 class="font-bold text-gray-800 mb-3 flex items-center"><span class="mr-2">🍚</span> 1. เลือกข้าวรองกล่อง</h3>
-            <div class="grid grid-cols-1 gap-2">
-              <label class="flex items-center justify-between p-3 border rounded-xl hover:bg-amber-50 cursor-pointer transition border-amber-500 bg-amber-50">
-                <span class="flex items-center">
-                  <input type="radio" name="rice" value="ข้าวหอมมะลิ" data-price="0" data-cal="250" checked class="accent-amber-500 mr-3">
-                  ข้าวหอมมะลิ
-                </span>
-                <span class="text-sm text-gray-500">ฟรี (250 kcal)</span>
-              </label>
-              <label class="flex items-center justify-between p-3 border rounded-xl hover:bg-amber-50 cursor-pointer transition border-gray-200">
-                <span class="flex items-center">
-                  <input type="radio" name="rice" value="ข้าวกล้องไรซ์เบอร์รี่" data-price="10" data-cal="210" class="accent-amber-500 mr-3">
-                  ข้าวกล้องไรซ์เบอร์รี่
-                </span>
-                <span class="text-sm text-amber-600 font-semibold">+10 ฿ (210 kcal)</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- 2. Main Dish -->
-          <div>
-            <h3 class="font-bold text-gray-800 mb-3 flex items-center"><span class="mr-2">🍳</span> 2. เลือกกับข้าวหลัก (รวมในราคาฐาน 69 บาท)</h3>
-            <div class="grid grid-cols-1 gap-2">
-              <label class="flex items-center justify-between p-3 border rounded-xl hover:bg-amber-50 cursor-pointer transition border-amber-500 bg-amber-50">
-                <span class="flex items-center">
-                  <input type="radio" name="main" value="อกไก่นุ่มย่างสมุนไพร" data-price="0" data-cal="180" checked class="accent-amber-500 mr-3">
-                  อกไก่นุ่มย่างสมุนไพร
-                </span>
-                <span class="text-sm text-gray-500">ฟรี (180 kcal)</span>
-              </label>
-              <label class="flex items-center justify-between p-3 border rounded-xl hover:bg-amber-50 cursor-pointer transition border-gray-200">
-                <span class="flex items-center">
-                  <input type="radio" name="main" value="หมูทอดสไตล์ทงคัตสึ" data-price="20" data-cal="380" class="accent-amber-500 mr-3">
-                  หมูทอดสไตล์ทงคัตสึ
-                </span>
-                <span class="text-sm text-amber-600 font-semibold">+20 ฿ (380 kcal)</span>
-              </label>
-              <label class="flex items-center justify-between p-3 border rounded-xl hover:bg-amber-50 cursor-pointer transition border-gray-200">
-                <span class="flex items-center">
-                  <input type="radio" name="main" value="ปลาแซลมอนเทริยากิ" data-price="45" data-cal="240" class="accent-amber-500 mr-3">
-                  ปลาแซลมอนเทริยากิ
-                </span>
-                <span class="text-sm text-amber-600 font-semibold">+45 ฿ (240 kcal)</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- 3. Side Dish -->
-          <div>
-            <h3 class="font-bold text-gray-800 mb-3 flex items-center"><span class="mr-2">🥗</span> 3. เครื่องเคียงเพิ่มเติม</h3>
-            <div class="grid grid-cols-1 gap-2">
-              <label class="flex items-center justify-between p-3 border rounded-xl hover:bg-amber-50 cursor-pointer transition border-gray-200">
-                <span class="flex items-center">
-                  <input type="checkbox" name="side" value="ไข่ดาวออร์แกนิก" data-price="10" data-cal="80" class="accent-amber-500 mr-3 rounded">
-                  ไข่ดาวออร์แกนิก
-                </span>
-                <span class="text-sm text-amber-600 font-semibold">+10 ฿ (80 kcal)</span>
-              </label>
-              <label class="flex items-center justify-between p-3 border rounded-xl hover:bg-amber-50 cursor-pointer transition border-gray-200">
-                <span class="flex items-center">
-                  <input type="checkbox" name="side" value="ผัดผักรวมมิตร" data-price="15" data-cal="60" class="accent-amber-500 mr-3 rounded">
-                  ผัดผักรวมมิตรบล็อกโคลี
-                </span>
-                <span class="text-sm text-amber-600 font-semibold">+15 ฿ (60 kcal)</span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- Real-time Summary Panel -->
-        <div class="p-8 bg-amber-50/50 flex flex-col justify-between">
-          <div>
-            <h3 class="font-bold text-gray-800 text-xl mb-4 text-center">🧾 รายละเอียดกล่องข้าวของคุณ</h3>
-            
-            <div class="space-y-4 text-sm text-gray-600 border-b border-dashed border-gray-200 pb-6">
-              <div class="flex justify-between">
-                <span>ราคาตั้งต้น (ข้าว + กับข้าวหลัก):</span>
-                <span class="font-semibold text-gray-800">69 ฿</span>
-              </div>
-              <div class="flex justify-between">
-                <span>ข้าวที่เลือก:</span>
-                <span id="selected-rice" class="font-semibold text-gray-800">ข้าวหอมมะลิ (0 ฿)</span>
-              </div>
-              <div class="flex justify-between">
-                <span>กับข้าวหลัก:</span>
-                <span id="selected-main" class="font-semibold text-gray-800">อกไก่นุ่มย่างสมุนไพร (0 ฿)</span>
-              </div>
-              <div class="flex justify-between">
-                <span>เครื่องเคียง:</span>
-                <span id="selected-sides" class="font-semibold text-gray-800">ไม่มีเพิ่มเติม</span>
-              </div>
-            </div>
-
-            <!-- Totals -->
-            <div class="py-6 space-y-2">
-              <div class="flex justify-between items-center">
-                <span class="text-gray-500 font-medium">พลังงานรวมทั้งหมด:</span>
-                <span id="total-calories" class="text-xl font-bold text-orange-600">430 kcal</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-gray-800 font-bold text-lg">ราคารวมสุทธิ:</span>
-                <span id="total-price" class="text-3xl font-extrabold text-amber-600">69 ฿</span>
-              </div>
-            </div>
-          </div>
-
-          <button onclick="orderCustomBox()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-2xl shadow-md transition duration-300 transform hover:scale-105 text-center text-lg">
-            🛒 ใส่กล่องข้าวของฉันเลย
-          </button>
+    <section id="menu" class="bg-white px-4 py-16 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><h2 class="text-3xl font-extrabold md:text-4xl">Signature menu</h2><p class="mt-3 max-w-2xl text-rice-cocoa">เมนูหลักสำหรับเริ่มขายจริง คุมต้นทุนง่าย ถ่ายรูปขึ้นคอนเทนต์ได้ และเหมาะกับการทำซ้ำในครัวกลาง</p></div><a href="#proposal" class="font-bold text-rice-clay">ขอราคา bulk order</a></div>
+        <div class="mt-8 grid gap-5 md:grid-cols-3">
+          <article class="rounded-3xl border border-rice-gold/20 bg-rice-paper p-5 shadow-soft"><div class="grid aspect-[4/3] place-items-center rounded-2xl bg-gradient-to-br from-amber-200 to-orange-400 text-7xl">ไก่</div><h3 class="mt-5 text-xl font-extrabold">ข้าวอกไก่ย่างเทอริยากิ</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">โปรตีนสูง ไขมันต่ำ เหมาะกับลูกค้าออฟฟิศและสายสุขภาพ</p><div class="mt-5 flex items-end justify-between"><span><strong class="text-2xl text-rice-clay">89 บาท</strong><small class="block text-rice-cocoa">450 kcal</small></span><button onclick="quickOrder('ข้าวอกไก่ย่างเทอริยากิ', 89, 450)" class="rounded-2xl bg-rice-ink px-4 py-3 text-sm font-bold text-white">สั่งเลย</button></div></article>
+          <article class="rounded-3xl border border-rice-gold/20 bg-rice-paper p-5 shadow-soft"><div class="grid aspect-[4/3] place-items-center rounded-2xl bg-gradient-to-br from-orange-200 to-red-400 text-7xl">เนื้อ</div><h3 class="mt-5 text-xl font-extrabold">ข้าวหน้าเนื้อซอสญี่ปุ่น</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">เมนู premium ticket สำหรับเพิ่มกำไรต่อกล่องและใช้ใน proposal</p><div class="mt-5 flex items-end justify-between"><span><strong class="text-2xl text-rice-clay">119 บาท</strong><small class="block text-rice-cocoa">620 kcal</small></span><button onclick="quickOrder('ข้าวหน้าเนื้อซอสญี่ปุ่น', 119, 620)" class="rounded-2xl bg-rice-ink px-4 py-3 text-sm font-bold text-white">สั่งเลย</button></div></article>
+          <article class="rounded-3xl border border-rice-gold/20 bg-rice-paper p-5 shadow-soft"><div class="grid aspect-[4/3] place-items-center rounded-2xl bg-gradient-to-br from-rose-100 to-orange-300 text-7xl">ปลา</div><h3 class="mt-5 text-xl font-extrabold">ข้าวแซลมอนย่างเกลือ</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">ภาพลักษณ์พรีเมียม เหมาะกับงานประชุม ลูกค้าองค์กร และเซ็ตสุขภาพ</p><div class="mt-5 flex items-end justify-between"><span><strong class="text-2xl text-rice-clay">139 บาท</strong><small class="block text-rice-cocoa">520 kcal</small></span><button onclick="quickOrder('ข้าวแซลมอนย่างเกลือ', 139, 520)" class="rounded-2xl bg-rice-ink px-4 py-3 text-sm font-bold text-white">สั่งเลย</button></div></article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- About Us Section -->
-  <section id="about" class="py-16 px-4 bg-white">
-    <div class="container mx-auto max-w-3xl text-center">
-      <h2 class="text-3xl font-bold mb-4 text-gray-800">🌾 เกี่ยวกับเรา (About Rice Box Online)</h2>
-      <p class="text-gray-600 leading-relaxed mb-6">
-        เราคือผู้ปฏิวัติปิ่นโตเมืองไทย โดยการใช้เทคโนโลยี Progressive Web App (PWA) ล้ำสมัย เข้ากับรสชาติอาหารไทย-ฟิวชันที่จัดจ้านและมีคุณค่าทางโภชนาการสูง ปรุงร้อนกล่องต่อกล่อง จัดส่งรวดเร็วว่องไวด้วยการวางเส้นทางอัจฉริยะ ให้ชีวิตคนทำงานออฟฟิศลงตัวและสมบูรณ์แบบในทุกๆ มื้อ
-      </p>
-      <div class="flex justify-center space-x-6 text-sm text-gray-500">
-        <div>👩‍🍳 เชฟฝีมือเยี่ยม</div>
-        <div>🌱 วัตถุดิบสดจากฟาร์ม</div>
-        <div>🍱 บรรจุภัณฑ์ธรรมชาติ</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Business Plan & Documentation Links Section -->
-  <section id="docs" class="bg-amber-50 py-12 px-4 border-t border-amber-100">
-    <div class="container mx-auto max-w-4xl text-center">
-      <h3 class="text-2xl font-bold mb-6 text-gray-800">📁 เอกสารและแผนการดำเนินธุรกิจ</h3>
-      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
-        เรามีความมุ่งมั่นและใส่ใจในรายละเอียดทุกขั้นตอน ท่านสามารถร่วมรับชมเบื้องหลังความสำเร็จและมาตรฐานการรันงานระดับมืออาชีพผ่านเอกสารสำคัญได้ที่นี่:
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-        <a href="docs/business-plan.md" target="_blank" class="bg-white hover:bg-amber-100/50 p-6 rounded-2xl shadow-sm border border-amber-200 transition text-left flex items-start space-x-4">
-          <span class="text-3xl">📊</span>
-          <div>
-            <h4 class="font-bold text-gray-800">Business Plan (แผนธุรกิจ)</h4>
-            <p class="text-xs text-gray-500 mt-1">กลุ่มเป้าหมาย จุดขาย และแผนการเงินที่จับต้องได้จริง</p>
+    <section id="builder" class="bg-rice-cream px-4 py-16 lg:px-8">
+      <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.95fr_1.05fr]">
+        <div>
+          <h2 class="text-3xl font-extrabold md:text-4xl">Build your rice box</h2><p class="mt-3 text-rice-cocoa">ลูกค้าเลือกข้าว กับข้าว เครื่องเคียง และแพ็กเกจได้เอง ระบบคำนวณราคาและแคลอรีทันทีเพื่อช่วยตัดสินใจเร็วขึ้น</p>
+          <div class="mt-8 space-y-5">
+            <div><h3 class="mb-3 font-extrabold">1. เลือกข้าว</h3><div class="grid gap-3"><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="radio" name="rice" value="ข้าวหอมมะลิ" data-price="0" data-cal="250" checked> ข้าวหอมมะลิ <span class="float-right text-rice-cocoa">ฟรี / 250 kcal</span></label><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="radio" name="rice" value="ข้าวกล้องไรซ์เบอร์รี" data-price="10" data-cal="210"> ข้าวกล้องไรซ์เบอร์รี <span class="float-right text-rice-clay">+10 / 210 kcal</span></label></div></div>
+            <div><h3 class="mb-3 font-extrabold">2. เลือกกับข้าวหลัก</h3><div class="grid gap-3"><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="radio" name="main" value="อกไก่ย่างสมุนไพร" data-price="0" data-cal="180" checked> อกไก่ย่างสมุนไพร <span class="float-right text-rice-cocoa">ฟรี / 180 kcal</span></label><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="radio" name="main" value="หมูทงคัตสึ" data-price="20" data-cal="380"> หมูทงคัตสึ <span class="float-right text-rice-clay">+20 / 380 kcal</span></label><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="radio" name="main" value="แซลมอนเทอริยากิ" data-price="45" data-cal="240"> แซลมอนเทอริยากิ <span class="float-right text-rice-clay">+45 / 240 kcal</span></label></div></div>
+            <div><h3 class="mb-3 font-extrabold">3. เครื่องเคียง</h3><div class="grid gap-3"><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="checkbox" name="side" value="ไข่ต้มยางมะตูม" data-price="12" data-cal="70"> ไข่ต้มยางมะตูม <span class="float-right text-rice-clay">+12</span></label><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="checkbox" name="side" value="ผักย่างรวม" data-price="15" data-cal="60"> ผักย่างรวม <span class="float-right text-rice-clay">+15</span></label><label class="option-card rounded-2xl border bg-white p-4"><input class="mr-2 accent-rice-gold" type="checkbox" name="side" value="ซุปมิโสะ" data-price="18" data-cal="45"> ซุปมิโสะ <span class="float-right text-rice-clay">+18</span></label></div></div>
           </div>
-        </a>
-        <a href="docs/ops-manual.md" target="_blank" class="bg-white hover:bg-amber-100/50 p-6 rounded-2xl shadow-sm border border-amber-200 transition text-left flex items-start space-x-4">
-          <span class="text-3xl">📖</span>
-          <div>
-            <h4 class="font-bold text-gray-800">Operations Manual (คู่มือการทำงาน)</h4>
-            <p class="text-xs text-gray-500 mt-1">มาตรฐานสุขอนามัยในครัว การอุ่นร้อน และระบบจัดส่งอัจฉริยะ</p>
-          </div>
-        </a>
+        </div>
+        <aside class="lg:sticky lg:top-24 lg:self-start"><div class="rounded-[2rem] bg-rice-ink p-6 text-white shadow-lift"><h3 class="text-2xl font-extrabold">Order preview</h3><div class="mt-6 space-y-4 rounded-3xl bg-white/10 p-5 text-sm"><p class="flex justify-between gap-4"><span>ข้าว</span><strong id="selected-rice">ข้าวหอมมะลิ (+0 บาท)</strong></p><p class="flex justify-between gap-4"><span>กับข้าว</span><strong id="selected-main">อกไก่ย่างสมุนไพร (+0 บาท)</strong></p><p><span class="block text-white/60">เครื่องเคียง</span><strong id="selected-sides">ไม่มีเพิ่มเติม</strong></p></div><div class="mt-6 grid grid-cols-2 gap-3"><div class="rounded-3xl bg-white p-5 text-rice-ink"><span class="text-sm text-rice-cocoa">ราคา</span><strong id="total-price" class="block text-3xl">69 บาท</strong></div><div class="rounded-3xl bg-white p-5 text-rice-ink"><span class="text-sm text-rice-cocoa">พลังงาน</span><strong id="total-calories" class="block text-3xl">430</strong><span class="text-sm">kcal</span></div></div><button onclick="orderCustomBox()" class="mt-5 w-full rounded-2xl bg-rice-gold px-5 py-4 font-extrabold text-rice-ink shadow-soft">ยืนยันออเดอร์จำลอง</button><p class="mt-4 text-xs leading-5 text-white/60">Demo นี้ยังไม่ตัดเงินจริง เหมาะสำหรับนำเสนอ flow ให้ลูกค้า นักลงทุน หรือทีมปฏิบัติการ</p></div></aside>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Modal/Alert for Simulation -->
-  <div id="modal-box" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50">
-    <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-amber-100 text-center relative transform transition duration-300 scale-95 opacity-0" id="modal-content">
-      <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">🎉</div>
-      <h3 class="text-2xl font-bold text-gray-800 mb-2" id="modal-title">ออเดอร์ถูกส่งเข้าครัวแล้วค่ะ!</h3>
-      <p class="text-gray-600 text-sm mb-6" id="modal-desc"></p>
-      <button onclick="closeModal()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-2xl transition shadow">
-        ตกลง ทานข้าวกล่องกัน!
-      </button>
-    </div>
-  </div>
+    <section id="operations" class="bg-white px-4 py-16 lg:px-8"><div class="mx-auto max-w-7xl"><h2 class="text-3xl font-extrabold md:text-4xl">Operating system ready for a small launch</h2><p class="mt-3 max-w-3xl text-rice-cocoa">ลำดับงานตั้งแต่รับวัตถุดิบถึงส่งถึงมือลูกค้า ถูกเขียนให้ทีมเล็กเริ่มทำจริงได้ และใช้เป็นเอกสารอธิบายนักลงทุนได้</p><div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4"><div class="rounded-3xl bg-rice-cream p-6"><b>05:00</b><h3 class="mt-2 font-extrabold">รับวัตถุดิบ</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">ตรวจอุณหภูมิ น้ำหนัก วันหมดอายุ และบันทึก supplier lot</p></div><div class="rounded-3xl bg-rice-cream p-6"><b>07:00</b><h3 class="mt-2 font-extrabold">เตรียมครัว</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">หุงข้าว หมักโปรตีน เตรียมซอส แยก station ลดการปนเปื้อน</p></div><div class="rounded-3xl bg-rice-cream p-6"><b>09:30</b><h3 class="mt-2 font-extrabold">ผลิตและ QC</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">แพ็กตามใบสั่ง ตรวจหน้าตา น้ำหนัก ซีล และ label delivery batch</p></div><div class="rounded-3xl bg-rice-cream p-6"><b>10:45</b><h3 class="mt-2 font-extrabold">จัด route</h3><p class="mt-2 text-sm leading-6 text-rice-cocoa">แยกตามอาคาร/โซน ส่งด้วยกระเป๋าเก็บความร้อนภายในช่วง 11:15-12:00</p></div></div></div></section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 py-12 px-4 text-center mt-auto border-t-4 border-amber-500">
-    <div class="container mx-auto max-w-xl">
-      <h3 class="text-white text-lg font-bold mb-2">🌾 Rice Box Online (ไรซ์บ็อกซ์ ออนไลน์)</h3>
-      <p class="text-xs mb-6 opacity-75">ออกแบบ พัฒนา และดูแลความอร่อยและแผนธุรกิจอันชาญฉลาดโดย น้องเฮอ (Nong Her) AI Partner สุดสวย อัจฉริยะ ของพี่ EBassWave ✨</p>
-      <div class="flex justify-center space-x-4 mb-6">
-        <a id="github-repo" href="#" target="_blank" class="hover:text-amber-400 text-sm transition font-medium">🐙 GitHub Repository</a>
-      </div>
-      <p class="text-xs opacity-50">&copy; 2026 Rice Box Online. All rights reserved.</p>
-    </div>
-  </footer>
+    <section id="investor" class="bg-rice-ink px-4 py-16 text-white lg:px-8"><div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.85fr_1.15fr]"><div><h2 class="text-3xl font-extrabold md:text-4xl">Investor-ready snapshot</h2><p class="mt-4 leading-8 text-white/75">เป้าหมายคือพิสูจน์ demand ในพื้นที่เล็กก่อน แล้วค่อยขยายด้วย order subscription, bulk order องค์กร และครัวกลางที่มี SOP ชัดเจน</p><div class="mt-6 flex gap-3"><a href="docs/business-plan.md" target="_blank" class="rounded-2xl bg-white px-5 py-3 font-bold text-rice-ink">Business Plan</a><a href="docs/ops-manual.md" target="_blank" class="rounded-2xl border border-white/25 px-5 py-3 font-bold text-white">Ops Manual</a></div></div><div class="grid gap-4 md:grid-cols-2"><div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Phase 1</span><h3 class="mt-2 text-xl font-extrabold">Pilot 50-100 boxes/day</h3><p class="mt-2 text-sm leading-6 text-white/70">ขายใน 1-2 office zones เก็บ feedback และคุม waste ต่ำกว่า 5%</p></div><div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Phase 2</span><h3 class="mt-2 text-xl font-extrabold">Scale 300 boxes/day</h3><p class="mt-2 text-sm leading-6 text-white/70">เพิ่ม subscription, corporate deals, route batching และ production forecast</p></div><div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Revenue</span><h3 class="mt-2 text-xl font-extrabold">89-149 THB/order</h3><p class="mt-2 text-sm leading-6 text-white/70">เฉลี่ย ticket 109 บาท พร้อม gross margin target 45-55% หลังคุมต้นทุน</p></div><div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Funding use</span><h3 class="mt-2 text-xl font-extrabold">Kitchen, packaging, growth</h3><p class="mt-2 text-sm leading-6 text-white/70">ใช้เงินกับอุปกรณ์ครัว วัตถุดิบรอบแรก บรรจุภัณฑ์ ภาพถ่าย และ marketing test</p></div></div></div></section>
+
+    <section id="launch" class="bg-rice-paper px-4 py-16 lg:px-8"><div class="mx-auto max-w-7xl"><h2 class="text-3xl font-extrabold md:text-4xl">Launch checklist</h2><div class="mt-8 grid gap-4 md:grid-cols-3"><div class="rounded-3xl bg-white p-6 shadow-soft"><h3 class="font-extrabold">Before opening</h3><ul class="mt-3 space-y-2 text-sm text-rice-cocoa"><li>✓ Supplier list and backup supplier</li><li>✓ Menu cost sheet per box</li><li>✓ Packaging and label stock</li><li>✓ Food safety checklist</li></ul></div><div class="rounded-3xl bg-white p-6 shadow-soft"><h3 class="font-extrabold">Daily operation</h3><ul class="mt-3 space-y-2 text-sm text-rice-cocoa"><li>✓ Order cut-off time</li><li>✓ Batch production board</li><li>✓ QC before seal</li><li>✓ Route and rider assignment</li></ul></div><div class="rounded-3xl bg-white p-6 shadow-soft"><h3 class="font-extrabold">Investor evidence</h3><ul class="mt-3 space-y-2 text-sm text-rice-cocoa"><li>✓ Daily sales report</li><li>✓ Repeat order rate</li><li>✓ Customer feedback</li><li>✓ Waste and margin tracking</li></ul></div></div></div></section>
+
+    <section id="proposal" class="bg-white px-4 py-16 lg:px-8"><div class="mx-auto max-w-5xl rounded-[2rem] bg-rice-clay p-8 text-white shadow-lift md:p-12"><h2 class="text-3xl font-extrabold md:text-4xl">พร้อมนำเสนอเป็น proposal</h2><p class="mt-4 max-w-3xl leading-8 text-white/85">เว็บนี้ออกแบบให้เปิดให้นักลงทุน ลูกค้าองค์กร หรือทีมงานดูได้ทันที โดยเห็นทั้งผลิตภัณฑ์ วิธีสั่งซื้อ แผนการทำงาน และทิศทางการเติบโตของธุรกิจ</p><div class="mt-8 grid gap-3 sm:grid-cols-3"><a href="docs/business-plan.md" target="_blank" class="rounded-2xl bg-white px-5 py-4 text-center font-bold text-rice-ink">อ่านแผนธุรกิจ</a><a href="docs/ops-manual.md" target="_blank" class="rounded-2xl bg-white/15 px-5 py-4 text-center font-bold text-white">อ่านคู่มือทำงาน</a><button onclick="showProposalSummary()" class="rounded-2xl bg-rice-gold px-5 py-4 font-bold text-rice-ink">ดูสรุปนำเสนอ</button></div></div></section>
+  </main>
+
+  <footer class="bg-rice-ink px-4 pb-24 pt-10 text-white lg:px-8 lg:pb-10"><div class="mx-auto flex max-w-7xl flex-col justify-between gap-5 md:flex-row"><div><h3 class="text-xl font-extrabold">Rice Box Online</h3><p class="mt-2 max-w-xl text-sm leading-6 text-white/65">Investor-ready PWA demo for a premium Thai rice box delivery business.</p></div><div class="text-sm text-white/65"><a class="block hover:text-white" href="https://github.com/BassSG/rice-box-online" target="_blank">GitHub Repository</a><span class="mt-2 block">© 2026 Rice Box Online</span></div></div></footer>
+
+  <nav class="fixed bottom-0 left-0 right-0 z-50 border-t border-rice-gold/20 bg-white/95 px-2 py-2 shadow-lift backdrop-blur lg:hidden"><div class="mx-auto grid max-w-md grid-cols-5 text-center text-[11px] font-bold text-rice-cocoa"><a class="rounded-2xl px-1 py-2 text-rice-clay" href="#top">Home</a><a class="rounded-2xl px-1 py-2" href="#menu">Menu</a><a class="rounded-2xl px-1 py-2" href="#builder">Order</a><a class="rounded-2xl px-1 py-2" href="#operations">Ops</a><a class="rounded-2xl px-1 py-2" href="#investor">Plan</a></div></nav>
+
+  <div id="modal-box" class="fixed inset-0 z-[60] hidden items-center justify-center bg-rice-ink/70 p-4 backdrop-blur"><div id="modal-content" class="max-w-md scale-95 rounded-[2rem] bg-white p-7 text-center opacity-0 shadow-lift transition"><div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-rice-cream text-3xl">✓</div><h3 id="modal-title" class="mt-5 text-2xl font-extrabold">รับออเดอร์จำลองแล้ว</h3><p id="modal-desc" class="mt-3 text-sm leading-7 text-rice-cocoa"></p><button onclick="closeModal()" class="mt-6 w-full rounded-2xl bg-rice-ink px-5 py-4 font-bold text-white">ตกลง</button></div></div>
 
   <script>
-    // ตั้งค่าลิ้งค์ GitHub อัตโนมัติจาก URL ปัจจุบัน
-    document.addEventListener("DOMContentLoaded", () => {
-      const currentUrl = window.location.href;
-      const githubLink = document.getElementById("github-repo");
-      if (currentUrl.includes("github.io")) {
-        // หากอยู่ใน GitHub Pages แปลงเป็น URL ของ Repository
-        const match = currentUrl.match(/https:\/\/([^.]+)\.github\.io\/([^/]+)/);
-        if (match) {
-          githubLink.href = `https://github.com/${match[1]}/${match[2]}`;
-        }
-      } else {
-        githubLink.href = "https://github.com/BassSG/rice-box-online";
-      }
-    });
-
-    // PWA Service Worker Registration
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/rice-box-online/sw.js')
-          .then((registration) => {
-            console.log('Service Worker Registered successfully! Scope:', registration.scope);
-          })
-          .catch((error) => {
-            console.log('Service Worker Registration failed:', error);
-          });
-      });
-    }
-
-    // PWA Install Event Listener
-    let deferredPrompt;
-    const installBtn = document.getElementById('install-btn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.classList.remove('hidden');
-    });
-
-    installBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`User response to install prompt: ${outcome}`);
-        deferredPrompt = null;
-        installBtn.classList.add('hidden');
-      }
-    });
-
-    // Network Status Indicators
-    const offlineIndicator = document.getElementById('offline-indicator');
-    const onlineIndicator = document.getElementById('online-indicator');
-
-    window.addEventListener('offline', () => {
-      offlineIndicator.classList.remove('hidden');
-      onlineIndicator.classList.add('hidden');
-    });
-
-    window.addEventListener('online', () => {
-      offlineIndicator.classList.add('hidden');
-      onlineIndicator.classList.remove('hidden');
-      setTimeout(() => {
-        onlineIndicator.classList.add('hidden');
-      }, 3000);
-    });
-
-    // Interactive Box Builder Logic
     const basePrice = 69;
-    const baseCalories = 0; // calculated dynamically
-
     const riceRadios = document.querySelectorAll('input[name="rice"]');
     const mainRadios = document.querySelectorAll('input[name="main"]');
     const sideCheckboxes = document.querySelectorAll('input[name="side"]');
-
     const totalCalEl = document.getElementById('total-calories');
     const totalPriceEl = document.getElementById('total-price');
     const selectedRiceEl = document.getElementById('selected-rice');
     const selectedMainEl = document.getElementById('selected-main');
     const selectedSidesEl = document.getElementById('selected-sides');
-
-    function updateSummary() {
-      let price = basePrice;
-      let calories = 0;
-      
-      // Rice selection
-      let selectedRice = "ข้าวหอมมะลิ";
-      let ricePrice = 0;
-      let riceCal = 0;
-      riceRadios.forEach(radio => {
-        if (radio.checked) {
-          selectedRice = radio.value;
-          ricePrice = parseInt(radio.getAttribute('data-price'));
-          riceCal = parseInt(radio.getAttribute('data-cal'));
-        }
-      });
-      price += ricePrice;
-      calories += riceCal;
-      selectedRiceEl.textContent = selectedRice + " (+" + ricePrice + " ฿)";
-
-      // Main selection
-      let selectedMain = "อกไก่นุ่มย่างสมุนไพร";
-      let mainPrice = 0;
-      let mainCal = 0;
-      mainRadios.forEach(radio => {
-        if (radio.checked) {
-          selectedMain = radio.value;
-          mainPrice = parseInt(radio.getAttribute('data-price'));
-          mainCal = parseInt(radio.getAttribute('data-cal'));
-        }
-      });
-      price += mainPrice;
-      calories += mainCal;
-      selectedMainEl.textContent = selectedMain + " (+" + mainPrice + " ฿)";
-
-      // Sides selection
-      let selectedSides = [];
-      sideCheckboxes.forEach(cb => {
-        if (cb.checked) {
-          selectedSides.push(cb.value + " (+" + cb.getAttribute('data-price') + " ฿)");
-          price += parseInt(cb.getAttribute('data-price'));
-          calories += parseInt(cb.getAttribute('data-cal'));
-        }
-      });
-      selectedSidesEl.textContent = selectedSides.length > 0 ? selectedSides.join(', ') : "ไม่มีเพิ่มเติม";
-
-      // Render Totals
-      totalPriceEl.textContent = price + " ฿";
-      totalCalEl.textContent = calories + " kcal";
-    }
-
-    // Add event listeners to input changes
-    riceRadios.forEach(r => r.addEventListener('change', updateSummary));
-    mainRadios.forEach(r => r.addEventListener('change', updateSummary));
-    sideCheckboxes.forEach(cb => cb.addEventListener('change', updateSummary));
-
-    // Initial run
-    updateSummary();
-
-    // Modal Simulation Logic
     const modalBox = document.getElementById('modal-box');
     const modalContent = document.getElementById('modal-content');
+    const modalTitle = document.getElementById('modal-title');
     const modalDesc = document.getElementById('modal-desc');
-
-    function quickOrder(menuName, price, kcal) {
-      modalDesc.innerHTML = "คุณได้ทำการสั่งเมนู <strong class=\"text-amber-600 font-bold\">" + menuName + "</strong> เรียบร้อยแล้วค่ะ<br>ในราคารวม <strong>" + price + " บาท</strong> (" + kcal + " kcal)<br><br>ไรเดอร์กุ๊กกิ๊กกำลังเร่งจัดส่ง และจะถึงมือคุณในอีก 30-40 นาทีนี้แน่นอน อุ่นร้อนถึงมือชัวร์ค่ะ!";
-      showModal();
+    function selectedInput(name) { return document.querySelector(`input[name="${name}"]:checked`); }
+    function updateSummary() {
+      let price = basePrice; let calories = 0;
+      const rice = selectedInput('rice'); const main = selectedInput('main');
+      price += Number(rice.dataset.price) + Number(main.dataset.price);
+      calories += Number(rice.dataset.cal) + Number(main.dataset.cal);
+      selectedRiceEl.textContent = `${rice.value} (+${rice.dataset.price} บาท)`;
+      selectedMainEl.textContent = `${main.value} (+${main.dataset.price} บาท)`;
+      const sides = [];
+      sideCheckboxes.forEach((side) => { if (side.checked) { price += Number(side.dataset.price); calories += Number(side.dataset.cal); sides.push(`${side.value} (+${side.dataset.price} บาท)`); } });
+      selectedSidesEl.textContent = sides.length ? sides.join(', ') : 'ไม่มีเพิ่มเติม';
+      totalPriceEl.textContent = `${price} บาท`; totalCalEl.textContent = calories;
     }
-
-    function orderCustomBox() {
-      const rice = document.querySelector('input[name="rice"]:checked').value;
-      const main = document.querySelector('input[name="main"]:checked').value;
-      let sides = [];
-      sideCheckboxes.forEach(cb => { if(cb.checked) sides.push(cb.value); });
-      const sidesStr = sides.length > 0 ? ", เพิ่ม " + sides.join(' และ ') : "";
-
-      modalDesc.innerHTML = "ข้าวกล่องดีไซน์เก๋ฝีมือคุณ ประกอบไปด้วย <strong class=\"text-amber-600 font-bold\">" + rice + "</strong> รองตึกด้านล่าง และราดด้วย <strong class=\"text-amber-600 font-bold\">" + main + "</strong>" + sidesStr + "!<br><br>ราคารวมทั้งหมด <strong>" + totalPriceEl.textContent + "</strong> (" + totalCalEl.textContent + ")<br><br>เราได้ส่งข้อมูลนี้เข้าแผงควบคุมออเดอร์ในห้องเครื่องครัวอัจฉริยะแล้วค่ะ กำลังเตรียมแพ็คความหอมอร่อยส่งให้คุณในทันทีค่ะ!";
-      showModal();
-    }
-
-    function showModal() {
-      modalBox.classList.remove('hidden');
-      setTimeout(() => {
-        modalContent.classList.remove('scale-95', 'opacity-0');
-        modalContent.classList.add('scale-100', 'opacity-100');
-      }, 50);
-    }
-
-    function closeModal() {
-      modalContent.classList.remove('scale-100', 'opacity-100');
-      modalContent.classList.add('scale-95', 'opacity-0');
-      setTimeout(() => {
-        modalBox.classList.add('hidden');
-      }, 150);
-    }
+    [...riceRadios, ...mainRadios, ...sideCheckboxes].forEach((input) => input.addEventListener('change', updateSummary)); updateSummary();
+    function showModal(title, description) { modalTitle.textContent = title; modalDesc.innerHTML = description; modalBox.classList.remove('hidden'); modalBox.classList.add('flex'); setTimeout(() => { modalContent.classList.remove('scale-95', 'opacity-0'); modalContent.classList.add('scale-100', 'opacity-100'); }, 30); }
+    function closeModal() { modalContent.classList.add('scale-95', 'opacity-0'); modalContent.classList.remove('scale-100', 'opacity-100'); setTimeout(() => { modalBox.classList.add('hidden'); modalBox.classList.remove('flex'); }, 150); }
+    function quickOrder(menuName, price, kcal) { showModal('รับออเดอร์จำลองแล้ว', `เมนู <strong>${menuName}</strong><br>ราคา ${price} บาท (${kcal} kcal)<br><br>ในระบบจริง ออเดอร์นี้จะถูกส่งเข้า kitchen dashboard, พิมพ์ label, และจัด route ส่งทันที`); }
+    function orderCustomBox() { showModal('กล่องข้าวของคุณพร้อมผลิต', `รายละเอียด: ${selectedRiceEl.textContent}, ${selectedMainEl.textContent}<br>${selectedSidesEl.textContent}<br><br>รวม ${totalPriceEl.textContent} (${totalCalEl.textContent} kcal)`); }
+    function showProposalSummary() { showModal('Investor proposal summary', 'โมเดลเริ่มจาก pilot 50-100 กล่อง/วัน วัด repeat order, margin, waste และ feedback ก่อนขยายเป็น subscription และ corporate bulk order. เอกสาร Business Plan และ Ops Manual พร้อมเปิดอ่านจากหน้าเว็บนี้'); }
+    window.addEventListener('offline', () => { document.getElementById('offline-indicator').classList.remove('hidden'); document.getElementById('online-indicator').classList.add('hidden'); });
+    window.addEventListener('online', () => { document.getElementById('offline-indicator').classList.add('hidden'); const online = document.getElementById('online-indicator'); online.classList.remove('hidden'); setTimeout(() => online.classList.add('hidden'), 3000); });
+    let deferredPrompt; const installBtn = document.getElementById('install-btn');
+    window.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredPrompt = event; installBtn.classList.remove('hidden'); });
+    installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.classList.add('hidden'); });
+    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { const base = location.pathname.includes('/rice-box-online/') ? '/rice-box-online/' : './'; navigator.serviceWorker.register(`${base}sw.js`).catch(console.warn); }); }
   </script>
 </body>
 </html>

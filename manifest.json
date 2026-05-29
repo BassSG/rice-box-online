@@ -1,22 +1,26 @@
 {
-  "name": "Rice Box Online",
+  "name": "Rice Box Online - Premium Rice Box Delivery",
   "short_name": "RiceBox",
+  "description": "เว็บ PWA สำหรับธุรกิจข้าวกล่องพรีเมียม พร้อมเมนู ระบบสั่งซื้อจำลอง แผนธุรกิจ และคู่มือปฏิบัติงาน",
   "start_url": "/rice-box-online/",
+  "scope": "/rice-box-online/",
   "display": "standalone",
-  "background_color": "#FFFFFF",
-  "theme_color": "#FF9F1C",
-  "description": "ข้าวกล่องอุ่นร้อน อร่อย สดใหม่ เพื่อชีวิตคนเมืองที่ลงตัว สั่งซื้อสะดวกรวดเร็วในรูปแบบ PWA",
   "orientation": "portrait",
+  "background_color": "#fff8ed",
+  "theme_color": "#c76b1a",
+  "categories": ["food", "business", "productivity"],
   "icons": [
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
