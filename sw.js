@@ -1,53 +1,51 @@
-const CACHE_NAME = 'rice-box-v1';
+const CACHE_NAME = 'rice-box-online-v2';
+const BASE_PATH = '/rice-box-online/';
 const ASSETS = [
-  '/rice-box-online/',
-  '/rice-box-online/index.html',
-  '/rice-box-online/manifest.json',
-  '/rice-box-online/icons/icon-192.png',
-  '/rice-box-online/icons/icon-512.png'
+  BASE_PATH,
+  `${BASE_PATH}index.html`,
+  `${BASE_PATH}manifest.json`,
+  `${BASE_PATH}assets/hero-rice-box.png`,
+  `${BASE_PATH}icons/icon-192.png`,
+  `${BASE_PATH}icons/icon-512.png`,
+  `${BASE_PATH}docs/business-plan.md`,
+  `${BASE_PATH}docs/ops-manual.md`
 ];
 
-// ติดตั้ง Service Worker และทำการแคชข้อมูล
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('Caching essential assets...');
-      return cache.addAll(ASSETS);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
   self.skipWaiting();
 });
 
-// เปิดใช้งาน Service Worker และลบแคชเก่า (ถ้ามี)
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            console.log('Deleting old cache:', key);
-            return caches.delete(key);
-          }
-        })
-      );
-    })
+    caches.keys().then((keys) =>
+      Promise.all(keys.map((key) => (key === CACHE_NAME ? null : caches.delete(key))))
+    )
   );
   self.clients.claim();
 });
 
-// ดึงข้อมูลและให้บริการแบบ Offline
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request).catch(() => {
-        // หากเน็ตล่มและไม่มีข้อมูลในแคช
-        if (event.request.mode === 'navigate') {
-          return caches.match('/rice-box-online/index.html');
-        }
-      });
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
+      return fetch(event.request)
+        .then((response) => {
+          const copy = response.clone();
+          if (response.ok && event.request.url.startsWith(self.location.origin)) {
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          }
+          return response;
+        })
+        .catch(() => {
+          if (event.request.mode === 'navigate') {
+            return caches.match(`${BASE_PATH}index.html`);
+          }
+          return undefined;
+        });
     })
   );
 });
