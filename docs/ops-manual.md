@@ -1,30 +1,30 @@
 # Rice Box Online Operations Manual
 
-This manual is written for a home-based online rice box shop selling from 09:00 to 15:00.
+This manual is written for a home-based online rice box shop that starts kitchen work at 09:00 after the school drop-off routine, sells until 15:00, blocks 15:00-16:30 for child pickup, and buys ingredients after 16:30 for the next selling day.
 
 ## Daily Working Hours
 
-The store is open to customers from 09:00 to 15:00, but kitchen work starts earlier.
+The store can accept customer orders from 09:00 to 15:00, but the practical rhythm is built around family time. Morning work starts after returning from school drop-off. Ingredient shopping and heavy preparation move to the evening after 16:30, so the next morning does not require a 04:45 market run.
 
 | Time | Task |
 | --- | --- |
-| 04:45 | Wake up, check pre-orders, check cash, open the shopping list. |
-| 05:00 | Buy ingredients from market, Makro, or selected supplier. |
-| 06:00 | Return home, sanitize kitchen, separate raw and dry goods. |
-| 06:30 | Cook rice. Start with 3.3 kg raw rice for a 30-box plan. |
-| 06:45 | Wash vegetables, pick basil, chop garlic and chili, prepare sauces. |
-| 07:15 | Portion pork and eggs by menu. |
-| 08:00 | Prepare cooking stations, labels, boxes, bags, and online menu stock. |
-| 08:45 | Open daily menu on LINE/Facebook/platform. Confirm prices and stock. |
-| 09:00 | Start selling. Accept only the order volume the kitchen can finish safely. |
+| 09:00 | Return from school drop-off, open the online shop, check pre-orders, confirm stock purchased the previous evening, and sanitize the kitchen. |
+| 09:15 | Cook rice. Start with 3.3 kg raw rice for a 30-box plan. Bring prepared pork, vegetables, sauce, boxes, spoons, and bags into the work stations. |
+| 09:30 | Open LINE, Facebook, and platform menu stock. Confirm prices, available menu items, and the maximum order volume for the day. |
+| 10:00 | Start the first cooking batch. Prioritize menus that were prepared the previous evening. |
 | 10:30 | First QC round: weight, appearance, cleanliness, label, and seal. |
 | 11:00 | Delivery or rider pickup for lunch orders. |
 | 12:00 | Short break, check remaining ingredients, prepare afternoon batch. |
 | 13:00 | Continue afternoon orders. Hide menu items that are nearly out of stock. |
 | 14:00 | Stop taking slow or fried-heavy menu items. |
 | 14:30 | Last normal order cut-off. |
-| 15:00 | Close shop, summarize sales, platform fee, waste, and tomorrow purchase list. |
-| 15:30 | Clean kitchen, sanitize surfaces, store safe ingredients using FIFO. |
+| 15:00 | Close the online shop, do a quick sales summary, note platform fees, waste, and the purchase list for after child pickup. |
+| 15:00-16:30 | Child pickup and travel block. Do not accept orders, do not shop, and do not schedule heavy kitchen work during this time. |
+| 16:30 | Buy next-day ingredients at Makro, market, or packaging supplier: pork, rice, eggs, vegetables, basil, garlic, chili, boxes, spoons, and bags. |
+| 17:45 | Return home, weigh stock, separate raw and dry goods, label dates, and store using FIFO. |
+| 18:15 | Wash vegetables, pick basil, chop garlic and chili, prepare sauce base, and portion pork by menu for the next day. |
+| 19:00 | Check boxes, labels, bags, and next-day menu stock. Open pre-orders if available. |
+| 19:30 | Clean kitchen, sanitize surfaces, store safe ingredients properly, and close the shop workday. |
 
 ## Core Menu
 

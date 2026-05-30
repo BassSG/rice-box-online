@@ -8,7 +8,7 @@ Home-kitchen operating website and static PWA for launching a Thai online rice b
 - Mobile app-like bottom navigation.
 - Installable PWA manifest, service worker, real app icons, Apple touch icon, maskable Android icon, and install screenshots.
 - Generated food images for the Thai core menu.
-- Daily 09:00-15:00 operating schedule.
+- Family-friendly 09:00-15:00 selling schedule with 15:00-16:30 child pickup block and after-16:30 Makro prep run.
 - Practical shopping list for 30 boxes per day.
 - Menu cost, direct price, platform price, and gross profit.
 - Low / Mid / High startup capital packages for a kitchen that already has equipment.
