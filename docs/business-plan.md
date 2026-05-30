@@ -32,23 +32,19 @@ These menus share ingredients such as rice, pork, egg, garlic, sauces, and veget
 
 ## Channel Strategy
 
-Use two price systems:
-
-1. Direct sales via LINE, Facebook, phone, or nearby customers.
-2. Platform sales via delivery apps.
-
-Platform prices must be higher because the shop receives less money after commission and VAT on platform fees. The planning baseline uses a 32.1% platform deduction assumption.
+Start as an online-only direct shop through LINE, Facebook, phone, nearby customers, and repeat customer lists. Do not depend on high-GP delivery platforms in the pilot phase.
 
 ## Pricing Principle
 
-The shop should not use the same price on direct channels and platforms.
+Use one simple base price:
 
-Example:
+- Base online menu price: 79 THB.
+- Fried egg add-on: +12 THB.
+- Extra rice: +10 THB.
+- Special portion: +15 THB.
+- Extra pork: +20 THB.
 
-- Direct price: 69-79 THB.
-- Platform price: 99-119 THB.
-
-This protects margin while still keeping prices understandable to customers.
+This keeps the menu easy to order while letting customers increase ticket size through add-ons.
 
 ## Startup Capital Packages
 
@@ -75,11 +71,11 @@ The mid package is the most balanced recommendation. The low package is acceptab
 
 ## Forecast Summary
 
-| Period | Boxes per day | Gross sales | Net after platform fees | Cost and fixed expenses | Cash before tax |
+| Period | Boxes per day | Base sales at 79 THB | Estimated add-on sales | Cost and fixed expenses | Cash before tax |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Month 1 Pilot | 30 | 71,100 THB | 55,500 THB | 43,200 THB | 12,300 THB |
-| Month 3 Stable | 60 | 143,500 THB | 112,300 THB | 82,500 THB | 29,800 THB |
-| Month 6 Scale | 100 | 247,000 THB | 195,000 THB | 136,000 THB | 59,000 THB |
+| Month 1 Pilot | 30 | 61,620 THB | 4,680 THB | 43,200 THB | 23,100 THB |
+| Month 3 Stable | 60 | 123,240 THB | 10,920 THB | 82,500 THB | 51,660 THB |
+| Month 6 Scale | 100 | 205,400 THB | 23,400 THB | 136,000 THB | 92,800 THB |
 
 The forecast is before owner salary and tax. It should be updated using actual daily sales.
 
@@ -88,8 +84,8 @@ The forecast is before owner salary and tax. It should be updated using actual d
 Track these every day:
 
 - Boxes sold.
-- Direct sales vs platform sales.
-- Platform fee.
+- Direct online orders.
+- Add-on order rate.
 - Ingredient cost.
 - Packaging cost.
 - Waste.
@@ -125,16 +121,16 @@ By month 6, the shop can consider:
 - 100 boxes per day.
 - Extra helper during peak hours.
 - Separate packing station.
-- More direct orders to reduce platform fee.
+- More repeat online-direct orders.
 - Corporate lunch packages.
 
 ## Risk Notes
 
 - Ingredient prices change often.
-- Delivery platform fees differ by contract.
+- Delivery platform fees can destroy margin if used with a 79 THB menu price.
 - Home kitchens can become overloaded quickly.
 - Too many menu items increase waste.
-- Promotions can destroy margin if platform GP is not included in pricing.
+- Promotions can destroy margin if add-ons and real ingredient cost are not tracked.
 
 ## Next Expansion
 
