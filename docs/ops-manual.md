@@ -10,7 +10,7 @@ The store can accept customer orders from 09:00 to 15:00, but the practical rhyt
 | --- | --- |
 | 09:00 | Return from school drop-off, open the online shop, check pre-orders, confirm stock purchased the previous evening, and sanitize the kitchen. |
 | 09:15 | Cook rice. Start with 3.3 kg raw rice for a 30-box plan. Bring prepared pork, vegetables, sauce, boxes, spoons, and bags into the work stations. |
-| 09:30 | Open LINE, Facebook, and platform menu stock. Confirm prices, available menu items, and the maximum order volume for the day. |
+| 09:30 | Open LINE, Facebook, and online menu stock. Confirm 79 THB base price, add-ons, available menu items, and the maximum order volume for the day. |
 | 10:00 | Start the first cooking batch. Prioritize menus that were prepared the previous evening. |
 | 10:30 | First QC round: weight, appearance, cleanliness, label, and seal. |
 | 11:00 | Delivery or rider pickup for lunch orders. |
@@ -18,7 +18,7 @@ The store can accept customer orders from 09:00 to 15:00, but the practical rhyt
 | 13:00 | Continue afternoon orders. Hide menu items that are nearly out of stock. |
 | 14:00 | Stop taking slow or fried-heavy menu items. |
 | 14:30 | Last normal order cut-off. |
-| 15:00 | Close the online shop, do a quick sales summary, note platform fees, waste, and the purchase list for after child pickup. |
+| 15:00 | Close the online shop, do a quick sales summary, note add-on sales, waste, and the purchase list for after child pickup. |
 | 15:00-16:30 | Child pickup and travel block. Do not accept orders, do not shop, and do not schedule heavy kitchen work during this time. |
 | 16:30 | Buy next-day ingredients at Makro, market, or packaging supplier: pork, rice, eggs, vegetables, basil, garlic, chili, boxes, spoons, and bags. |
 | 17:45 | Return home, weigh stock, separate raw and dry goods, label dates, and store using FIFO. |
@@ -105,8 +105,8 @@ Every box must pass:
 ## Daily Closing Checklist
 
 - Count total boxes sold.
-- Separate direct sales and platform sales.
-- Record platform fee estimate.
+- Count online-direct sales.
+- Record add-on sales.
 - Count food waste.
 - Record ingredient prices for the day.
 - Plan tomorrow's purchase list.
@@ -115,4 +115,4 @@ Every box must pass:
 
 ## Practical Rule
 
-If the shop cannot finish orders while keeping the kitchen clean, reduce the number of available menus or close the platform temporarily. Consistency is more important than taking every order.
+If the shop cannot finish orders while keeping the kitchen clean, reduce the number of available menus or close online ordering temporarily. Consistency is more important than taking every order.

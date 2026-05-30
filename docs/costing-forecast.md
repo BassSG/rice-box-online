@@ -8,28 +8,29 @@
 - Ingredient shopping time: after 16:30 for the next selling day.
 - Operating days: 26 days per month.
 - Starting volume: 30 boxes per day.
-- Platform deduction assumption: 32.1% of platform selling price.
+- Base online menu price: 79 THB.
+- Add-ons: fried egg +12 THB, extra rice +10 THB, special +15 THB, extra pork +20 THB.
 - Daily shopping budget for 30 boxes: about 1,600 THB plus 400 THB buffer.
 
-The platform assumption is conservative. Always check the real contract before setting the final menu price.
+This plan is optimized for online-direct orders through LINE, Facebook, and repeat customers. If a delivery platform with GP is added later, pricing must be recalculated before opening that channel.
 
 ## Menu Cost Sheet
 
-| Menu | Estimated cost | Direct price | Platform price | Net after platform fee | Gross profit on platform |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| ข้าวกะเพราหมูสับไข่ดาว | 41 THB | 69 THB | 99 THB | 67 THB | 26 THB |
-| ข้าวหมูผัดน้ำมันหอย | 39 THB | 75 THB | 109 THB | 74 THB | 35 THB |
-| ข้าวผัดหมู | 37 THB | 69 THB | 99 THB | 67 THB | 30 THB |
-| ข้าวหมูกระเทียมไข่ดาว | 40 THB | 75 THB | 109 THB | 74 THB | 34 THB |
+| Menu | Estimated base cost | Online price | Base gross profit | Add-on path |
+| --- | ---: | ---: | ---: | --- |
+| Krapao Moo Sap | 36 THB | 79 THB | 43 THB | Fried egg or extra pork |
+| Moo Pad Nam Mun Hoy | 39 THB | 79 THB | 40 THB | Extra pork or special portion |
+| Khao Pad Moo | 37 THB | 79 THB | 42 THB | Fried egg or extra rice |
+| Moo Kratiem | 35 THB | 79 THB | 44 THB | Fried egg or special portion |
 
 ## Add-On Pricing
 
-| Add-on | Estimated cost | Direct price | Platform price |
+| Add-on | Estimated cost | Online price | Gross profit |
 | --- | ---: | ---: | ---: |
-| Fried egg | 5 THB | 12 THB | 18 THB |
-| Extra rice | 4 THB | 10 THB | 15 THB |
-| Extra pork | 13-17 THB | 25 THB | 35 THB |
-| Special size | 10-15 THB | 20 THB | 29 THB |
+| Fried egg | 5 THB | 12 THB | 7 THB |
+| Extra rice | 4 THB | 10 THB | 6 THB |
+| Extra pork | 13 THB | 20 THB | 7 THB |
+| Special size | 8 THB | 15 THB | 7 THB |
 
 ## Evening Purchase Plan for Next-Day 30 Boxes
 
@@ -70,18 +71,18 @@ Do not buy bulk packaging or extra equipment before the menu sells repeatedly. C
 
 ## Monthly Forecast
 
-| Period | Boxes/day | Boxes/month | Gross sales | Net after platform fees | Variable cost | Fixed cost | Cash before tax |
+| Period | Boxes/day | Boxes/month | Base sales at 79 THB | Estimated add-on sales | Variable cost | Fixed cost | Cash before tax |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Month 1 | 30 | 780 | 71,100 THB | 55,500 THB | 31,200 THB | 12,000 THB | 12,300 THB |
-| Month 3 | 60 | 1,560 | 143,500 THB | 112,300 THB | 58,500 THB | 24,000 THB | 29,800 THB |
-| Month 6 | 100 | 2,600 | 247,000 THB | 195,000 THB | 94,000 THB | 42,000 THB | 59,000 THB |
+| Month 1 | 30 | 780 | 61,620 THB | 4,680 THB | 31,200 THB | 12,000 THB | 23,100 THB |
+| Month 3 | 60 | 1,560 | 123,240 THB | 10,920 THB | 58,500 THB | 24,000 THB | 51,660 THB |
+| Month 6 | 100 | 2,600 | 205,400 THB | 23,400 THB | 94,000 THB | 42,000 THB | 92,800 THB |
 
 ## Weekly Review Questions
 
 1. Which menu has the highest profit per minute of cooking time?
 2. Which menu creates the most waste?
-3. How many orders came from direct customers?
-4. How much platform fee was paid?
+3. How many orders came from repeat online customers?
+4. How many orders added egg, extra pork, extra rice, or special size?
 5. Did the shop run out of any ingredient?
 6. Did any customer complain about delivery time or food quality?
 
@@ -93,14 +94,14 @@ Use this rule when adding new menu items:
 2. Add packaging cost.
 3. Add gas/electric/water estimate.
 4. Add waste buffer.
-5. Set direct price with at least 35-45% gross margin.
-6. Set platform price higher enough to survive platform deduction.
+5. Keep the base online price around 79 THB when possible.
+6. Add egg, rice, pork, or special-size options to increase ticket size.
 
 Simple formula:
 
-`Platform price = Direct price / 0.679`
+`Expected ticket = 79 THB + selected add-ons`
 
-Then round up to a customer-friendly price such as 99, 109, 119, or 129 THB.
+If using a delivery platform later, calculate GP separately before opening that menu.
 
 ## References to Recheck Weekly
 

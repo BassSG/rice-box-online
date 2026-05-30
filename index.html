@@ -55,6 +55,8 @@
     .calc-option:has(input:checked) { border-color: #c97822; background: #fff6e8; box-shadow: 0 10px 28px rgba(201, 120, 34, .16); }
     .doc-modal-shell { max-height: min(92vh, 920px); }
     .doc-modal-body { max-height: calc(min(92vh, 920px) - 156px); }
+    .makro-item.done .makro-title { text-decoration: line-through; opacity: .55; }
+    .makro-item.done { background: #f7efe1; }
   </style>
 </head>
 <body class="min-h-screen overflow-x-hidden">
@@ -73,10 +75,10 @@
       <nav class="hidden items-center gap-6 text-sm font-semibold text-shop-soy lg:flex">
         <a href="#schedule" class="hover:text-shop-chili">Schedule</a>
         <a href="#menu" class="hover:text-shop-chili">Menu Cost</a>
-        <a href="#shopping" class="hover:text-shop-chili">Shopping</a>
+        <a href="#makro-tool" class="hover:text-shop-chili">Makro List</a>
         <a href="#capital" class="hover:text-shop-chili">Capital</a>
         <a href="#forecast" class="hover:text-shop-chili">Forecast</a>
-        <a href="#platform" class="hover:text-shop-chili">Platform Fee</a>
+        <a href="#pricing" class="hover:text-shop-chili">Pricing</a>
       </nav>
       <div class="flex items-center gap-2">
         <button id="install-btn" class="hidden rounded-full bg-shop-ink px-4 py-2 text-sm font-bold text-white shadow-soft">Install App</button>
@@ -91,12 +93,12 @@
         <div class="relative z-10">
           <p class="mb-4 max-w-fit rounded-full border border-shop-line bg-white px-4 py-2 text-sm font-bold text-shop-chili">แผนเปิดร้านข้าวออนไลน์ที่บ้าน เริ่มงาน 09:00 หลังส่งลูก</p>
           <h1 class="max-w-3xl text-4xl font-extrabold leading-tight text-shop-ink md:text-6xl">เริ่มกี่โมง ซื้ออะไร ใช้เงินเท่าไหร่ ขายราคาไหน ให้เห็นครบในเว็บเดียว</h1>
-          <p class="mt-6 max-w-2xl text-lg leading-8 text-shop-soy">แผนนี้ออกแบบสำหรับเริ่มขายข้าวกล่องออนไลน์จากครัวที่บ้าน โดยใช้เมนูไทยที่ทำซ้ำง่าย: กะเพรา หมูผัดน้ำมันหอย ข้าวผัด และหมูกระเทียม พร้อมต้นทุนต่อกล่อง ราคา direct ราคาแพลตฟอร์ม รายการซื้อของ และ forecast 1/3/6 เดือน</p>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-shop-soy">แผนนี้ออกแบบสำหรับเริ่มขายข้าวกล่องออนไลน์จากครัวที่บ้าน โดยใช้เมนูไทยที่ทำซ้ำง่าย: กะเพรา หมูผัดน้ำมันหอย ข้าวผัด และหมูกระเทียม พร้อมต้นทุนต่อกล่อง ราคาออนไลน์ 79 บาท add-ons รายการซื้อของ และ forecast 1/3/6 เดือน</p>
           <div class="mt-8 grid max-w-2xl grid-cols-2 gap-3 md:grid-cols-4">
             <div class="rounded-2xl bg-white p-4 shadow-soft"><span class="text-xs text-shop-soy">เริ่มต่ำสุด</span><strong class="tabular block text-2xl text-shop-chili">15k+</strong><span class="text-xs text-shop-soy">บาท</span></div>
             <div class="rounded-2xl bg-white p-4 shadow-soft"><span class="text-xs text-shop-soy">เริ่มขาย</span><strong class="tabular block text-2xl text-shop-chili">30</strong><span class="text-xs text-shop-soy">กล่อง/วัน</span></div>
             <div class="rounded-2xl bg-white p-4 shadow-soft"><span class="text-xs text-shop-soy">เวลาขาย</span><strong class="tabular block text-2xl text-shop-chili">09-15</strong><span class="text-xs text-shop-soy">น. / ซื้อของ 16:30+</span></div>
-            <div class="rounded-2xl bg-white p-4 shadow-soft"><span class="text-xs text-shop-soy">กันค่า GP</span><strong class="tabular block text-2xl text-shop-chili">32.1%</strong><span class="text-xs text-shop-soy">สมมติฐาน</span></div>
+            <div class="rounded-2xl bg-white p-4 shadow-soft"><span class="text-xs text-shop-soy">ราคาเริ่ม</span><strong class="tabular block text-2xl text-shop-chili">79</strong><span class="text-xs text-shop-soy">บาท + add-ons</span></div>
           </div>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="#schedule" class="rounded-2xl bg-shop-ink px-6 py-4 text-center font-bold text-white shadow-lift">ดูตารางวันทำงาน</a>
@@ -141,7 +143,7 @@
         <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
             <h2 class="text-3xl font-extrabold md:text-4xl">Core menu, cost, and selling price</h2>
-            <p class="mt-3 max-w-3xl text-shop-soy">ใช้เมนูที่ทำจากครัวบ้านได้จริง ซื้อวัตถุดิบซ้ำง่าย และตั้งราคาสองแบบ: ราคาขายตรง กับราคาแพลตฟอร์มที่บวกค่า GP ไว้แล้ว</p>
+            <p class="mt-3 max-w-3xl text-shop-soy">ใช้เมนูที่ทำจากครัวบ้านได้จริง ซื้อวัตถุดิบซ้ำง่าย และตั้งราคาออนไลน์เริ่ม 79 บาททุกเมนู แล้วให้ลูกค้าเพิ่มยอดจาก add-ons ตามต้องการ</p>
           </div>
           <a href="#calculator" class="font-bold text-shop-chili">ลองคำนวณกำไรต่อกล่อง</a>
         </div>
@@ -152,23 +154,25 @@
     <section id="calculator" class="bg-shop-paper px-4 py-16 lg:px-8">
       <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]">
         <div>
-          <h2 class="text-3xl font-extrabold md:text-4xl">Profit calculator</h2>
-          <p class="mt-3 leading-8 text-shop-soy">เลือกเมนูและช่องทางขายเพื่อดูว่าเงินเข้าร้านจริงเท่าไหร่หลังหัก GP แพลตฟอร์ม ตัวเลขนี้ช่วยกันไม่ให้ตั้งราคาถูกจนขายดีแต่ไม่เหลือเงิน</p>
+          <h2 class="text-3xl font-extrabold md:text-4xl">Online price and add-on calculator</h2>
+          <p class="mt-3 leading-8 text-shop-soy">แผนนี้ปรับเป็นขายออนไลน์ราคาเริ่ม 79 บาททุกเมนู แล้วเพิ่มกำไรจาก add-ons เช่น ไข่ดาว เพิ่มหมู เพิ่มข้าว หรือสั่งพิเศษ เพื่อให้ราคาหน้าร้านดูไม่แพงเกินไปแต่ยังเหลือกำไรจริง</p>
           <div class="mt-6 grid gap-3">
             <label class="font-bold" for="menu-select">เลือกเมนู</label>
             <select id="menu-select" class="rounded-2xl border border-shop-line bg-white px-4 py-4 font-semibold shadow-soft"></select>
-            <div class="grid gap-3 sm:grid-cols-2">
-              <label class="calc-option rounded-2xl border border-shop-line bg-white p-4 font-bold"><input type="radio" name="channel" value="direct" checked class="mr-2 accent-shop-wok"> ขายตรง LINE/Facebook</label>
-              <label class="calc-option rounded-2xl border border-shop-line bg-white p-4 font-bold"><input type="radio" name="channel" value="platform" class="mr-2 accent-shop-wok"> ขายบนแพลตฟอร์ม</label>
+            <div id="addon-options" class="grid gap-3 sm:grid-cols-2">
+              <label class="calc-option rounded-2xl border border-shop-line bg-white p-4 font-bold"><input type="checkbox" data-addon="egg" class="mr-2 accent-shop-wok"> เพิ่มไข่ดาว +12</label>
+              <label class="calc-option rounded-2xl border border-shop-line bg-white p-4 font-bold"><input type="checkbox" data-addon="extraPork" class="mr-2 accent-shop-wok"> เพิ่มหมู +20</label>
+              <label class="calc-option rounded-2xl border border-shop-line bg-white p-4 font-bold"><input type="checkbox" data-addon="extraRice" class="mr-2 accent-shop-wok"> เพิ่มข้าว +10</label>
+              <label class="calc-option rounded-2xl border border-shop-line bg-white p-4 font-bold"><input type="checkbox" data-addon="special" class="mr-2 accent-shop-wok"> พิเศษ +15</label>
             </div>
           </div>
         </div>
         <div class="rounded-[2rem] bg-shop-ink p-6 text-white shadow-lift">
           <h3 class="text-2xl font-extrabold">ผลคำนวณต่อ 1 กล่อง</h3>
           <div class="mt-6 grid gap-3 sm:grid-cols-2">
-            <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">ราคาขาย</span><strong id="calc-price" class="tabular block text-3xl">0</strong></div>
-            <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">เงินเข้าร้านหลัง GP</span><strong id="calc-net" class="tabular block text-3xl">0</strong></div>
-            <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">ต้นทุนอาหาร+แพ็ก</span><strong id="calc-cost" class="tabular block text-3xl">0</strong></div>
+            <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">ราคาออนไลน์</span><strong id="calc-price" class="tabular block text-3xl">0</strong></div>
+            <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">มูลค่า add-ons</span><strong id="calc-net" class="tabular block text-3xl">0</strong></div>
+            <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">ต้นทุนรวม</span><strong id="calc-cost" class="tabular block text-3xl">0</strong></div>
             <div class="rounded-3xl bg-white p-5 text-shop-ink"><span class="text-sm text-shop-soy">กำไรขั้นต้น</span><strong id="calc-profit" class="tabular block text-3xl">0</strong></div>
           </div>
           <p id="calc-note" class="mt-5 text-sm leading-6 text-white/70"></p>
@@ -193,6 +197,51 @@
               <span>รายการ</span><span>ปริมาณ</span><span>งบประมาณ</span>
             </div>
             <div id="shopping-list" class="divide-y divide-shop-line"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="makro-tool" class="bg-shop-paper px-4 py-16 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <h2 class="text-3xl font-extrabold md:text-4xl">Makro shopping checklist</h2>
+            <p class="mt-3 max-w-3xl leading-8 text-shop-soy">เช็กลิสต์สำหรับเดินซื้อของจริง ติ๊กแล้วรายการจะขีดฆ่า ใส่ราคาจริง เพิ่มของเองได้ บันทึกรอบซื้อเป็น logs และคำนวณทันทีว่าของที่ซื้อทำได้ประมาณกี่กล่อง</p>
+          </div>
+          <a href="#makro-logs" class="font-bold text-shop-chili">ดูประวัติการซื้อ</a>
+        </div>
+        <div class="mt-8 grid gap-6 lg:grid-cols-[1.15fr_.85fr]">
+          <div class="rounded-[2rem] bg-white p-5 shadow-soft">
+            <div class="grid gap-3 md:grid-cols-[1fr_120px_100px_140px_auto]">
+              <input id="custom-item-name" class="rounded-2xl border border-shop-line px-4 py-3" placeholder="เพิ่มรายการ เช่น น้ำปลา">
+              <input id="custom-item-qty" type="number" min="0" step="0.1" class="rounded-2xl border border-shop-line px-4 py-3" placeholder="จำนวน">
+              <input id="custom-item-unit" class="rounded-2xl border border-shop-line px-4 py-3" placeholder="หน่วย">
+              <input id="custom-item-price" type="number" min="0" step="1" class="rounded-2xl border border-shop-line px-4 py-3" placeholder="ราคา">
+              <button id="add-makro-item" type="button" class="rounded-2xl bg-shop-ink px-5 py-3 font-bold text-white">เพิ่ม</button>
+            </div>
+            <div id="makro-list" class="mt-5 grid gap-3"></div>
+            <div class="mt-5 grid gap-3 sm:grid-cols-3">
+              <button id="save-makro-log" type="button" class="rounded-2xl bg-shop-wok px-5 py-4 font-bold text-shop-ink shadow-soft">ซื้อเสร็จและบันทึก Log</button>
+              <button id="clear-makro-checked" type="button" class="rounded-2xl bg-shop-cream px-5 py-4 font-bold text-shop-soy">เริ่มรอบใหม่</button>
+              <button id="reset-makro-defaults" type="button" class="rounded-2xl border border-shop-line bg-white px-5 py-4 font-bold text-shop-ink">คืนค่าเริ่มต้น</button>
+            </div>
+          </div>
+          <div class="grid gap-5">
+            <div class="rounded-[2rem] bg-shop-ink p-6 text-white shadow-lift">
+              <h3 class="text-xl font-extrabold">สรุปจากของที่ติ๊กซื้อแล้ว</h3>
+              <div class="mt-5 grid grid-cols-2 gap-3">
+                <div class="rounded-3xl bg-white p-4 text-shop-ink"><span class="text-xs text-shop-soy">เงินที่ใช้</span><strong id="makro-total" class="tabular block text-2xl">0</strong></div>
+                <div class="rounded-3xl bg-white p-4 text-shop-ink"><span class="text-xs text-shop-soy">ทำได้ประมาณ</span><strong id="makro-boxes" class="tabular block text-2xl">0</strong></div>
+                <div class="rounded-3xl bg-white p-4 text-shop-ink"><span class="text-xs text-shop-soy">ยอดขาย 79+</span><strong id="makro-sales" class="tabular block text-2xl">0</strong></div>
+                <div class="rounded-3xl bg-white p-4 text-shop-ink"><span class="text-xs text-shop-soy">เหลือก่อนค่าอื่น</span><strong id="makro-profit" class="tabular block text-2xl">0</strong></div>
+              </div>
+              <div id="makro-mix" class="mt-5 rounded-3xl bg-white/10 p-4 text-sm leading-7 text-white/75"></div>
+            </div>
+            <div id="makro-logs" class="rounded-[2rem] bg-white p-5 shadow-soft">
+              <h3 class="text-xl font-extrabold">Purchase logs</h3>
+              <div id="makro-log-list" class="mt-4 grid gap-3"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -237,25 +286,25 @@
         <p class="mt-3 max-w-3xl leading-8 text-shop-soy">Forecast นี้เป็นแผนเงินสดแบบระวังตัว ใช้สมมติฐานขาย 26 วันต่อเดือน และยังไม่หักภาษี/เงินเดือนเจ้าของร้าน ตัวเลขจริงต้องอัปเดตจากยอดขายทุกวัน</p>
         <div class="mt-8 overflow-hidden rounded-[2rem] border border-shop-line shadow-soft">
           <div class="grid min-w-[920px] grid-cols-[.9fr_.75fr_.9fr_.9fr_.9fr_.9fr] bg-shop-ink px-5 py-3 text-sm font-bold text-white">
-            <span>ช่วง</span><span>กล่อง/วัน</span><span>ยอดขายรวม</span><span>เงินเข้าหลัง GP</span><span>ต้นทุน+ค่าใช้จ่าย</span><span>เงินเหลือก่อนภาษี</span>
+            <span>ช่วง</span><span>กล่อง/วัน</span><span>ยอดฐาน 79</span><span>ยอด add-ons คาด</span><span>ต้นทุน+ค่าใช้จ่าย</span><span>เงินเหลือก่อนภาษี</span>
           </div>
           <div id="forecast-list" class="min-w-[920px] divide-y divide-shop-line bg-shop-paper"></div>
         </div>
       </div>
     </section>
 
-    <section id="platform" class="bg-shop-ink px-4 py-16 text-white lg:px-8">
+    <section id="pricing" class="bg-shop-ink px-4 py-16 text-white lg:px-8">
       <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]">
         <div>
-          <h2 class="text-3xl font-extrabold md:text-4xl">Platform fee pricing rule</h2>
-          <p class="mt-4 leading-8 text-white/75">การขายผ่าน delivery platform ต้องตั้งราคาแยกจากขายตรง เพราะค่า GP เฉลี่ยอาจอยู่แถว 30% และมักมี VAT บนค่าบริการนั้น แผนนี้จึงใช้สมมติฐานกันไว้ 32.1% ของยอดขายแพลตฟอร์ม</p>
-          <p class="mt-4 text-sm leading-6 text-white/60">สูตรใช้งาน: ราคาแพลตฟอร์มขั้นต่ำ = ราคาขายตรง ÷ 0.679 แล้วปัดขึ้นเป็น 99, 109, 119 หรือ 129 บาท เพื่อให้ลูกค้าจำง่าย</p>
+          <h2 class="text-3xl font-extrabold md:text-4xl">Online-only pricing rule</h2>
+          <p class="mt-4 leading-8 text-white/75">ปรับเป็นขายออนไลน์ราคาเริ่ม 79 บาททุกเมนู เพื่อให้ลูกค้าตัดสินใจง่ายและไม่รู้สึกว่าแพงเกินไป รายได้เพิ่มมาจาก add-ons ที่ลูกค้าเลือกเอง เช่น ไข่ดาว เพิ่มหมู เพิ่มข้าว หรือสั่งพิเศษ</p>
+          <p class="mt-4 text-sm leading-6 text-white/60">ถ้าวันไหนจะเปิด delivery platform ที่มี GP สูง ให้ใช้เป็นช่องทางทดลองเท่านั้น เพราะราคา 79 บาทเหมาะกับออเดอร์ออนไลน์ตรงผ่าน LINE/Facebook/ลูกค้าประจำมากกว่า</p>
         </div>
         <div class="grid gap-4 md:grid-cols-2">
-          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Direct price</span><strong class="mt-2 block text-3xl">69-79 บาท</strong><p class="mt-2 text-sm leading-6 text-white/70">เหมาะกับ LINE OA, Facebook, ลูกค้าใกล้บ้าน และลูกค้าประจำ</p></div>
-          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Platform price</span><strong class="mt-2 block text-3xl">99-119 บาท</strong><p class="mt-2 text-sm leading-6 text-white/70">บวก GP และ VAT บน GP เพื่อรักษากำไรต่อกล่อง</p></div>
-          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Best practice</span><strong class="mt-2 block text-2xl">ไม่ทำโปรเองถ้า margin ต่ำ</strong><p class="mt-2 text-sm leading-6 text-white/70">โปรลดราคาให้ใช้เฉพาะเมนูต้นทุนต่ำหรือช่วงเปิดร้านเท่านั้น</p></div>
-          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Source check</span><strong class="mt-2 block text-2xl">ตรวจค่าจริงตอนสมัคร</strong><p class="mt-2 text-sm leading-6 text-white/70">เงื่อนไขแต่ละแพลตฟอร์มเปลี่ยนตามแคมเปญและประเภทสัญญา</p></div>
+          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Base menu</span><strong class="mt-2 block text-3xl">79 บาท</strong><p class="mt-2 text-sm leading-6 text-white/70">ใช้เป็นราคาเริ่มของทุกเมนูหลัก เพื่อให้เมนูดูเข้าถึงง่าย</p></div>
+          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Add fried egg</span><strong class="mt-2 block text-3xl">+12 บาท</strong><p class="mt-2 text-sm leading-6 text-white/70">ต้นทุนไข่ประมาณ 5 บาท เหลือ margin เพิ่มต่อ order</p></div>
+          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Special order</span><strong class="mt-2 block text-3xl">+15 ถึง +20</strong><p class="mt-2 text-sm leading-6 text-white/70">พิเศษ +15, เพิ่มหมู +20, เพิ่มข้าว +10 ตามต้นทุนจริง</p></div>
+          <div class="rounded-3xl bg-white/10 p-6"><span class="text-white/60">Best practice</span><strong class="mt-2 block text-2xl">ขายราคาเดียวให้จำง่าย</strong><p class="mt-2 text-sm leading-6 text-white/70">อย่าให้เมนูหลักเกิน 79 ในช่วงเริ่มร้าน ให้เพิ่มยอดจาก add-ons แทน</p></div>
         </div>
       </div>
     </section>
@@ -266,7 +315,7 @@
         <div class="mt-8 grid gap-5 md:grid-cols-3">
           <div class="rounded-[2rem] bg-white p-6 shadow-soft"><h3 class="font-extrabold">ก่อนเปิดร้าน 7 วัน</h3><ul class="mt-4 space-y-3 text-sm leading-6 text-shop-soy"><li>ทำ cost sheet ทั้ง 4 เมนู</li><li>ถ่ายรูปเมนูจริงในกล่องที่จะขาย</li><li>เลือก supplier หมู ไข่ ข้าว กล่อง</li><li>ทำ LINE OA และ Google Form สำรอง</li></ul></div>
           <div class="rounded-[2rem] bg-white p-6 shadow-soft"><h3 class="font-extrabold">วันทดลองขาย</h3><ul class="mt-4 space-y-3 text-sm leading-6 text-shop-soy"><li>ขายเฉพาะ 20-30 กล่อง</li><li>จดเวลา prep/pack ต่อกล่อง</li><li>ถ่าย feedback ลูกค้า</li><li>วัดของเหลือและของเสีย</li></ul></div>
-          <div class="rounded-[2rem] bg-white p-6 shadow-soft"><h3 class="font-extrabold">หลังขายทุกวัน</h3><ul class="mt-4 space-y-3 text-sm leading-6 text-shop-soy"><li>สรุปยอดขาย เงินเข้า และค่า GP</li><li>อัปเดตราคาวัตถุดิบ</li><li>เช็กเมนูขายดี/กำไรดี</li><li>วางแผนซื้อของวันถัดไป</li></ul></div>
+          <div class="rounded-[2rem] bg-white p-6 shadow-soft"><h3 class="font-extrabold">หลังขายทุกวัน</h3><ul class="mt-4 space-y-3 text-sm leading-6 text-shop-soy"><li>สรุปยอดขาย เงินเข้า และยอด add-ons</li><li>อัปเดตราคาวัตถุดิบ</li><li>เช็กเมนูขายดี/กำไรดี</li><li>วางแผนซื้อของวันถัดไป</li></ul></div>
         </div>
         <div class="mt-8 grid gap-3 sm:grid-cols-3">
           <button type="button" data-doc-open="ops" class="rounded-2xl bg-shop-ink px-5 py-4 text-center font-bold text-white shadow-soft">อ่านคู่มือปฏิบัติงาน</button>
@@ -313,18 +362,24 @@
       <a class="rounded-2xl px-1 py-2 text-shop-chili" href="#top">Home</a>
       <a class="rounded-2xl px-1 py-2" href="#schedule">Time</a>
       <a class="rounded-2xl px-1 py-2" href="#menu">Menu</a>
-      <a class="rounded-2xl px-1 py-2" href="#shopping">Buy</a>
+      <a class="rounded-2xl px-1 py-2" href="#makro-tool">Buy</a>
       <a class="rounded-2xl px-1 py-2" href="#capital">Money</a>
     </div>
   </nav>
 
   <script>
-    const platformRate = 0.321;
+    const onlineBasePrice = 79;
+    const addOns = {
+      egg: { label: 'ไข่ดาว', price: 12, cost: 5 },
+      extraPork: { label: 'เพิ่มหมู', price: 20, cost: 13 },
+      extraRice: { label: 'เพิ่มข้าว', price: 10, cost: 4 },
+      special: { label: 'พิเศษ', price: 15, cost: 8 }
+    };
     const menus = [
-      { id: 'krapao', name: 'ข้าวกะเพราหมูสับไข่ดาว', img: 'assets/menu-krapao.png', cost: 41, direct: 69, platform: 99, kcal: 690, mix: 10, note: 'เมนูหลัก ขายง่าย กลิ่นหอม ทำซ้ำเร็ว' },
-      { id: 'oyster', name: 'ข้าวหมูผัดน้ำมันหอย', img: 'assets/menu-oyster-pork.png', cost: 39, direct: 75, platform: 109, kcal: 620, mix: 7, note: 'รสกลาง กินง่าย เหมาะกับลูกค้าทั่วไป' },
-      { id: 'fried-rice', name: 'ข้าวผัดหมู', img: 'assets/menu-fried-rice.png', cost: 37, direct: 69, platform: 99, kcal: 650, mix: 8, note: 'ใช้วัตถุดิบคุมง่าย เหมาะกับช่วงเริ่มร้าน' },
-      { id: 'garlic', name: 'ข้าวหมูกระเทียมไข่ดาว', img: 'assets/menu-garlic-pork.png', cost: 40, direct: 75, platform: 109, kcal: 700, mix: 5, note: 'เมนูมาตรฐาน ทำ batch ได้ดี' }
+      { id: 'krapao', name: 'ข้าวกะเพราหมูสับ', img: 'assets/menu-krapao.png', cost: 36, online: 79, kcal: 610, mix: 10, note: 'เมนูหลัก ขายง่าย เพิ่มไข่ดาวเป็น add-on ได้' },
+      { id: 'oyster', name: 'ข้าวหมูผัดน้ำมันหอย', img: 'assets/menu-oyster-pork.png', cost: 39, online: 79, kcal: 620, mix: 7, note: 'รสกลาง กินง่าย เหมาะกับลูกค้าทั่วไป' },
+      { id: 'fried-rice', name: 'ข้าวผัดหมู', img: 'assets/menu-fried-rice.png', cost: 37, online: 79, kcal: 650, mix: 8, note: 'ใช้วัตถุดิบคุมง่าย เหมาะกับช่วงเริ่มร้าน' },
+      { id: 'garlic', name: 'ข้าวหมูกระเทียม', img: 'assets/menu-garlic-pork.png', cost: 35, online: 79, kcal: 620, mix: 5, note: 'เมนูมาตรฐาน ทำ batch ได้ดี เพิ่มไข่ดาวได้' }
     ];
     const schedule = [
       ['09:00', 'กลับจากส่งลูกที่โรงเรียน เปิดร้านออนไลน์ เช็กพรีออเดอร์ เช็กสต็อกที่ซื้อไว้เมื่อเย็นก่อน และฆ่าเชื้อโต๊ะครัว'],
@@ -337,7 +392,7 @@
       ['13:00', 'รับออเดอร์รอบบ่าย เน้นเมนูที่ยังมีวัตถุดิบพร้อม ไม่เปิดเมนูที่ใกล้หมด'],
       ['14:00', 'ปิดรับเมนูทอด/เมนูใช้เวลานาน เริ่มเคลียร์วัตถุดิบสด'],
       ['14:30', 'ปิดรับออเดอร์ใหม่ ยกเว้นลูกค้าใกล้บ้านที่ทำทันจริง'],
-      ['15:00', 'ปิดร้านออนไลน์ สรุปยอดขายแบบเร็ว เงินเข้า ค่า GP ของเหลือ และรายการที่ต้องซื้อหลังรับลูก'],
+      ['15:00', 'ปิดร้านออนไลน์ สรุปยอดขายแบบเร็ว เงินเข้า ยอด add-ons ของเหลือ และรายการที่ต้องซื้อหลังรับลูก'],
       ['15:00-16:30', 'เวลารับลูกและเดินทางกลับบ้าน ไม่รับออเดอร์ ไม่เข้า Makro และไม่วางงานครัวหนักในช่วงนี้'],
       ['16:30', 'เข้า Makro/ตลาด/ร้านแพ็กเกจ ซื้อหมู ข้าว ไข่ ผัก กะเพรา กระเทียม พริก กล่อง ช้อน ถุง สำหรับขายวันถัดไป'],
       ['17:45', 'กลับบ้าน ชั่งของเข้าสต็อก แยกของสด/ของแห้ง ติด label วันที่ และเก็บแบบ FIFO'],
@@ -356,6 +411,18 @@
       ['แก๊ส/ไฟ/น้ำ/น้ำแข็ง/เบ็ดเตล็ด', 'เฉลี่ยต่อวัน', '180 บาท'],
       ['Buffer ราคาขึ้นหรือออเดอร์เพิ่ม', 'สำรอง', '200 บาท']
     ];
+    const makroDefaults = [
+      { id: 'rice', name: 'ข้าวสารหอมมะลิ/ข้าวขาว', qty: 3.3, unit: 'กก.', price: 125, category: 'rice', boxesPerUnit: 9.1 },
+      { id: 'pork', name: 'หมูบด/หมูชิ้นรวม', qty: 2.9, unit: 'กก.', price: 500, category: 'pork', boxesPerUnit: 10.4 },
+      { id: 'eggs', name: 'ไข่ไก่เบอร์ 2-3', qty: 26, unit: 'ฟอง', price: 135, category: 'eggs', boxesPerUnit: 1 },
+      { id: 'herbs', name: 'กะเพรา พริก กระเทียม', qty: 1, unit: 'ชุด', price: 160, category: 'herbs', boxesPerUnit: 30 },
+      { id: 'veg', name: 'ผักรวม หอมใหญ่ แครอต ต้นหอม แตงกวา', qty: 4.5, unit: 'กก.', price: 250, category: 'veg', boxesPerUnit: 6.7 },
+      { id: 'sauce', name: 'น้ำมัน ซอสหอย ซีอิ๊ว น้ำปลา น้ำตาล', qty: 1, unit: 'รอบ', price: 220, category: 'sauce', boxesPerUnit: 30 },
+      { id: 'packaging', name: 'กล่องข้าว ฝา ช้อน ถุง กระดาษซับ', qty: 35, unit: 'ชุด', price: 230, category: 'packaging', boxesPerUnit: 1 },
+      { id: 'utilities', name: 'แก๊ส/ไฟ/น้ำ/น้ำแข็ง/เบ็ดเตล็ด', qty: 1, unit: 'รอบ', price: 180, category: 'utility', boxesPerUnit: 30 },
+      { id: 'buffer', name: 'Buffer ราคาขึ้นหรือออเดอร์เพิ่ม', qty: 1, unit: 'สำรอง', price: 200, category: 'buffer', boxesPerUnit: 0 }
+    ];
+    const makroRequiredCategories = ['rice', 'pork', 'herbs', 'veg', 'sauce', 'packaging'];
     const packages = [
       {
         tier: 'ต่ำ / Lean test',
@@ -391,9 +458,9 @@
       ['เงินฉุกเฉิน', 'ของเสีย ราคาหมู/ไข่ขึ้น กล่องหมด หรือยอดขายต่ำกว่าคาด', '2,500-10,000 บาท']
     ];
     const forecast = [
-      ['Month 1 Pilot', '30', '71,100', '55,500', '43,200', '12,300'],
-      ['Month 3 Stable', '60', '143,500', '112,300', '82,500', '29,800'],
-      ['Month 6 Scale', '100', '247,000', '195,000', '136,000', '59,000']
+      ['Month 1 Pilot', '30', '61,620', '4,680', '43,200', '23,100'],
+      ['Month 3 Stable', '60', '123,240', '10,920', '82,500', '51,660'],
+      ['Month 6 Scale', '100', '205,400', '23,400', '136,000', '92,800']
     ];
     const docTabs = [
       ['ops', 'คู่มือปฏิบัติงาน'],
@@ -432,19 +499,19 @@
       cost: {
         kicker: 'Costing and Forecast',
         title: 'ต้นทุน ราคา และ Forecast แบบอ่านง่าย',
-        summary: 'สรุปตัวเลขที่ต้องใช้ตัดสินใจจริง: ต้นทุนต่อเมนู ราคาขายตรง ราคาแพลตฟอร์ม เงินสดซื้อของ และ forecast 1/3/6 เดือน โดยใช้ค่า GP รวมสมมติฐาน 32.1%',
+        summary: 'สรุปตัวเลขที่ต้องใช้ตัดสินใจจริง: ต้นทุนต่อเมนู ราคาออนไลน์ 79 บาท add-ons เงินสดซื้อของ และ forecast 1/3/6 เดือน โดยเน้นขายออนไลน์ตรงก่อน ไม่ตั้งราคาแพงแบบแพลตฟอร์ม',
         stats: [
           ['เงินซื้อของ', '2,000', 'บาท/วัน สำหรับ 30 กล่อง'],
-          ['ค่า GP กันไว้', '32.1%', 'ตั้งราคาแพลตฟอร์มแยก'],
+          ['ราคาเริ่ม', '79', 'บาททุกเมนูหลัก'],
           ['แพ็กเกจแนะนำ', '35,000', 'บาท ถ้าเริ่มจริง'],
-          ['เป้าหมายแรก', '30', 'กล่อง/วัน']
+          ['Add-ons เฉลี่ย', '+10-20', 'บาทต่อรายการ']
         ],
         sections: [
           {
             type: 'table',
-            title: 'ต้นทุนและราคาขายต่อเมนู',
-            headers: ['เมนู', 'ต้นทุน', 'ขายตรง', 'แพลตฟอร์ม', 'กำไรหลัง GP'],
-            rows: menus.map((menu) => [menu.name, baht(menu.cost), baht(menu.direct), baht(menu.platform), baht(menu.platform * (1 - platformRate) - menu.cost)])
+            title: 'ต้นทุนและราคาออนไลน์ต่อเมนู',
+            headers: ['เมนู', 'ต้นทุนฐาน', 'ราคาออนไลน์', 'กำไรฐาน', 'แนวทางเพิ่มยอด'],
+            rows: menus.map((menu) => [menu.name, baht(menu.cost), baht(menu.online), baht(menu.online - menu.cost), 'เพิ่มไข่ดาว/พิเศษ/เพิ่มหมูตามลูกค้าเลือก'])
           },
           {
             type: 'table',
@@ -455,20 +522,20 @@
           {
             type: 'table',
             title: 'Forecast เงินสด 1/3/6 เดือน',
-            headers: ['ช่วง', 'กล่อง/วัน', 'ยอดขายรวม', 'เงินเข้าหลัง GP', 'ต้นทุน+ค่าใช้จ่าย', 'เหลือก่อนภาษี'],
+            headers: ['ช่วง', 'กล่อง/วัน', 'ยอดฐาน 79', 'ยอด add-ons คาด', 'ต้นทุน+ค่าใช้จ่าย', 'เหลือก่อนภาษี'],
             rows: forecast
           },
           {
             type: 'list',
             title: 'กฎตั้งราคา',
-            items: ['ขายตรงใช้ราคา 69-79 บาทตามเมนู', 'ราคาแพลตฟอร์มต้องสูงกว่า เพราะถูกหัก GP', 'สูตรตั้งต้น: ราคาแพลตฟอร์ม = ราคาขายตรง ÷ 0.679', 'ปัดราคาเป็น 99 / 109 / 119 / 129 บาท เพื่อให้ลูกค้าจำง่าย']
+            items: ['เมนูหลักตั้ง 79 บาทให้จำง่าย', 'ไข่ดาว +12 บาท', 'เพิ่มข้าว +10 บาท', 'พิเศษ +15 บาท', 'เพิ่มหมู +20 บาท', 'ถ้าเข้า delivery platform ที่มี GP สูง ต้องคำนวณใหม่ก่อนเปิดขาย']
           }
         ]
       },
       business: {
         kicker: 'Business Plan',
         title: 'แผนธุรกิจสำหรับร้านข้าวออนไลน์ที่บ้าน',
-        summary: 'แผนนี้เน้นเริ่มเล็กแบบควบคุมเงินสด ใช้เมนูที่ทำซ้ำง่าย พิสูจน์ยอดขายจริงก่อนเพิ่มกำลังผลิต และเก็บลูกค้าประจำเพื่อลดการพึ่งพาแพลตฟอร์ม',
+        summary: 'แผนนี้เน้นเริ่มเล็กแบบควบคุมเงินสด ใช้เมนูที่ทำซ้ำง่าย ราคาออนไลน์เริ่ม 79 บาท พิสูจน์ยอดขายจริงก่อนเพิ่มกำลังผลิต และเก็บลูกค้าประจำผ่าน LINE/Facebook',
         stats: [
           ['จุดเริ่มต้น', '15k+', 'แพ็กเกจต่ำสุด'],
           ['แนะนำ', '35k', 'แพ็กเกจกลาง'],
@@ -485,7 +552,7 @@
           {
             type: 'list',
             title: 'กลยุทธ์ช่องทางขาย',
-            items: ['เริ่มจาก LINE/Facebook และลูกค้าใกล้บ้านเพื่อลดค่า GP', 'ใช้แพลตฟอร์มเพื่อเพิ่มการมองเห็น แต่ตั้งราคาแยก', 'เก็บรายชื่อลูกค้าซ้ำทุกวัน', 'ไม่ทำโปรลดหนักถ้ากำไรต่อกล่องยังบาง']
+            items: ['ขายออนไลน์ตรงผ่าน LINE/Facebook เป็นช่องทางหลัก', 'ใช้ราคาเริ่ม 79 บาททุกเมนูเพื่อให้ลูกค้าตัดสินใจง่าย', 'เพิ่มยอดจาก add-ons เช่น ไข่ดาว พิเศษ เพิ่มหมู เพิ่มข้าว', 'เก็บรายชื่อลูกค้าซ้ำทุกวัน', 'ยังไม่เปิดแพลตฟอร์ม GP สูงจนกว่าจะคำนวณ margin ใหม่']
           },
           {
             type: 'cards',
@@ -505,6 +572,14 @@
       }
     };
     function baht(value) { return `${Math.round(value).toLocaleString('th-TH')} บาท`; }
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
     function sectionHtml(section) {
       if (section.type === 'timeline') {
         return `<section class="rounded-[2rem] bg-white p-5 shadow-soft"><h3 class="text-xl font-extrabold">${section.title}</h3><div class="mt-4 overflow-hidden rounded-2xl border border-shop-line">${section.rows.map(([time, task]) => `<div class="grid grid-cols-[112px_1fr] border-b border-shop-line last:border-b-0"><strong class="bg-shop-cream px-4 py-3 tabular text-shop-chili">${time}</strong><span class="px-4 py-3 text-sm leading-6 text-shop-soy">${task}</span></div>`).join('')}</div></section>`;
@@ -547,7 +622,7 @@
     function renderMenu() {
       const grid = document.getElementById('menu-grid');
       grid.innerHTML = menus.map((menu) => {
-        const platformNet = menu.platform * (1 - platformRate);
+        const baseProfit = menu.online - menu.cost;
         return `
           <article class="menu-card overflow-hidden rounded-[2rem] border border-shop-line bg-shop-paper shadow-soft">
             <img src="${menu.img}" alt="${menu.name}" class="aspect-[4/3] w-full object-cover">
@@ -556,9 +631,9 @@
               <p class="mt-2 text-sm leading-6 text-shop-soy">${menu.note}</p>
               <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
                 <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">ต้นทุน</span><strong class="tabular block text-lg">${baht(menu.cost)}</strong></div>
-                <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">Direct</span><strong class="tabular block text-lg">${baht(menu.direct)}</strong></div>
-                <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">Platform</span><strong class="tabular block text-lg">${baht(menu.platform)}</strong></div>
-                <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">หลัง GP</span><strong class="tabular block text-lg">${baht(platformNet)}</strong></div>
+                <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">Online</span><strong class="tabular block text-lg">${baht(menu.online)}</strong></div>
+                <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">กำไรฐาน</span><strong class="tabular block text-lg">${baht(baseProfit)}</strong></div>
+                <div class="rounded-2xl bg-white p-3"><span class="text-shop-soy">Add-ons</span><strong class="tabular block text-lg">+10-20</strong></div>
               </div>
             </div>
           </article>`;
@@ -567,24 +642,133 @@
     function renderRows(target, rows, template) {
       document.getElementById(target).innerHTML = rows.map(template).join('');
     }
+    const makroItemsKey = 'riceBoxMakroItemsV1';
+    const makroLogsKey = 'riceBoxMakroLogsV1';
+    function storedJson(key, fallback) {
+      try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+    function freshMakroDefaults() {
+      return makroDefaults.map((item) => ({ ...item, checked: false }));
+    }
+    let makroItems = storedJson(makroItemsKey, freshMakroDefaults());
+    let makroLogs = storedJson(makroLogsKey, []);
+    function saveMakroState() {
+      localStorage.setItem(makroItemsKey, JSON.stringify(makroItems));
+      localStorage.setItem(makroLogsKey, JSON.stringify(makroLogs));
+    }
+    function numberValue(value) {
+      const parsed = Number(value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+    function itemBoxes(item) {
+      if (!item.checked || !item.boxesPerUnit) return 0;
+      return numberValue(item.qty) * numberValue(item.boxesPerUnit);
+    }
+    function makroSummary() {
+      const checked = makroItems.filter((item) => item.checked);
+      const total = checked.reduce((sum, item) => sum + numberValue(item.price), 0);
+      const boxCandidates = makroRequiredCategories
+        .map((category) => checked.filter((item) => item.category === category).reduce((sum, item) => sum + itemBoxes(item), 0));
+      const boxes = Math.floor(boxCandidates.every((value) => value > 0) ? Math.min(...boxCandidates) : 0);
+      const eggs = checked.filter((item) => item.category === 'eggs').reduce((sum, item) => sum + numberValue(item.qty), 0);
+      const eggAddOns = Math.min(Math.floor(eggs), Math.round(boxes * 0.35));
+      const specialOrders = Math.round(boxes * 0.2);
+      const sales = (boxes * onlineBasePrice) + (eggAddOns * addOns.egg.price) + (specialOrders * addOns.special.price);
+      const profit = sales - total;
+      const mix = menus.map((menu) => [menu.name, Math.floor((boxes * menu.mix) / 30)]);
+      const mixTotal = mix.reduce((sum, [, amount]) => sum + amount, 0);
+      if (boxes > mixTotal && mix.length) mix[0][1] += boxes - mixTotal;
+      return { checked, total, boxes, eggAddOns, specialOrders, sales, profit, mix };
+    }
+    function renderMakroList() {
+      document.getElementById('makro-list').innerHTML = makroItems.map((item) => `
+        <article class="makro-item ${item.checked ? 'done' : ''} grid gap-3 rounded-3xl border border-shop-line bg-shop-paper p-4 md:grid-cols-[44px_1fr_110px_80px_130px_48px] md:items-center">
+          <label class="flex items-center gap-3 md:justify-center"><input type="checkbox" data-makro-id="${item.id}" data-makro-action="toggle" ${item.checked ? 'checked' : ''} class="h-6 w-6 accent-shop-wok"><span class="md:hidden">ซื้อแล้ว</span></label>
+          <div><strong class="makro-title block">${escapeHtml(item.name)}</strong><span class="text-xs text-shop-soy">${item.category === 'custom' ? 'เพิ่มเอง' : 'รายการหลัก'} ${item.boxesPerUnit ? `ประมาณ ${Math.round(itemBoxes({ ...item, checked: true }))} กล่อง` : ''}</span></div>
+          <input type="number" min="0" step="0.1" value="${item.qty}" data-makro-id="${item.id}" data-makro-field="qty" class="rounded-2xl border border-shop-line bg-white px-3 py-2 tabular">
+          <input value="${escapeHtml(item.unit)}" data-makro-id="${item.id}" data-makro-field="unit" class="rounded-2xl border border-shop-line bg-white px-3 py-2">
+          <input type="number" min="0" step="1" value="${item.price}" data-makro-id="${item.id}" data-makro-field="price" class="rounded-2xl border border-shop-line bg-white px-3 py-2 tabular">
+          <button type="button" data-makro-id="${item.id}" data-makro-action="remove" class="rounded-2xl bg-white px-3 py-2 font-bold text-shop-chili">ลบ</button>
+        </article>
+      `).join('');
+      renderMakroSummary();
+    }
+    function renderMakroSummary() {
+      const summary = makroSummary();
+      document.getElementById('makro-total').textContent = baht(summary.total);
+      document.getElementById('makro-boxes').textContent = `${summary.boxes.toLocaleString('th-TH')} กล่อง`;
+      document.getElementById('makro-sales').textContent = baht(summary.sales);
+      document.getElementById('makro-profit').textContent = baht(summary.profit);
+      document.getElementById('makro-mix').innerHTML = summary.boxes
+        ? `<strong class="block text-white">เมนูที่ทำได้โดยประมาณ</strong>${summary.mix.map(([name, amount]) => `<div class="mt-1 flex justify-between gap-3"><span>${name}</span><span class="tabular font-bold">${amount} กล่อง</span></div>`).join('')}<div class="mt-3 text-white/65">ประมาณ add-ons: ไข่ดาว ${summary.eggAddOns} ฟอง, พิเศษ ${summary.specialOrders} กล่อง</div>`
+        : 'ติ๊กของที่ซื้อแล้วอย่างน้อย ข้าว หมู ผัก เครื่องปรุง และกล่อง ระบบจะคำนวณจำนวนกล่องให้ทันที';
+      renderMakroLogs();
+    }
+    function renderMakroLogs() {
+      document.getElementById('makro-log-list').innerHTML = makroLogs.length
+        ? makroLogs.map((log) => `
+          <article class="rounded-3xl bg-shop-cream p-4">
+            <div class="flex items-start justify-between gap-3">
+              <div><strong>${escapeHtml(log.createdAt)}</strong><p class="mt-1 text-sm text-shop-soy">ใช้เงิน ${baht(log.total)} / ทำได้ประมาณ ${log.boxes} กล่อง / ยอดขายคาด ${baht(log.sales)}</p></div>
+              <button type="button" data-log-id="${log.id}" class="rounded-2xl bg-white px-3 py-2 text-sm font-bold text-shop-chili">ลบ</button>
+            </div>
+            <p class="mt-3 text-xs leading-6 text-shop-soy">${log.items.map((item) => `${escapeHtml(item.name)} ${item.qty} ${escapeHtml(item.unit)}`).join(' • ')}</p>
+          </article>
+        `).join('')
+        : '<p class="rounded-2xl bg-shop-cream p-4 text-sm text-shop-soy">ยังไม่มี logs การซื้อของ</p>';
+    }
+    function addMakroItem() {
+      const name = document.getElementById('custom-item-name').value.trim();
+      if (!name) return;
+      const qty = numberValue(document.getElementById('custom-item-qty').value || 1);
+      const unit = document.getElementById('custom-item-unit').value.trim() || 'ชิ้น';
+      const price = numberValue(document.getElementById('custom-item-price').value);
+      makroItems.push({ id: `custom-${Date.now()}`, name, qty, unit, price, category: 'custom', boxesPerUnit: 0, checked: false });
+      ['custom-item-name', 'custom-item-qty', 'custom-item-unit', 'custom-item-price'].forEach((id) => { document.getElementById(id).value = ''; });
+      saveMakroState();
+      renderMakroList();
+    }
+    function saveMakroLog() {
+      const summary = makroSummary();
+      if (!summary.checked.length) return;
+      makroLogs.unshift({
+        id: `log-${Date.now()}`,
+        createdAt: new Date().toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' }),
+        total: summary.total,
+        boxes: summary.boxes,
+        sales: summary.sales,
+        profit: summary.profit,
+        items: summary.checked.map((item) => ({ name: item.name, qty: item.qty, unit: item.unit, price: item.price }))
+      });
+      makroLogs = makroLogs.slice(0, 20);
+      saveMakroState();
+      renderMakroLogs();
+    }
     function updateCalculator() {
       const menu = menus.find((item) => item.id === document.getElementById('menu-select').value);
-      const channel = document.querySelector('input[name="channel"]:checked').value;
-      const price = channel === 'platform' ? menu.platform : menu.direct;
-      const fee = channel === 'platform' ? price * platformRate : 0;
-      const net = price - fee;
-      const profit = net - menu.cost;
+      const selectedAddOns = [...document.querySelectorAll('[data-addon]:checked')].map((input) => addOns[input.dataset.addon]);
+      const addonPrice = selectedAddOns.reduce((sum, addon) => sum + addon.price, 0);
+      const addonCost = selectedAddOns.reduce((sum, addon) => sum + addon.cost, 0);
+      const price = menu.online + addonPrice;
+      const cost = menu.cost + addonCost;
+      const profit = price - cost;
       document.getElementById('calc-price').textContent = baht(price);
-      document.getElementById('calc-net').textContent = baht(net);
-      document.getElementById('calc-cost').textContent = baht(menu.cost);
+      document.getElementById('calc-net').textContent = baht(addonPrice);
+      document.getElementById('calc-cost').textContent = baht(cost);
       document.getElementById('calc-profit').textContent = baht(profit);
-      document.getElementById('calc-note').textContent = channel === 'platform'
-        ? `ใช้สมมติฐานค่า GP รวม VAT บน GP ${Math.round(platformRate * 1000) / 10}% จึงต้องตั้งราคาแพลตฟอร์มสูงกว่าขายตรง`
-        : 'ขายตรงเหมาะกับลูกค้าประจำ เพราะไม่มี GP แพลตฟอร์มและเก็บข้อมูลลูกค้าเองได้';
+      document.getElementById('calc-note').textContent = selectedAddOns.length
+        ? `Add-ons ที่เลือก: ${selectedAddOns.map((addon) => addon.label).join(', ')} ทำให้ยอดต่อกล่องสูงขึ้นโดยลูกค้าเลือกเอง`
+        : 'ราคาเริ่ม 79 บาทเหมาะกับขายออนไลน์ตรงผ่าน LINE/Facebook ถ้าขายผ่านแพลตฟอร์ม GP สูงต้องคำนวณใหม่';
     }
     renderMenu();
     renderRows('schedule-list', schedule, ([time, task]) => `<div class="grid grid-cols-[116px_1fr] px-5 py-4"><strong class="tabular text-shop-chili">${time}</strong><span class="text-sm leading-6 text-shop-soy">${task}</span></div>`);
     renderRows('shopping-list', shopping, ([item, qty, budget]) => `<div class="grid grid-cols-[1.1fr_.7fr_.7fr] px-5 py-4 text-sm"><strong>${item}</strong><span class="text-shop-soy">${qty}</span><span class="tabular font-bold text-shop-chili">${budget}</span></div>`);
+    renderMakroList();
     document.getElementById('package-list').innerHTML = packages.map((pkg) => `
       <article class="rounded-3xl border border-shop-line bg-shop-paper p-5">
         <span class="text-sm font-bold text-shop-chili">${pkg.tier}</span>
@@ -599,8 +783,52 @@
     renderRows('forecast-list', forecast, (row) => `<div class="grid grid-cols-[.9fr_.75fr_.9fr_.9fr_.9fr_.9fr] px-5 py-4 text-sm"><strong>${row[0]}</strong><span class="tabular">${row[1]}</span><span class="tabular">${row[2]}</span><span class="tabular">${row[3]}</span><span class="tabular">${row[4]}</span><strong class="tabular text-shop-chili">${row[5]}</strong></div>`);
     document.getElementById('menu-select').innerHTML = menus.map((menu) => `<option value="${menu.id}">${menu.name}</option>`).join('');
     document.getElementById('menu-select').addEventListener('change', updateCalculator);
-    document.querySelectorAll('input[name="channel"]').forEach((input) => input.addEventListener('change', updateCalculator));
+    document.querySelectorAll('[data-addon]').forEach((input) => input.addEventListener('change', updateCalculator));
     updateCalculator();
+    document.getElementById('add-makro-item').addEventListener('click', addMakroItem);
+    document.getElementById('save-makro-log').addEventListener('click', saveMakroLog);
+    document.getElementById('clear-makro-checked').addEventListener('click', () => {
+      makroItems = makroItems.map((item) => ({ ...item, checked: false }));
+      saveMakroState();
+      renderMakroList();
+    });
+    document.getElementById('reset-makro-defaults').addEventListener('click', () => {
+      makroItems = freshMakroDefaults();
+      saveMakroState();
+      renderMakroList();
+    });
+    document.getElementById('makro-list').addEventListener('change', (event) => {
+      const id = event.target.dataset.makroId;
+      if (!id) return;
+      const item = makroItems.find((entry) => entry.id === id);
+      if (!item) return;
+      if (event.target.dataset.makroAction === 'toggle') item.checked = event.target.checked;
+      saveMakroState();
+      renderMakroList();
+    });
+    document.getElementById('makro-list').addEventListener('input', (event) => {
+      const id = event.target.dataset.makroId;
+      const field = event.target.dataset.makroField;
+      if (!id || !field) return;
+      const item = makroItems.find((entry) => entry.id === id);
+      if (!item) return;
+      item[field] = field === 'qty' || field === 'price' ? numberValue(event.target.value) : event.target.value;
+      saveMakroState();
+      renderMakroSummary();
+    });
+    document.getElementById('makro-list').addEventListener('click', (event) => {
+      if (event.target.dataset.makroAction !== 'remove') return;
+      makroItems = makroItems.filter((item) => item.id !== event.target.dataset.makroId);
+      saveMakroState();
+      renderMakroList();
+    });
+    document.getElementById('makro-log-list').addEventListener('click', (event) => {
+      const logId = event.target.dataset.logId;
+      if (!logId) return;
+      makroLogs = makroLogs.filter((log) => log.id !== logId);
+      saveMakroState();
+      renderMakroLogs();
+    });
     document.addEventListener('click', (event) => {
       const openButton = event.target.closest('[data-doc-open]');
       if (openButton) {
