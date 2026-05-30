@@ -284,7 +284,8 @@
       <div class="mx-auto max-w-7xl">
         <h2 class="text-3xl font-extrabold md:text-4xl">1, 3, and 6 month forecast</h2>
         <p class="mt-3 max-w-3xl leading-8 text-shop-soy">Forecast นี้เป็นแผนเงินสดแบบระวังตัว ใช้สมมติฐานขาย 26 วันต่อเดือน และยังไม่หักภาษี/เงินเดือนเจ้าของร้าน ตัวเลขจริงต้องอัปเดตจากยอดขายทุกวัน</p>
-        <div class="mt-8 overflow-hidden rounded-[2rem] border border-shop-line shadow-soft">
+        <div class="mt-8 grid gap-4 lg:hidden" id="forecast-cards"></div>
+        <div class="mt-8 hidden overflow-x-auto rounded-[2rem] border border-shop-line shadow-soft lg:block">
           <div class="grid min-w-[920px] grid-cols-[.9fr_.75fr_.9fr_.9fr_.9fr_.9fr] bg-shop-ink px-5 py-3 text-sm font-bold text-white">
             <span>ช่วง</span><span>กล่อง/วัน</span><span>ยอดฐาน 79</span><span>ยอด add-ons คาด</span><span>ต้นทุน+ค่าใช้จ่าย</span><span>เงินเหลือก่อนภาษี</span>
           </div>
@@ -642,6 +643,51 @@
     function renderRows(target, rows, template) {
       document.getElementById(target).innerHTML = rows.map(template).join('');
     }
+    function numberFromText(value) {
+      const parsed = Number(String(value).replace(/[^\d.-]/g, ''));
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+    function renderForecast() {
+      document.getElementById('forecast-list').innerHTML = forecast.map((row) => `<div class="grid grid-cols-[.9fr_.75fr_.9fr_.9fr_.9fr_.9fr] px-5 py-4 text-sm"><strong>${row[0]}</strong><span class="tabular">${row[1]}</span><span class="tabular">${row[2]}</span><span class="tabular">${row[3]}</span><span class="tabular">${row[4]}</span><strong class="tabular text-shop-chili">${row[5]}</strong></div>`).join('');
+      const cards = document.getElementById('forecast-cards');
+      if (!cards) return;
+      const maxBoxes = Math.max(...forecast.map((row) => numberFromText(row[1])), 1);
+      const stageLabels = ['เริ่มทดสอบ', 'เริ่มนิ่ง', 'ขยายกำลัง'];
+      cards.innerHTML = forecast.map((row, index) => {
+        const boxes = numberFromText(row[1]);
+        const baseSales = numberFromText(row[2]);
+        const addonSales = numberFromText(row[3]);
+        const totalSales = baseSales + addonSales;
+        const progress = Math.max(16, Math.round((boxes / maxBoxes) * 100));
+        return `
+          <article class="rounded-[2rem] border border-shop-line bg-shop-paper p-5 shadow-soft">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <span class="rounded-full bg-shop-wok px-3 py-1 text-xs font-extrabold text-shop-ink">${stageLabels[index] || 'Forecast'}</span>
+                <h3 class="mt-3 text-2xl font-extrabold">${row[0]}</h3>
+              </div>
+              <div class="rounded-3xl bg-white px-4 py-3 text-right shadow-soft">
+                <span class="block text-xs font-bold text-shop-soy">กล่อง/วัน</span>
+                <strong class="tabular text-3xl text-shop-chili">${row[1]}</strong>
+              </div>
+            </div>
+            <div class="mt-5 h-2 overflow-hidden rounded-full bg-white">
+              <div class="h-full rounded-full bg-shop-chili" style="width: ${progress}%"></div>
+            </div>
+            <div class="mt-5 rounded-3xl bg-shop-ink p-4 text-white">
+              <span class="text-sm text-white/60">ยอดขายรวมคาดต่อเดือน</span>
+              <strong class="tabular mt-1 block text-3xl">${totalSales.toLocaleString('th-TH')} บาท</strong>
+              <p class="mt-2 text-sm text-white/65">เงินเหลือก่อนภาษี ${row[5]} บาท หลังหักต้นทุนและค่าใช้จ่ายหลัก</p>
+            </div>
+            <div class="mt-4 grid grid-cols-2 gap-3 text-sm">
+              <div class="rounded-2xl bg-white p-4"><span class="text-shop-soy">ยอดฐาน 79</span><strong class="tabular mt-1 block text-lg">${row[2]}</strong></div>
+              <div class="rounded-2xl bg-white p-4"><span class="text-shop-soy">Add-ons</span><strong class="tabular mt-1 block text-lg">${row[3]}</strong></div>
+              <div class="rounded-2xl bg-white p-4"><span class="text-shop-soy">ต้นทุนรวม</span><strong class="tabular mt-1 block text-lg">${row[4]}</strong></div>
+              <div class="rounded-2xl bg-white p-4"><span class="text-shop-soy">เงินเหลือ</span><strong class="tabular mt-1 block text-lg text-shop-chili">${row[5]}</strong></div>
+            </div>
+          </article>`;
+      }).join('');
+    }
     const makroItemsKey = 'riceBoxMakroItemsV1';
     const makroLogsKey = 'riceBoxMakroLogsV1';
     function storedJson(key, fallback) {
@@ -780,7 +826,7 @@
       </article>
     `).join('');
     renderRows('capital-list', capital, ([name, desc, amount]) => `<div class="flex items-start justify-between gap-4 py-4"><div><strong>${name}</strong><p class="mt-1 text-sm leading-6 text-shop-soy">${desc}</p></div><strong class="tabular whitespace-nowrap text-shop-chili">${amount}</strong></div>`);
-    renderRows('forecast-list', forecast, (row) => `<div class="grid grid-cols-[.9fr_.75fr_.9fr_.9fr_.9fr_.9fr] px-5 py-4 text-sm"><strong>${row[0]}</strong><span class="tabular">${row[1]}</span><span class="tabular">${row[2]}</span><span class="tabular">${row[3]}</span><span class="tabular">${row[4]}</span><strong class="tabular text-shop-chili">${row[5]}</strong></div>`);
+    renderForecast();
     document.getElementById('menu-select').innerHTML = menus.map((menu) => `<option value="${menu.id}">${menu.name}</option>`).join('');
     document.getElementById('menu-select').addEventListener('change', updateCalculator);
     document.querySelectorAll('[data-addon]').forEach((input) => input.addEventListener('change', updateCalculator));
