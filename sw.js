@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rice-box-online-v8';
+const CACHE_NAME = 'rice-box-online-v9';
 const BASE_PATH = new URL(self.registration.scope).pathname;
 const ASSETS = [
   BASE_PATH,
