@@ -12,6 +12,7 @@ Home-kitchen operating website and static PWA for launching a Thai online rice b
 - Practical shopping list for 30 boxes per day.
 - Menu cost, direct price, platform price, and gross profit.
 - Low / Mid / High startup capital packages for a kitchen that already has equipment.
+- In-page pop-up documents for the operations manual, costing/forecast, and business plan.
 - 1, 3, and 6 month forecast.
 - Proposal-ready documentation.
 

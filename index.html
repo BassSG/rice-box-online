@@ -53,6 +53,8 @@
     .menu-card img { transition: transform .35s ease; }
     .menu-card:hover img { transform: scale(1.04); }
     .calc-option:has(input:checked) { border-color: #c97822; background: #fff6e8; box-shadow: 0 10px 28px rgba(201, 120, 34, .16); }
+    .doc-modal-shell { max-height: min(92vh, 920px); }
+    .doc-modal-body { max-height: calc(min(92vh, 920px) - 156px); }
   </style>
 </head>
 <body class="min-h-screen overflow-x-hidden">
@@ -267,9 +269,9 @@
           <div class="rounded-[2rem] bg-white p-6 shadow-soft"><h3 class="font-extrabold">หลังขายทุกวัน</h3><ul class="mt-4 space-y-3 text-sm leading-6 text-shop-soy"><li>สรุปยอดขาย เงินเข้า และค่า GP</li><li>อัปเดตราคาวัตถุดิบ</li><li>เช็กเมนูขายดี/กำไรดี</li><li>วางแผนซื้อของวันถัดไป</li></ul></div>
         </div>
         <div class="mt-8 grid gap-3 sm:grid-cols-3">
-          <a href="docs/ops-manual.md" target="_blank" class="rounded-2xl bg-shop-ink px-5 py-4 text-center font-bold text-white shadow-soft">อ่านคู่มือปฏิบัติงาน</a>
-          <a href="docs/costing-forecast.md" target="_blank" class="rounded-2xl bg-shop-wok px-5 py-4 text-center font-bold text-shop-ink shadow-soft">อ่านต้นทุนและ Forecast</a>
-          <a href="docs/business-plan.md" target="_blank" class="rounded-2xl border border-shop-line bg-white px-5 py-4 text-center font-bold text-shop-ink shadow-soft">อ่านแผนธุรกิจ</a>
+          <button type="button" data-doc-open="ops" class="rounded-2xl bg-shop-ink px-5 py-4 text-center font-bold text-white shadow-soft">อ่านคู่มือปฏิบัติงาน</button>
+          <button type="button" data-doc-open="cost" class="rounded-2xl bg-shop-wok px-5 py-4 text-center font-bold text-shop-ink shadow-soft">อ่านต้นทุนและ Forecast</button>
+          <button type="button" data-doc-open="business" class="rounded-2xl border border-shop-line bg-white px-5 py-4 text-center font-bold text-shop-ink shadow-soft">อ่านแผนธุรกิจ</button>
         </div>
       </div>
     </section>
@@ -281,6 +283,23 @@
       </div>
     </section>
   </main>
+
+  <div id="doc-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-shop-ink/70 p-3 backdrop-blur-sm sm:p-6" aria-hidden="true">
+    <div data-doc-close class="absolute inset-0"></div>
+    <section class="doc-modal-shell relative flex w-full max-w-6xl flex-col overflow-hidden rounded-[2rem] bg-shop-paper shadow-lift" role="dialog" aria-modal="true" aria-labelledby="doc-modal-title">
+      <header class="border-b border-shop-line bg-white px-4 py-4 sm:px-6">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p id="doc-modal-kicker" class="text-sm font-bold text-shop-chili">Rice Box Online</p>
+            <h2 id="doc-modal-title" class="mt-1 text-2xl font-extrabold text-shop-ink sm:text-3xl">Document</h2>
+          </div>
+          <button type="button" data-doc-close class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-shop-ink text-xl font-bold text-white" aria-label="Close document">×</button>
+        </div>
+        <div id="doc-modal-tabs" class="mt-4 grid gap-2 sm:grid-cols-3"></div>
+      </header>
+      <div id="doc-modal-body" class="doc-modal-body overflow-y-auto px-4 py-5 sm:px-6"></div>
+    </section>
+  </div>
 
   <footer class="bg-shop-ink px-4 pb-24 pt-10 text-white lg:px-8 lg:pb-10">
     <div class="mx-auto flex max-w-7xl flex-col justify-between gap-5 md:flex-row">
@@ -376,7 +395,155 @@
       ['Month 3 Stable', '60', '143,500', '112,300', '82,500', '29,800'],
       ['Month 6 Scale', '100', '247,000', '195,000', '136,000', '59,000']
     ];
+    const docTabs = [
+      ['ops', 'คู่มือปฏิบัติงาน'],
+      ['cost', 'ต้นทุนและ Forecast'],
+      ['business', 'แผนธุรกิจ']
+    ];
+    const docData = {
+      ops: {
+        kicker: 'Operations Manual',
+        title: 'คู่มือปฏิบัติงานสำหรับเปิดร้านทุกวัน',
+        summary: 'คู่มือนี้ออกแบบให้คุณเปิดร้านจากครัวที่บ้านโดยไม่ต้องตื่นไปซื้อของเช้ามืด: เริ่มงานหลังส่งลูก 09:00, ปิดร้าน 15:00, รับลูก 15:00-16:30 และซื้อของหลัง 16:30 สำหรับขายวันถัดไป',
+        stats: [
+          ['เริ่มงาน', '09:00', 'หลังกลับจากส่งลูก'],
+          ['ปิดรับปกติ', '14:30', 'ไม่ให้หลุดเวลารับลูก'],
+          ['รับลูก', '15:00-16:30', 'ไม่รับออเดอร์ช่วงนี้'],
+          ['ซื้อของ', '16:30+', 'Makro/ตลาด/แพ็กเกจ']
+        ],
+        sections: [
+          {
+            type: 'timeline',
+            title: 'ลำดับงานประจำวันที่ใช้ได้จริง',
+            rows: schedule
+          },
+          {
+            type: 'list',
+            title: 'QC ก่อนส่งทุกกล่อง',
+            items: ['เมนูถูกต้องและมี add-on ครบ', 'ข้าวและโปรตีนปริมาณสม่ำเสมอ', 'กล่องสะอาด ฝาปิดแน่น ไม่มีน้ำซึม', 'แยกถุงตามลูกค้าและช่องทางขาย', 'มีช้อน/ทิชชู่/ชื่อหรือรหัสออเดอร์ครบ']
+          },
+          {
+            type: 'list',
+            title: 'กติกาปิดร้าน',
+            items: ['ปิดรับเมนูใช้เวลานาน 14:00', 'ปิดรับออเดอร์ปกติ 14:30', 'ปิดร้าน 15:00 ตรงเพื่อรับลูก', 'สรุปยอดขายและของขาดก่อนออกจากบ้าน', 'ซื้อของหลัง 16:30 แล้วเตรียมของสำหรับวันถัดไป']
+          }
+        ]
+      },
+      cost: {
+        kicker: 'Costing and Forecast',
+        title: 'ต้นทุน ราคา และ Forecast แบบอ่านง่าย',
+        summary: 'สรุปตัวเลขที่ต้องใช้ตัดสินใจจริง: ต้นทุนต่อเมนู ราคาขายตรง ราคาแพลตฟอร์ม เงินสดซื้อของ และ forecast 1/3/6 เดือน โดยใช้ค่า GP รวมสมมติฐาน 32.1%',
+        stats: [
+          ['เงินซื้อของ', '2,000', 'บาท/วัน สำหรับ 30 กล่อง'],
+          ['ค่า GP กันไว้', '32.1%', 'ตั้งราคาแพลตฟอร์มแยก'],
+          ['แพ็กเกจแนะนำ', '35,000', 'บาท ถ้าเริ่มจริง'],
+          ['เป้าหมายแรก', '30', 'กล่อง/วัน']
+        ],
+        sections: [
+          {
+            type: 'table',
+            title: 'ต้นทุนและราคาขายต่อเมนู',
+            headers: ['เมนู', 'ต้นทุน', 'ขายตรง', 'แพลตฟอร์ม', 'กำไรหลัง GP'],
+            rows: menus.map((menu) => [menu.name, baht(menu.cost), baht(menu.direct), baht(menu.platform), baht(menu.platform * (1 - platformRate) - menu.cost)])
+          },
+          {
+            type: 'table',
+            title: 'รายการซื้อของหลัง 16:30 สำหรับขายวันถัดไป',
+            headers: ['รายการ', 'ปริมาณ', 'งบ'],
+            rows: shopping
+          },
+          {
+            type: 'table',
+            title: 'Forecast เงินสด 1/3/6 เดือน',
+            headers: ['ช่วง', 'กล่อง/วัน', 'ยอดขายรวม', 'เงินเข้าหลัง GP', 'ต้นทุน+ค่าใช้จ่าย', 'เหลือก่อนภาษี'],
+            rows: forecast
+          },
+          {
+            type: 'list',
+            title: 'กฎตั้งราคา',
+            items: ['ขายตรงใช้ราคา 69-79 บาทตามเมนู', 'ราคาแพลตฟอร์มต้องสูงกว่า เพราะถูกหัก GP', 'สูตรตั้งต้น: ราคาแพลตฟอร์ม = ราคาขายตรง ÷ 0.679', 'ปัดราคาเป็น 99 / 109 / 119 / 129 บาท เพื่อให้ลูกค้าจำง่าย']
+          }
+        ]
+      },
+      business: {
+        kicker: 'Business Plan',
+        title: 'แผนธุรกิจสำหรับร้านข้าวออนไลน์ที่บ้าน',
+        summary: 'แผนนี้เน้นเริ่มเล็กแบบควบคุมเงินสด ใช้เมนูที่ทำซ้ำง่าย พิสูจน์ยอดขายจริงก่อนเพิ่มกำลังผลิต และเก็บลูกค้าประจำเพื่อลดการพึ่งพาแพลตฟอร์ม',
+        stats: [
+          ['จุดเริ่มต้น', '15k+', 'แพ็กเกจต่ำสุด'],
+          ['แนะนำ', '35k', 'แพ็กเกจกลาง'],
+          ['เดือนแรก', '30/day', 'พิสูจน์ demand'],
+          ['เดือน 6', '100/day', 'ค่อย scale เมื่อระบบนิ่ง']
+        ],
+        sections: [
+          {
+            type: 'table',
+            title: 'แพ็กเกจทุนเริ่มต้น',
+            headers: ['แพ็กเกจ', 'เงินเตรียม', 'จำนวนขาย', 'เหมาะกับ'],
+            rows: packages.map((pkg) => [pkg.tier, pkg.recommend.replace('เตรียม ', '').replace('เริ่มที่ ', ''), pkg.volume, pkg.bestFor])
+          },
+          {
+            type: 'list',
+            title: 'กลยุทธ์ช่องทางขาย',
+            items: ['เริ่มจาก LINE/Facebook และลูกค้าใกล้บ้านเพื่อลดค่า GP', 'ใช้แพลตฟอร์มเพื่อเพิ่มการมองเห็น แต่ตั้งราคาแยก', 'เก็บรายชื่อลูกค้าซ้ำทุกวัน', 'ไม่ทำโปรลดหนักถ้ากำไรต่อกล่องยังบาง']
+          },
+          {
+            type: 'cards',
+            title: 'เป้าหมายตามช่วงเวลา',
+            cards: [
+              ['30 วัน', 'พิสูจน์เมนูขายดี คุมคุณภาพ 30 กล่อง/วัน และรู้ต้นทุนจริง'],
+              ['90 วัน', 'เพิ่มเป็น 60 กล่อง/วัน มีลูกค้าซ้ำและจุดส่งประจำ'],
+              ['180 วัน', 'พิจารณา 100 กล่อง/วัน เพิ่มผู้ช่วยหรือรับออเดอร์องค์กร']
+            ]
+          },
+          {
+            type: 'list',
+            title: 'ความเสี่ยงที่ต้องดูทุกสัปดาห์',
+            items: ['ราคาหมู ไข่ ข้าว น้ำมัน และกล่องเปลี่ยนเร็ว', 'รับออเดอร์เกินกำลังแล้วคุณภาพตก', 'แพลตฟอร์มกิน margin ถ้าไม่ตั้งราคาแยก', 'เมนูเยอะเกินไปทำให้ของเสียและเตรียมงานนาน']
+          }
+        ]
+      }
+    };
     function baht(value) { return `${Math.round(value).toLocaleString('th-TH')} บาท`; }
+    function sectionHtml(section) {
+      if (section.type === 'timeline') {
+        return `<section class="rounded-[2rem] bg-white p-5 shadow-soft"><h3 class="text-xl font-extrabold">${section.title}</h3><div class="mt-4 overflow-hidden rounded-2xl border border-shop-line">${section.rows.map(([time, task]) => `<div class="grid grid-cols-[112px_1fr] border-b border-shop-line last:border-b-0"><strong class="bg-shop-cream px-4 py-3 tabular text-shop-chili">${time}</strong><span class="px-4 py-3 text-sm leading-6 text-shop-soy">${task}</span></div>`).join('')}</div></section>`;
+      }
+      if (section.type === 'table') {
+        return `<section class="rounded-[2rem] bg-white p-5 shadow-soft"><h3 class="text-xl font-extrabold">${section.title}</h3><div class="mt-4 overflow-x-auto rounded-2xl border border-shop-line"><table class="w-full min-w-[720px] border-collapse text-left text-sm"><thead class="bg-shop-ink text-white"><tr>${section.headers.map((header) => `<th class="px-4 py-3 font-bold">${header}</th>`).join('')}</tr></thead><tbody>${section.rows.map((row) => `<tr class="border-b border-shop-line last:border-b-0">${row.map((cell) => `<td class="px-4 py-3 align-top text-shop-soy">${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></section>`;
+      }
+      if (section.type === 'cards') {
+        return `<section class="rounded-[2rem] bg-white p-5 shadow-soft"><h3 class="text-xl font-extrabold">${section.title}</h3><div class="mt-4 grid gap-3 md:grid-cols-3">${section.cards.map(([title, body]) => `<article class="rounded-2xl bg-shop-cream p-4"><strong class="text-shop-chili">${title}</strong><p class="mt-2 text-sm leading-6 text-shop-soy">${body}</p></article>`).join('')}</div></section>`;
+      }
+      return `<section class="rounded-[2rem] bg-white p-5 shadow-soft"><h3 class="text-xl font-extrabold">${section.title}</h3><ul class="mt-4 grid gap-3">${section.items.map((item) => `<li class="rounded-2xl bg-shop-cream px-4 py-3 text-sm leading-6 text-shop-soy">${item}</li>`).join('')}</ul></section>`;
+    }
+    function renderDoc(docId) {
+      const doc = docData[docId];
+      document.getElementById('doc-modal-kicker').textContent = doc.kicker;
+      document.getElementById('doc-modal-title').textContent = doc.title;
+      document.getElementById('doc-modal-tabs').innerHTML = docTabs.map(([id, label]) => `<button type="button" data-doc-open="${id}" class="rounded-2xl px-4 py-3 text-sm font-bold ${id === docId ? 'bg-shop-ink text-white' : 'bg-shop-cream text-shop-soy'}">${label}</button>`).join('');
+      document.getElementById('doc-modal-body').innerHTML = `
+        <div class="rounded-[2rem] bg-shop-ink p-5 text-white shadow-lift">
+          <p class="max-w-4xl text-base leading-8 text-white/80">${doc.summary}</p>
+          <div class="mt-5 grid gap-3 md:grid-cols-4">${doc.stats.map(([label, value, note]) => `<div class="rounded-2xl bg-white/10 p-4"><span class="text-xs text-white/60">${label}</span><strong class="tabular mt-1 block text-2xl text-white">${value}</strong><span class="text-xs text-white/65">${note}</span></div>`).join('')}</div>
+        </div>
+        <div class="mt-5 grid gap-5">${doc.sections.map(sectionHtml).join('')}</div>`;
+    }
+    function openDoc(docId) {
+      renderDoc(docId);
+      const modal = document.getElementById('doc-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('overflow-hidden');
+    }
+    function closeDoc() {
+      const modal = document.getElementById('doc-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('overflow-hidden');
+    }
     function renderMenu() {
       const grid = document.getElementById('menu-grid');
       grid.innerHTML = menus.map((menu) => {
@@ -434,6 +601,17 @@
     document.getElementById('menu-select').addEventListener('change', updateCalculator);
     document.querySelectorAll('input[name="channel"]').forEach((input) => input.addEventListener('change', updateCalculator));
     updateCalculator();
+    document.addEventListener('click', (event) => {
+      const openButton = event.target.closest('[data-doc-open]');
+      if (openButton) {
+        openDoc(openButton.dataset.docOpen);
+        return;
+      }
+      if (event.target.closest('[data-doc-close]')) closeDoc();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeDoc();
+    });
     window.addEventListener('offline', () => { document.getElementById('offline-indicator').classList.remove('hidden'); document.getElementById('online-indicator').classList.add('hidden'); });
     window.addEventListener('online', () => { document.getElementById('offline-indicator').classList.add('hidden'); const online = document.getElementById('online-indicator'); online.classList.remove('hidden'); setTimeout(() => online.classList.add('hidden'), 3000); });
     let deferredPrompt; const installBtn = document.getElementById('install-btn');
