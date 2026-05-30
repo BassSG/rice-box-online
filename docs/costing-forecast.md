@@ -3,6 +3,9 @@
 ## Planning Assumptions
 
 - Selling hours: 09:00-15:00.
+- Kitchen start time: 09:00 after returning from school drop-off.
+- Child pickup block: 15:00-16:30.
+- Ingredient shopping time: after 16:30 for the next selling day.
 - Operating days: 26 days per month.
 - Starting volume: 30 boxes per day.
 - Platform deduction assumption: 32.1% of platform selling price.
@@ -28,7 +31,9 @@ The platform assumption is conservative. Always check the real contract before s
 | Extra pork | 13-17 THB | 25 THB | 35 THB |
 | Special size | 10-15 THB | 20 THB | 29 THB |
 
-## Daily Purchase Plan for 30 Boxes
+## Evening Purchase Plan for Next-Day 30 Boxes
+
+Buy this list after 16:30 at Makro, market, or the packaging supplier. The ingredients are for the next selling day, not the same morning.
 
 | Item | Quantity | Budget |
 | --- | ---: | ---: |

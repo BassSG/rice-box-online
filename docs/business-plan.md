@@ -7,9 +7,13 @@ Rice Box Online is a home-based online rice box shop focused on familiar Thai me
 ## Sales Window
 
 - Customer-facing sales time: 09:00-15:00.
-- Kitchen preparation starts: 04:45.
+- Kitchen work starts: 09:00 after returning from school drop-off.
 - Recommended last order: 14:30.
+- Family pickup block: 15:00-16:30.
+- Makro/market purchasing and next-day prep: after 16:30.
 - Operating days for forecast: 26 days per month.
+
+This plan is intentionally built around the owner's real family schedule. The shop should not depend on a 04:45 market run. Ingredients are bought and partially prepared in the evening for the next selling day, so the morning can start cleanly at 09:00.
 
 ## Starting Position
 

@@ -101,12 +101,12 @@ def mobile_screenshot():
     paste_rounded(image, cover(ASSETS / "hero-rice-box.png", (952, 590)), (64, 220, 1016, 810), 56)
     draw.rounded_rectangle((94, 630, 560, 770), radius=40, fill=PAPER)
     text(draw, (130, 680), "30 boxes first", INK, 44, True)
-    text(draw, (130, 730), "09:00 - 15:00 sales window", SOY, 26)
+    text(draw, (130, 730), "09:00 start / 16:30 prep run", SOY, 26)
 
     cards = [
         ("Start lean", "15k+", CHILI),
         ("Recommended", "35k", WOK),
-        ("Daily cash", "2k", LEAF),
+        ("Makro run", "16:30+", LEAF),
     ]
     x = 64
     for label, value, color in cards:
@@ -144,7 +144,7 @@ def desktop_screenshot():
     text(draw, (90, 230), "Open an online rice shop", INK, 72, True)
     text(draw, (90, 318), "with schedule, cost, menu, capital and forecast ready.", SOY, 36)
 
-    stats = [("Start lean", "15k+"), ("Sell target", "30/day"), ("Hours", "09-15"), ("Platform fee", "32.1%")]
+    stats = [("Start lean", "15k+"), ("Sell target", "30/day"), ("Work start", "09:00"), ("Makro run", "16:30+")]
     x = 90
     for label, value in stats:
         draw_card(draw, (x, 430, x + 200, 568), radius=32)
