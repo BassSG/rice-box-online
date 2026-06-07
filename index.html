@@ -234,7 +234,17 @@
             <h2 class="text-3xl font-extrabold md:text-4xl">Makro shopping checklist</h2>
             <p class="mt-3 max-w-3xl leading-8 text-shop-soy">เช็กลิสต์สำหรับเดินซื้อของจริง ติ๊กแล้วรายการจะขีดฆ่า ใส่ราคาจริง เพิ่มของเองได้ บันทึกรอบซื้อเป็น logs และคำนวณทันทีว่าของที่ซื้อทำได้ประมาณกี่กล่อง</p>
           </div>
-          <a href="#makro-logs" class="font-bold text-shop-chili">ดูประวัติการซื้อ</a>
+          <div class="flex flex-wrap gap-3">
+            <button type="button" data-doc-open="buying-overview" class="rounded-2xl bg-shop-ink px-5 py-3 font-bold text-white shadow-soft">เปิดคู่มือเลือกซื้อ</button>
+            <a href="#makro-logs" class="rounded-2xl bg-white px-5 py-3 font-bold text-shop-chili shadow-soft">ดูประวัติการซื้อ</a>
+          </div>
+        </div>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <button type="button" data-doc-open="buying-rice" class="rounded-2xl bg-white px-4 py-3 text-left font-bold text-shop-ink shadow-soft">เลือกข้าว</button>
+          <button type="button" data-doc-open="buying-box" class="rounded-2xl bg-white px-4 py-3 text-left font-bold text-shop-ink shadow-soft">กล่องและถุง</button>
+          <button type="button" data-doc-open="buying-spoon" class="rounded-2xl bg-white px-4 py-3 text-left font-bold text-shop-ink shadow-soft">ช้อน</button>
+          <button type="button" data-doc-open="buying-nampla" class="rounded-2xl bg-white px-4 py-3 text-left font-bold text-shop-ink shadow-soft">พริกน้ำปลา</button>
+          <button type="button" data-doc-open="buying-missed" class="rounded-2xl bg-white px-4 py-3 text-left font-bold text-shop-ink shadow-soft">ของกันลืม</button>
         </div>
         <div class="mt-8 grid gap-6 lg:grid-cols-[1.15fr_.85fr]">
           <div class="rounded-[2rem] bg-white p-5 shadow-soft">
@@ -395,7 +405,7 @@
           </div>
           <button type="button" data-doc-close class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-shop-ink text-xl font-bold text-white" aria-label="Close document">×</button>
         </div>
-        <div id="doc-modal-tabs" class="mt-4 grid gap-2 sm:grid-cols-3"></div>
+        <div id="doc-modal-tabs" class="mt-4 flex gap-2 overflow-x-auto pb-1"></div>
       </header>
       <div id="doc-modal-body" class="doc-modal-body overflow-y-auto px-4 py-5 sm:px-6"></div>
     </section>
@@ -452,24 +462,24 @@
       ['19:30', 'ล้างครัว ฆ่าเชื้อ เก็บของเย็นให้ปลอดภัย และปิดงานร้านของวันนี้']
     ];
     const shopping = [
-      ['ข้าวสารหอมมะลิ/ข้าวขาว', '3.3 กก.', '125 บาท'],
+      ['ข้าวหอม 100% หรือข้าวขาว 100%', '3.3 กก.', '85 บาท'],
       ['หมูบด/หมูชิ้นรวม', '2.9 กก.', '500 บาท'],
       ['ไข่ไก่เบอร์ 2-3', '26 ฟอง', '135 บาท'],
       ['กะเพรา พริก กระเทียม', '1 ชุดใหญ่', '160 บาท'],
       ['ผักรวม หอมใหญ่ แครอต ต้นหอม แตงกวา', '4-5 กก. รวม', '250 บาท'],
       ['น้ำมันพืช ซอสหอย ซีอิ๊ว น้ำปลา น้ำตาล', 'เฉลี่ยต่อวัน', '220 บาท'],
-      ['กล่องข้าว ฝา ช้อน ถุง กระดาษซับ', '35 ชุด', '230 บาท'],
+      ['กล่องข้าว ฝา ช้อน ถุง ถ้วยน้ำจิ้ม', '35 ชุด', '300 บาท'],
       ['แก๊ส/ไฟ/น้ำ/น้ำแข็ง/เบ็ดเตล็ด', 'เฉลี่ยต่อวัน', '180 บาท'],
       ['Buffer ราคาขึ้นหรือออเดอร์เพิ่ม', 'สำรอง', '200 บาท']
     ];
     const makroDefaults = [
-      { id: 'rice', name: 'ข้าวสารหอมมะลิ/ข้าวขาว', qty: 3.3, unit: 'กก.', price: 125, category: 'rice', boxesPerUnit: 9.1 },
+      { id: 'rice', name: 'ข้าวหอม 100% หรือข้าวขาว 100%', qty: 3.3, unit: 'กก.', price: 85, category: 'rice', boxesPerUnit: 9.1 },
       { id: 'pork', name: 'หมูบด/หมูชิ้นรวม', qty: 2.9, unit: 'กก.', price: 500, category: 'pork', boxesPerUnit: 10.4 },
       { id: 'eggs', name: 'ไข่ไก่เบอร์ 2-3', qty: 26, unit: 'ฟอง', price: 135, category: 'eggs', boxesPerUnit: 1 },
       { id: 'herbs', name: 'กะเพรา พริก กระเทียม', qty: 1, unit: 'ชุด', price: 160, category: 'herbs', boxesPerUnit: 30 },
       { id: 'veg', name: 'ผักรวม หอมใหญ่ แครอต ต้นหอม แตงกวา', qty: 4.5, unit: 'กก.', price: 250, category: 'veg', boxesPerUnit: 6.7 },
       { id: 'sauce', name: 'น้ำมัน ซอสหอย ซีอิ๊ว น้ำปลา น้ำตาล', qty: 1, unit: 'รอบ', price: 220, category: 'sauce', boxesPerUnit: 30 },
-      { id: 'packaging', name: 'กล่องข้าว ฝา ช้อน ถุง กระดาษซับ', qty: 35, unit: 'ชุด', price: 230, category: 'packaging', boxesPerUnit: 1 },
+      { id: 'packaging', name: 'กล่องข้าว ฝา ช้อน ถุง ถ้วยน้ำจิ้ม', qty: 35, unit: 'ชุด', price: 300, category: 'packaging', boxesPerUnit: 1 },
       { id: 'utilities', name: 'แก๊ส/ไฟ/น้ำ/น้ำแข็ง/เบ็ดเตล็ด', qty: 1, unit: 'รอบ', price: 180, category: 'utility', boxesPerUnit: 30 },
       { id: 'buffer', name: 'Buffer ราคาขึ้นหรือออเดอร์เพิ่ม', qty: 1, unit: 'สำรอง', price: 200, category: 'buffer', boxesPerUnit: 0 }
     ];
@@ -484,31 +494,31 @@
       ['admin', 'หน้าร้าน']
     ];
     const essentialItems = [
-      { id: 'box-pp', category: 'packaging', name: 'กล่องข้าว PP พร้อมฝา 750-1,000 ml', qty: '50 ชุด', price: 155, required: true, note: 'ใช้ 1 ชุดต่อ 1 กล่อง เลือกขนาดที่ข้าว+กับข้าวไม่ล้น' },
-      { id: 'spoon-wrap', category: 'packaging', name: 'ช้อนพลาสติก/ช้อนส้อมห่อแยก', qty: '100 ชิ้น', price: 55, required: true, note: 'ถ้าขายออนไลน์ควรแยกห่อให้สะอาด' },
-      { id: 'carry-bag', category: 'packaging', name: 'ถุงหิ้วใส่ออเดอร์', qty: '1 กก.', price: 75, required: true, note: 'เลือกขนาดใส่ 1-3 กล่องได้ ไม่บางเกินไป' },
-      { id: 'sauce-cup', category: 'packaging', name: 'ถ้วยน้ำจิ้ม 2 oz พร้อมฝา', qty: '50 ชุด', price: 60, required: true, note: 'สำหรับพริกน้ำปลา/น้ำปลาพริก ไม่ให้หกในถุง' },
+      { id: 'box-pp', category: 'packaging', name: 'เอโร่ กล่องข้าว PP พร้อมฝา 750 ml', qty: '50 ชุด', price: 279, required: true, note: 'ใช้ 1 ชุดต่อ 1 กล่อง เป็นขนาดหลักสำหรับเมนู 79 บาทและยังดูเต็มกล่อง' },
+      { id: 'spoon-wrap', category: 'packaging', name: 'ช้อนพลาสติกแพ็กซอง/ช้อนสะอาดสำหรับเดลิเวอรี', qty: '100 ชิ้น', price: 100, required: true, note: 'ถ้าซื้อแบบไม่แพ็กซองให้เก็บในกล่องปิดและหยิบด้วยมือสะอาดเท่านั้น' },
+      { id: 'carry-bag', category: 'packaging', name: 'เอโร่ ถุงหิ้ว PE 8x16 นิ้ว', qty: '1 กก.', price: 149, required: true, note: 'ขนาดนี้ใส่ 1-3 กล่องได้ง่ายกว่าไซซ์เล็ก และลดปัญหาถุงขาดตอนส่ง' },
+      { id: 'sauce-cup', category: 'packaging', name: 'ถ้วยน้ำจิ้มฝาพับ 2 oz', qty: '50 ใบ', price: 28, required: true, note: 'สำหรับพริกน้ำปลา เลือกแบบฝาปิดแน่นและลองคว่ำทดสอบก่อนใช้จริง' },
       { id: 'food-paper', category: 'packaging', name: 'กระดาษซับมัน/กระดาษรองอาหาร', qty: '100 แผ่น', price: 45, required: false, note: 'ช่วยให้กล่องดูสะอาด โดยเฉพาะเมนูทอด/น้ำมันเยอะ' },
       { id: 'label-sticker', category: 'packaging', name: 'สติกเกอร์ชื่อเมนู/วันที่ผลิต', qty: '100 ดวง', price: 45, required: true, note: 'แยกเมนู แยกเผ็ด/ไม่เผ็ด และช่วยดูเป็นร้านจริง' },
       { id: 'tape-marker', category: 'packaging', name: 'เทปใส + ปากกาเมจิก', qty: '1 ชุด', price: 55, required: true, note: 'ใช้ปิดถุง เขียนชื่อเมนู เขียนรอบผลิต' },
-      { id: 'oyster-maekrua', category: 'condiment', name: 'น้ำมันหอยตรา 3 แม่ครัว', qty: '600 กรัม', price: 45, required: true, note: 'เครื่องปรุงหลักสำหรับผัดน้ำมันหอย กะเพรา และหมูกระเทียม' },
-      { id: 'green-cap-sauce', category: 'condiment', name: 'ซอสปรุงรสฝาเขียว ภูเขาทอง', qty: '600 มล.', price: 36, required: true, note: 'ใช้ปรับรสเค็มหอมในเมนูผัด' },
-      { id: 'tiparos-fish-sauce', category: 'condiment', name: 'น้ำปลา ทิพรส', qty: '700 มล.', price: 35, required: true, note: 'ใช้ทั้งปรุงอาหารและทำพริกน้ำปลา' },
+      { id: 'oyster-maekrua', category: 'condiment', name: 'แม่ครัว ซอสหอยนางรม 600 มล. x 3', qty: '3 ขวด', price: 148, required: true, note: 'คงรสชาติเดิมตามสูตรของคุณ ซื้อแพ็ก 3 จะคุมต้นทุนต่อขวดได้ดีกว่า' },
+      { id: 'green-cap-sauce', category: 'condiment', name: 'ซอสปรุงรสฝาเขียว ภูเขาทอง', qty: 'รอบทดลอง', price: 102, required: true, note: 'คงรสเค็มหอมเดิม ถ้าขายต่อเนื่องค่อยขยับเป็นขนาด 3 ลิตร' },
+      { id: 'tiparos-fish-sauce', category: 'condiment', name: 'น้ำปลา ทิพรส ขวดเพ็ท 700 มล.', qty: '1 ขวด', price: 29, required: true, note: 'ใช้ทั้งปรุงอาหารและทำพริกน้ำปลา' },
       { id: 'sugar', category: 'condiment', name: 'น้ำตาลทราย', qty: '1 กก.', price: 30, required: true, note: 'ตัดรสเค็มและทำรสผัดให้กลม' },
       { id: 'white-soy', category: 'condiment', name: 'ซีอิ๊วขาว', qty: '700 มล.', price: 35, required: true, note: 'ควรมีสำหรับข้าวผัด/หมูกระเทียม เพื่อรสที่ไม่เข้มเกิน' },
       { id: 'dark-soy', category: 'condiment', name: 'ซีอิ๊วดำหวาน', qty: '1 ขวด', price: 38, required: false, note: 'ใช้แต่งสีและกลิ่น โดยเฉพาะข้าวผัด' },
-      { id: 'vegetable-oil', category: 'condiment', name: 'น้ำมันพืช', qty: '1 ลิตร', price: 70, required: true, note: 'ซื้อสำรองอย่างน้อย 1 ขวดสำหรับวันทดลองขาย' },
+      { id: 'vegetable-oil', category: 'condiment', name: 'น้ำมันพืช 5 ลิตร', qty: '1 แกลลอน', price: 270, required: true, note: 'ถ้าทดลองขายจริง 20-30 กล่อง/วัน ขนาด 5 ลิตรคุ้มกว่า 1 ลิตรและไม่ต้องซื้อซ้ำเร็ว' },
       { id: 'pepper', category: 'condiment', name: 'พริกไทยป่น', qty: '1 กระปุก', price: 35, required: true, note: 'จำเป็นสำหรับหมูกระเทียมและข้าวผัด' },
       { id: 'salt', category: 'condiment', name: 'เกลือ', qty: '1 ถุง', price: 12, required: true, note: 'ใช้แก้รสและล้าง/แช่วัตถุดิบบางอย่าง' },
       { id: 'stock-powder', category: 'condiment', name: 'ผงปรุงรสหมู', qty: '1 ซอง', price: 35, required: false, note: 'ไม่บังคับ แต่ช่วยคุมรสให้คงที่ถ้าใช้สูตรเดียวกัน' },
-      { id: 'chili', category: 'nampla', name: 'พริกขี้หนูสำหรับพริกน้ำปลา', qty: '0.5 กก.', price: 40, required: true, note: 'เผื่อใช้ทั้งทำกะเพราและพริกน้ำปลา' },
-      { id: 'lime', category: 'nampla', name: 'มะนาว', qty: '1 กก.', price: 60, required: true, note: 'ทำพริกน้ำปลาให้หอมกว่าใช้น้ำส้มอย่างเดียว' },
+      { id: 'chili', category: 'nampla', name: 'พริกขี้หนูสวนหอม', qty: '100 กรัม', price: 49, required: true, note: 'ซื้อถุงเล็กก่อนเพื่อคุมของเสีย ถ้าใช้กะเพราเยอะค่อยเพิ่มเป็น 0.5-1 กก.' },
+      { id: 'lime', category: 'nampla', name: 'มะนาวสดหรือน้ำมะนาวสำรอง', qty: '1 รอบ', price: 80, required: true, note: 'พริกน้ำปลาควรมีมะนาวสดเป็นหลัก แต่มีน้ำมะนาวสำรองไว้กันราคาขึ้นหรือของหมด' },
       { id: 'garlic-flavor', category: 'nampla', name: 'กระเทียมไทย/กระเทียมกลีบ', qty: '0.5 กก.', price: 45, required: true, note: 'ใช้ทั้งผัดและใส่พริกน้ำปลา' },
       { id: 'vinegar', category: 'nampla', name: 'น้ำส้มสายชู', qty: '1 ขวด', price: 25, required: false, note: 'ใช้ช่วยยืดรสพริกน้ำปลาและแก้รสเปรี้ยวเมื่อมะนาวแพง' },
       { id: 'zip-bag', category: 'prep', name: 'ถุงซิป/ถุงร้อนแบ่งหมู', qty: '100 ใบ', price: 65, required: true, note: 'แบ่งหมูเป็นรอบผลิต ลดหยิบผิดและลดของเสีย' },
       { id: 'prep-label', category: 'prep', name: 'สติกเกอร์วันที่/ฉลาก FIFO', qty: '100 ดวง', price: 45, required: true, note: 'ติดวันซื้อ วันเตรียม และวันหมดอายุ' },
       { id: 'food-container', category: 'prep', name: 'กล่อง/ถาดเก็บวัตถุดิบสำรอง', qty: '2-4 ใบ', price: 200, required: false, note: 'ถ้าในครัวมีครบแล้วติ๊กว่ามีแล้วได้เลย' },
-      { id: 'gloves', category: 'hygiene', name: 'ถุงมือ food grade', qty: '100 ชิ้น', price: 95, required: true, note: 'ใช้ตอนแพ็กและหยิบอาหารพร้อมขาย' },
+      { id: 'gloves', category: 'hygiene', name: 'ถุงมือพลาสติก food safe', qty: '100 ชิ้น', price: 50, required: true, note: 'ใช้ตอนแพ็กและหยิบอาหารพร้อมขาย ถ้าแพ็กหนักทุกวันค่อยขยับเป็นไนไตรล์' },
       { id: 'hair-cap', category: 'hygiene', name: 'หมวกคลุมผม', qty: '100 ชิ้น', price: 80, required: true, note: 'จำเป็นถ้าทำขายจริงและถ่ายรูปหลังครัว' },
       { id: 'mask', category: 'hygiene', name: 'หน้ากากอนามัย', qty: '50 ชิ้น', price: 60, required: true, note: 'ใส่ตอนแพ็ก/ส่งของให้ดูสะอาดมืออาชีพ' },
       { id: 'dish-soap', category: 'hygiene', name: 'น้ำยาล้างจาน', qty: '3.6 ลิตร', price: 120, required: true, note: 'กันลืม เพราะใช้มากกว่างานครัวบ้านปกติ' },
@@ -563,7 +573,298 @@
       ['cost', 'ต้นทุนและ Forecast'],
       ['business', 'แผนธุรกิจ']
     ];
+    const buyingGuideTabs = [
+      ['buying-overview', 'สรุปซื้อรอบแรก'],
+      ['buying-rice', 'เลือกข้าว'],
+      ['buying-box', 'กล่องและถุง'],
+      ['buying-spoon', 'ช้อน'],
+      ['buying-nampla', 'พริกน้ำปลา'],
+      ['buying-missed', 'ของกันลืม']
+    ];
     const docData = {
+      'buying-overview': {
+        group: 'buying',
+        kicker: 'Makro Buying Research',
+        title: 'สรุปซื้อรอบแรกแบบคุ้มและไม่หลงชั้นวาง',
+        summary: 'เป้าหมายคือซื้อของมาทดลองขายจริง 20-30 กล่องโดยไม่ใช้มาตรฐานของกินเองทั้งหมด ข้าวใช้กลุ่มข้าวหอม/ข้าวขาวแทนหอมมะลิแท้ แต่เครื่องปรุงหลักคงแบรนด์เดิมเพื่อให้รสชาติไม่แกว่ง ราคานี้เป็นราคาอ้างอิง Makro PRO ที่เช็กวันที่ 8 มิ.ย. 2026 และอาจเปลี่ยนตามสาขา โปรโมชัน หรือพื้นที่จัดส่ง',
+        stats: [
+          ['งบทดลองซื้อ', '1,500-1,800', 'ยังไม่รวมหมู ไข่ ผักหลัก'],
+          ['กล่องเป้าหมาย', '50 ชุด', 'พอทดลอง 1-2 วัน'],
+          ['ข้าวแนะนำ', 'ข้าวหอม 100%', 'คุ้มกว่าหอมมะลิแท้'],
+          ['กฎสำคัญ', 'ซื้อเล็กก่อน', 'อย่าเริ่มด้วยลัง 500 ใบ']
+        ],
+        sections: [
+          {
+            type: 'cards',
+            title: 'คำตอบสั้นที่สุดสำหรับรอบแรก',
+            cards: [
+              ['ข้าว', 'ซื้อเบญจรงค์ ข้าวหอม 100% 5 กก. ก่อน 1 ถุง ถ้ายังอยากลดต้นทุนค่อยเทสต์ข้าวขาว 100% ในรอบถัดไป'],
+              ['กล่อง', 'ซื้อกล่อง PP 750 ml พร้อมฝา 50 ชุดก่อน ขนาด 750 ml เหมาะกับเมนู 79 บาทมากกว่า 1000 ml'],
+              ['พริกน้ำปลา', 'ซื้อถ้วยน้ำจิ้ม 2 oz 50 ใบ + น้ำปลา ทิพรส + พริกถุงเล็ก + มะนาวสดหรือน้ำมะนาวสำรอง']
+            ]
+          },
+          {
+            type: 'table',
+            title: 'ตะกร้าแนะนำสำหรับทดลองขายจริง',
+            headers: ['หมวด', 'ซื้ออะไร', 'งบอ้างอิง', 'เหตุผล'],
+            rows: [
+              ['ข้าว', 'เบญจรงค์ ข้าวหอม 100% 5 กก.', '120 บาท', 'หอมกว่าข้าวขาวล้วน แต่ถูกกว่าหอมมะลิแท้มาก เหมาะกับราคา 79'],
+              ['กล่อง', 'เอโร่ กล่อง PP 750 ml พร้อมฝา 50 ชุด', '279 บาท', 'คุมภาพลักษณ์และขนาดอาหารได้ดี เริ่ม 50 ชุดก่อน'],
+              ['ช้อน', 'ช้อนแพ็กซอง 100 ชิ้น หรือช้อนใส 100 ชิ้นถ้างบตึง', '50-100 บาท', 'ออนไลน์ควรสะอาดและหยิบง่าย อย่าให้ลูกค้ารู้สึกว่าแพ็กไม่มืออาชีพ'],
+              ['ถุง', 'เอโร่ ถุงหิ้ว PE 8x16 นิ้ว 1 กก.', '149 บาท', 'ใส่ 1-3 กล่องได้จริง ลดปัญหาถุงขาดตอนส่ง'],
+              ['ถ้วยน้ำจิ้ม', 'ถ้วยน้ำจิ้มฝาพับ 2 oz 50 ใบ', '28 บาท', 'ต้นทุนต่ำมากเมื่อเทียบกับความเรียบร้อยของออเดอร์'],
+              ['เครื่องปรุงคงสูตร', 'ซอสหอยนางรมแม่ครัว, ซอสฝาเขียวภูเขาทอง, น้ำปลา ทิพรส, น้ำตาล', 'ประมาณ 309 บาท', 'คงรสมือเดิม ลดความเสี่ยงเมนูแกว่ง'],
+              ['ของสะอาด', 'ถุงมือ food safe, สติกเกอร์, เทป, ปากกา, ทิชชู่/กระดาษซับ', '250-400 บาท', 'ของเล็กที่ทำให้งบบานถ้าไม่คิดก่อน']
+            ]
+          },
+          {
+            type: 'list',
+            title: 'กฎเดินซื้อในสาขา',
+            items: [
+              'อย่าซื้อของแพ็กใหญ่เพราะเห็นว่าต่อชิ้นถูกกว่า ถ้ายังไม่รู้ว่ากล่องปิดแน่นไหมและลูกค้าชอบไหม',
+              'ยกกล่องตัวอย่างขึ้นดูความแข็ง ฝาปิด และพื้นที่ใส่ข้าวจริงก่อนซื้อ ถ้าฝาหลวมให้เปลี่ยนรุ่นทันที',
+              'ราคาหน้าเว็บกับหน้าสาขาอาจไม่ตรงกัน ให้ใช้ราคาในเว็บเป็นเพดานงบ และแก้ราคาใน checklist ตามใบเสร็จจริง',
+              'ถ้าต้องเลือกตัดของ ให้ตัดของ premium ก่อน เช่น กล่องกระดาษคราฟ หรือช้อนแพง แต่ห้ามตัดถ้วยน้ำจิ้ม ถุงมือ และถุงหิ้ว'
+            ]
+          }
+        ]
+      },
+      'buying-rice': {
+        group: 'buying',
+        kicker: 'Rice Decision',
+        title: 'เลือกข้าวสำหรับขายกล่อง 79 บาท',
+        summary: 'คุณกินหอมมะลิเป็นหลักได้ แต่ร้านราคา 79 บาทไม่ควรเริ่มด้วยหอมมะลิแท้ 100% เพราะต้นทุนต่อกล่องสูงขึ้นทันทีโดยลูกค้าออนไลน์จำนวนมากตัดสินใจจากรสรวม ปริมาณ ความสะอาด และความคุ้มมากกว่ากลิ่นข้าวล้วน',
+        stats: [
+          ['ตัวเลือกหลัก', 'ข้าวหอม 100%', 'เริ่มทดลองก่อน'],
+          ['ต้นทุนข้าว/กล่อง', 'ประมาณ 2.6', 'จาก 110 กรัมดิบ'],
+          ['หอมมะลิแท้', '5.5+', 'แพงเกินสำหรับฐาน 79'],
+          ['ซื้อรอบแรก', '5 กก.', 'พอเทสต์หลายหม้อ']
+        ],
+        sections: [
+          {
+            type: 'table',
+            title: 'เทียบตัวเลือกที่ควรตัดสินใจ',
+            headers: ['ตัวเลือก', 'ราคาอ้างอิง', 'เหมาะกับ', 'คำตัดสิน'],
+            rows: [
+              ['เบญจรงค์ ข้าวหอม 100% 5 กก.', '120 บาท', 'ร้านข้าวกล่องเริ่มจริงที่ยังอยากได้กลิ่นหอม', 'แนะนำซื้อรอบแรก'],
+              ['ข้าวแสนดี ข้าวขาว 100% 5 กก.', '85 บาท', 'สูตรที่ต้องการลดต้นทุนมากที่สุด', 'ซื้อรอบสองเพื่อเทสต์เปรียบเทียบ อย่าเริ่มทันทีถ้ากลัวรสตก'],
+              ['เบญจรงค์ ข้าวขาวเสาไห้ 5 กก.', '98 บาท', 'ข้าวผัดหรือเมนูที่ไม่อยากให้ข้าวนิ่มติดกัน', 'เป็น fallback ที่ดีถ้าเจอในสาขา'],
+              ['ข้าวหอมมะลิแท้ 100% 5 กก.', '249-289 บาท', 'เมนู premium หรือกินเอง', 'ยังไม่ควรใช้เป็นข้าวหลักสำหรับราคา 79']
+            ]
+          },
+          {
+            type: 'cards',
+            title: 'วิธีหุงให้เหมาะกับข้าวกล่อง',
+            cards: [
+              ['น้ำเริ่มต้น', 'ลอง 1 ส่วนข้าว : 1.25-1.35 ส่วนน้ำ แล้วพักข้าว 15 นาทีก่อนตักลงกล่อง'],
+              ['ทดสอบจริง', 'ตักใส่กล่อง ปิดฝา 20 นาที แล้วเปิดดูว่าข้าวแฉะ กลิ่นอับ หรือเม็ดแตกไหม'],
+              ['ถ้ากลิ่นไม่พอ', 'ค่อยผสมหอมมะลิ 20-30% ไม่ต้องเปลี่ยนกลับไปใช้หอมมะลิแท้ทั้งถุง']
+            ]
+          },
+          {
+            type: 'list',
+            title: 'แหล่งราคาอ้างอิง',
+            items: [
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/838363-6761202385091" target="_blank">เบญจรงค์ ข้าวหอม 100% 5 กก.</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/198882-6814750376131" target="_blank">ข้าวแสนดี ข้าวขาว 100% 5 กก.</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/tepudnz2-6974763794627" target="_blank">เบญจรงค์ ข้าวขาวเสาไห้ 5 กก.</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/6531467724-7250689753283" target="_blank">ตัวอย่างหอมมะลิแท้ 100% 5 กก. ที่ใช้เทียบต้นทุน</a>'
+            ]
+          }
+        ]
+      },
+      'buying-box': {
+        group: 'buying',
+        kicker: 'Packaging Decision',
+        title: 'เลือกกล่อง ถุง และถ้วยน้ำจิ้มให้คุ้ม',
+        summary: 'บรรจุภัณฑ์เป็นสิ่งที่ลูกค้าเห็นก่อนชิมอาหาร แต่ไม่ควรกิน margin จนเกินไป สำหรับเมนู 79 บาท ให้เริ่มจาก PP 750 ml 50 ชุดก่อน ทดลองฝา ทดลองการรั่ว และทดลองรูปถ่ายจริงก่อนซื้อจำนวนมาก',
+        stats: [
+          ['ขนาดหลัก', '750 ml', 'พอดีกับเมนู 79'],
+          ['ต้นทุนกล่อง', '5.58', 'เอโร่ 50 ชุด'],
+          ['ถ้วยน้ำจิ้ม', '0.56', '2 oz ต่อใบ'],
+          ['ถุงหิ้ว', '8x16', 'ใส่หลายกล่องได้']
+        ],
+        sections: [
+          {
+            type: 'table',
+            title: 'ตัวเลือกกล่องที่เจอจาก Research',
+            headers: ['สินค้า', 'ราคาอ้างอิง', 'ต้นทุนต่อชุด', 'คำตัดสิน'],
+            rows: [
+              ['เอโร่ กล่องอาหาร PP พร้อมฝา 750 ml x 50', '279 บาท', '5.58 บาท', 'แนะนำสำหรับรอบแรก เพราะเป็นแบรนด์ค้าส่งและขนาดชัด'],
+              ['thefoodbox กล่องใส 750 ml x 50', '205 บาท', '4.10 บาท', 'น่าสนใจถ้างบตึง แต่ต้องลองฝาปิดและความแข็งก่อนใช้จริง'],
+              ['Depack กล่องกระดาษทรงกลม 750 ml x 50', '303 บาท', '6.06 บาท', 'ดู premium แต่ยังไม่แนะนำสำหรับฐาน 79 ในรอบแรก'],
+              ['K Union Pack 750 ml ลัง 500 ใบ', '1,875 บาท', '3.75 บาท', 'คุ้มเมื่อขายนิ่งแล้วเท่านั้น อย่าเริ่มด้วยลังใหญ่']
+            ]
+          },
+          {
+            type: 'cards',
+            title: 'กฎเลือกกล่องในสาขา',
+            cards: [
+              ['จับจริงก่อนซื้อ', 'ลองกดฝา เขย่าเบา ๆ และดูว่าฝาบิดง่ายไหม กล่องถูกแต่ฝาหลวมทำให้เสียชื่อร้านเร็วมาก'],
+              ['750 ml ก่อน', 'เมนูกะเพรา น้ำมันหอย ข้าวผัด หมูกระเทียมที่ราคา 79 ควรดูเต็ม ไม่ควรใช้กล่องใหญ่จนอาหารดูน้อย'],
+              ['อย่าลืมถ้วยน้ำจิ้ม', 'ถ้วยน้ำจิ้ม 2 oz ราคาถูกกว่าความเสียหายจากน้ำปลาหกในถุงมาก']
+            ]
+          },
+          {
+            type: 'list',
+            title: 'แหล่งราคาอ้างอิง',
+            items: [
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/en/p/849515-6974723358915" target="_blank">ARO Food Box with Lid PP 750 ml x 50</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/191287361203-7467977244867" target="_blank">thefoodbox กล่องข้าว 750 ml x 50</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/p/X006%28750ml.%29-7232119701699" target="_blank">Depack กล่องกระดาษ 750 ml x 50</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/en/p/ET-2oz.-512495384079630" target="_blank">Depack ถ้วยน้ำจิ้มฝาพับ 2 oz x 50</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/en/p/290906-629090674632891" target="_blank">ARO Plastic Handle Bag PE 8x16 นิ้ว 1 กก.</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://food.fda.moph.go.th/food-law/plastic-containers/" target="_blank">ข้อมูล อย. เรื่องภาชนะบรรจุอาหารพลาสติก</a>'
+            ]
+          }
+        ]
+      },
+      'buying-spoon': {
+        group: 'buying',
+        kicker: 'Cutlery Decision',
+        title: 'เลือกช้อนให้สะอาด ดูดี และไม่เปลืองเกินไป',
+        summary: 'สำหรับร้านออนไลน์ ช้อนไม่ใช่แค่ของแถม แต่เป็นสัญญาณความสะอาด ถ้างบพอให้ใช้ช้อนแพ็กซอง ถ้างบตึงใช้ช้อนแพ็กใหญ่ได้แต่ต้องเก็บในกล่องปิดและหยิบด้วยถุงมือ',
+        stats: [
+          ['งบประหยัด', '50 บาท', 'ช้อนใส 100 ชิ้น'],
+          ['งบดูดี', '100 บาท', 'ช้อนแพ็กซอง 100 ชิ้น'],
+          ['ซื้อเยอะ', 'รอหลังเทสต์', 'อย่าเพิ่งสั่งลัง'],
+          ['ต้นทุนต่อกล่อง', '0.5-1', 'ยังรับได้']
+        ],
+        sections: [
+          {
+            type: 'table',
+            title: 'ตัวเลือกช้อน',
+            headers: ['สินค้า', 'ราคาอ้างอิง', 'เหมาะกับ', 'คำตัดสิน'],
+            rows: [
+              ['GROW ช้อนพลาสติกใส 100 ชิ้น', '50 บาท', 'ทดลองขายแบบคุมงบ', 'ใช้ได้ แต่ต้องจัดเก็บให้สะอาดมาก'],
+              ['thefoodbox ช้อนสั้นแพ็กซอง 100 ชิ้น', '100 บาท', 'ออเดอร์ออนไลน์ที่อยากดูมืออาชีพ', 'แนะนำถ้ามีงบเพิ่ม 50 บาท'],
+              ['เอโร่ หลอดช้อนห่อฟิล์ม 100 ชิ้น x 5', '120-125 บาท', 'ถ้าเจอสาขาและรูปแบบตรงกับการใช้งาน', 'คุ้มมากต่อชิ้น แต่ตรวจว่าคือช้อนที่ใช้กินข้าวได้จริง']
+            ]
+          },
+          {
+            type: 'list',
+            title: 'กฎตัดสินใจเร็ว',
+            items: [
+              'ถ้าขายบน LINE/Facebook ลูกค้าประจำ: เริ่ม GROW 100 ชิ้นได้ แต่แพ็กให้สะอาด',
+              'ถ้าจะส่งผ่านไรเดอร์หรือถ่ายรูปลงร้าน: เลือกช้อนแพ็กซอง ดูน่าเชื่อถือกว่า',
+              'ยังไม่ต้องซื้อช้อนส้อมคู่ ถ้าเมนูหลักเป็นข้าวราด ใช้ช้อนเดี่ยวพอ',
+              'อย่าลืมทิชชู่หรือกระดาษเช็ดปากเล็ก ๆ ถ้ากล่องดู premium แต่ไม่มีทิชชู่ ลูกค้าจะรู้สึกขาด'
+            ]
+          },
+          {
+            type: 'list',
+            title: 'แหล่งราคาอ้างอิง',
+            items: [
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/W-SP01-1-7127578968259" target="_blank">GROW ช้อนพลาสติกใส 100 ชิ้น</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/azcogzw-7468004737219" target="_blank">thefoodbox ช้อนสั้นแพ็กซอง 100 ชิ้น</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/909976-97414863060080" target="_blank">เอโร่ หลอดช้อนห่อฟิล์ม 100 ชิ้น x 5</a>'
+            ]
+          }
+        ]
+      },
+      'buying-nampla': {
+        group: 'buying',
+        kicker: 'Nam Pla Prik Decision',
+        title: 'พริกน้ำปลาที่ทำง่าย ไม่รั่ว และคุมต้นทุน',
+        summary: 'พริกน้ำปลาเป็นรายละเอียดเล็กที่ทำให้อาหารกล่องดูครบ อย่าตักใส่ถุงเล็กหรือแถมแบบเสี่ยงรั่ว ให้ใช้ถ้วยน้ำจิ้มฝาปิด 2 oz แล้ว portion 15-20 ml ต่อกล่องเพื่อคุมต้นทุนและดูสะอาด',
+        stats: [
+          ['ถ้วย', '2 oz', 'ฝาพับหรือฝาล็อก'],
+          ['portion', '15-20 ml', 'ต่อ 1 กล่อง'],
+          ['ทำสด', 'รายวัน', 'รสไม่หมอง'],
+          ['ต้นทุน', 'ต่ำกว่า 1.5', 'ไม่รวมแรง']
+        ],
+        sections: [
+          {
+            type: 'table',
+            title: 'ของที่ต้องซื้อสำหรับพริกน้ำปลา',
+            headers: ['รายการ', 'ราคาอ้างอิง', 'ซื้อเท่าไหร่ก่อน', 'หมายเหตุ'],
+            rows: [
+              ['ทิพรส น้ำปลาแท้ 700 มล.', '29 บาท', '1 ขวด', 'คงรสเดิมและใช้ปรุงอาหารได้ด้วย'],
+              ['พริกขี้หนูสวนหอม', '49 บาท / 100 กรัม', '1 แพ็ก', 'พอทำพริกน้ำปลาและเติมเมนูกะเพรารอบทดลอง'],
+              ['กระเทียมไทยแกะกลีบ', '89 บาท / 1 กก.', 'ใช้ครึ่งถุงก่อน', 'ใช้ได้ทั้งพริกน้ำปลาและผัด'],
+              ['มะนาวสด', 'เผื่อ 80 บาท', 'ซื้อสดตามราคาในวันนั้น', 'ถ้าแพงหรือหมดให้มีน้ำมะนาวสำรอง'],
+              ['ถ้วยน้ำจิ้มฝาพับ 2 oz x 50', '28 บาท', '1 แพ็ก', 'ปิดแน่นกว่าถุงเล็ก และดูเป็นร้านมากกว่า']
+            ]
+          },
+          {
+            type: 'cards',
+            title: 'สูตรตั้งต้น 30 กล่อง',
+            cards: [
+              ['น้ำปลา', 'ประมาณ 300-350 ml ใช้ทิพรสเป็นฐานรส'],
+              ['เปรี้ยวหวาน', 'น้ำมะนาว 150 ml + น้ำตาล 15-20 g ชิมให้เค็มนำ เปรี้ยวตาม'],
+              ['เครื่องสด', 'พริก 50-60 g + กระเทียม 25-30 g ซอยใหม่แล้วแช่เย็น']
+            ]
+          },
+          {
+            type: 'list',
+            title: 'ข้อห้ามสำคัญ',
+            items: [
+              'อย่าใส่เต็มถ้วย 2 oz เพราะต้นทุนสูงและเสี่ยงหก ให้ใส่ 15-20 ml แล้วปิดฝาแน่น',
+              'อย่าทำค้างหลายวันช่วงเริ่มร้าน ทำสดวันต่อวันก่อนเพื่อดู feedback',
+              'อย่าใช้พริกแพ็กใหญ่ 1 กก. ตั้งแต่รอบแรกถ้ายังไม่รู้ยอดขายจริง เพราะของสดเสียเร็ว',
+              'ถ้าลูกค้าขอเยอะ ให้ทำเป็น add-on พริกน้ำปลาเพิ่ม 5 บาท แทนการเพิ่มฟรีทุกออเดอร์'
+            ]
+          },
+          {
+            type: 'list',
+            title: 'แหล่งราคาอ้างอิง',
+            items: [
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/426547-274346112267996" target="_blank">ทิพรส น้ำปลาแท้ ขวดเพ็ท 700 มล.</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/146544-7078708183235" target="_blank">พริกขี้หนูสวนหอม 100 กรัม</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/p/qchqj1z-6976617644227" target="_blank">กระเทียมไทยแกะกลีบ 1 กก.</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/en/p/ET-2oz.-512495384079630" target="_blank">ถ้วยน้ำจิ้มฝาพับ 2 oz x 50</a>'
+            ]
+          }
+        ]
+      },
+      'buying-missed': {
+        group: 'buying',
+        kicker: 'Forgotten Essentials',
+        title: 'ของเล็กที่มักลืม แต่จำเป็นตอนขายจริง',
+        summary: 'ของกลุ่มนี้ไม่ทำให้อาหารอร่อยขึ้นโดยตรง แต่ทำให้ร้านดูสะอาด คุมงานง่าย และไม่สะดุดตอนมีออเดอร์จริง ควรเช็กก่อนออกจากบ้านทุกครั้ง โดยเฉพาะวันที่ซื้อของหลัง 16:30',
+        stats: [
+          ['งบกันลืม', '350-600', 'ซื้อเท่าที่ขาด'],
+          ['สำคัญสุด', 'ถุงมือ', 'ห้ามตัดออก'],
+          ['คุมออเดอร์', 'สติกเกอร์', 'ลดหยิบผิด'],
+          ['กันเสียเวลา', 'เทป/ปากกา', 'ใช้ทุกวัน']
+        ],
+        sections: [
+          {
+            type: 'table',
+            title: 'รายการกันลืมก่อนเปิดร้าน',
+            headers: ['รายการ', 'งบตั้งต้น', 'ต้องมีไหม', 'ใช้ทำอะไร'],
+            rows: [
+              ['ถุงมือพลาสติก food safe 100 ชิ้น', '50-65 บาท', 'ขาดไม่ได้', 'แพ็กอาหาร หยิบช้อน หยิบถ้วยน้ำจิ้ม'],
+              ['ถุงมือยางไร้แป้ง/ไนไตรล์', '199-269 บาท', 'ควรมีถ้าแพ็กหนัก', 'จับของมัน ของเปียก หรือทำความสะอาด'],
+              ['สติกเกอร์ชื่อเมนู/วันที่', '45-80 บาท', 'ขาดไม่ได้', 'แยกเผ็ด ไม่เผ็ด พิเศษ ไข่ดาว และวันเตรียม'],
+              ['เทปใส + ปากกาเมจิก', '50-80 บาท', 'ขาดไม่ได้', 'ปิดถุง เขียนชื่อออเดอร์ เขียนเวลา'],
+              ['ทิชชู่/กระดาษเช็ดปาก', '50-100 บาท', 'ควรมี', 'ทำให้ออเดอร์ดูครบ ไม่เหมือนทำเล่น'],
+              ['ถุงซิป/ถุงร้อนแบ่งหมู', '60-100 บาท', 'ขาดไม่ได้', 'แบ่งวัตถุดิบเป็นรอบ ลดของเสียและหยิบผิด'],
+              ['แอลกอฮอล์/สเปรย์ฆ่าเชื้อ', '80-120 บาท', 'ขาดไม่ได้', 'เช็ดโต๊ะแพ็ก มือจับ และจุดวางกล่อง'],
+              ['ถุงขยะครัว', '60-100 บาท', 'ขาดไม่ได้', 'ครัวขายจริงมีขยะมากกว่าทำกินเอง']
+            ]
+          },
+          {
+            type: 'list',
+            title: 'สิ่งที่ไม่ต้องซื้อทันทีถ้าครัวมีอยู่แล้ว',
+            items: [
+              'กล่องเก็บวัตถุดิบใหญ่ ถ้าในบ้านมีฝาปิดแน่นและแยกของขายได้',
+              'ตาชั่งใหม่ ถ้าตาชั่งเดิมชั่งได้ละเอียดพอและยังแม่น',
+              'กล่องกระดาษ premium หรือช้อนส้อมไม้ รอให้ยอดขายนิ่งก่อน',
+              'ป้ายเมนูแพง ๆ เริ่มจาก QR/เมนูพิมพ์เองและสติกเกอร์ก่อน'
+            ]
+          },
+          {
+            type: 'list',
+            title: 'แหล่งราคาอ้างอิง',
+            items: [
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/eie3loz-6974545526979" target="_blank">เอโร่ ถุงมือพลาสติกอเนกประสงค์ 100 ชิ้น</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://www.makro.pro/th/p/996086-999608672676730" target="_blank">เอโร่ ถุงมือยางไร้แป้ง 100 ชิ้น</a>',
+              '<a class="font-bold text-shop-chili underline" href="https://pr.moph.go.th/online/index/news/329108" target="_blank">แนวทางสุขาภิบาลอาหารและสุขวิทยาส่วนบุคคลจากกระทรวงสาธารณสุข</a>'
+            ]
+          }
+        ]
+      },
       ops: {
         kicker: 'Operations Manual',
         title: 'คู่มือปฏิบัติงานสำหรับเปิดร้านทุกวัน',
@@ -690,9 +991,10 @@
     }
     function renderDoc(docId) {
       const doc = docData[docId];
+      const tabs = doc.group === 'buying' ? buyingGuideTabs : docTabs;
       document.getElementById('doc-modal-kicker').textContent = doc.kicker;
       document.getElementById('doc-modal-title').textContent = doc.title;
-      document.getElementById('doc-modal-tabs').innerHTML = docTabs.map(([id, label]) => `<button type="button" data-doc-open="${id}" class="rounded-2xl px-4 py-3 text-sm font-bold ${id === docId ? 'bg-shop-ink text-white' : 'bg-shop-cream text-shop-soy'}">${label}</button>`).join('');
+      document.getElementById('doc-modal-tabs').innerHTML = tabs.map(([id, label]) => `<button type="button" data-doc-open="${id}" class="shrink-0 rounded-full px-4 py-2 text-sm font-bold ${id === docId ? 'bg-shop-ink text-white' : 'bg-shop-cream text-shop-soy'}">${label}</button>`).join('');
       document.getElementById('doc-modal-body').innerHTML = `
         <div class="rounded-[2rem] bg-shop-ink p-5 text-white shadow-lift">
           <p class="max-w-4xl text-base leading-8 text-white/80">${doc.summary}</p>
@@ -904,9 +1206,37 @@
     function saveEssentialState() {
       localStorage.setItem(essentialStateKey, JSON.stringify(essentialState));
     }
+    const legacyMakroDefaults = {
+      rice: { name: 'ข้าวสารหอมมะลิ/ข้าวขาว', price: 125 },
+      packaging: { name: 'กล่องข้าว ฝา ช้อน ถุง กระดาษซับ', price: 230 }
+    };
     function numberValue(value) {
       const parsed = Number(value);
       return Number.isFinite(parsed) ? parsed : 0;
+    }
+    function knownMakroDefault(item) {
+      if (!item) return null;
+      const legacyId = Object.entries(legacyMakroDefaults).find(([, legacy]) => legacy.name === item.name)?.[0];
+      return makroDefaults.find((entry) => entry.id === item.id || entry.name === item.name || entry.id === legacyId) || null;
+    }
+    function migrateMakroItems() {
+      let changed = false;
+      makroItems = makroItems.map((item) => {
+        const current = knownMakroDefault(item);
+        const legacy = current ? legacyMakroDefaults[current.id] : null;
+        if (!current || !legacy) return item;
+        const next = { ...item };
+        if (item.name === legacy.name) {
+          next.name = current.name;
+          changed = true;
+        }
+        if (item.price === legacy.price) {
+          next.price = current.price;
+          changed = true;
+        }
+        return next;
+      });
+      if (changed) saveMakroState();
     }
     function itemBoxes(item) {
       if (!item.checked || !item.boxesPerUnit) return 0;
@@ -935,7 +1265,7 @@
     }
     function hydrateLogItems(items = []) {
       return items.map((item) => {
-        const known = makroDefaults.find((entry) => entry.name === item.name);
+        const known = knownMakroDefault(item);
         return { ...(known || {}), ...item, checked: true, id: known?.id || item.name || `log-item-${Date.now()}` };
       });
     }
@@ -1035,6 +1365,7 @@
     renderMenu();
     renderRows('schedule-list', schedule, ([time, task]) => `<div class="grid grid-cols-[116px_1fr] px-5 py-4"><strong class="tabular text-shop-chili">${time}</strong><span class="text-sm leading-6 text-shop-soy">${task}</span></div>`);
     renderRows('shopping-list', shopping, ([item, qty, budget]) => `<div class="grid grid-cols-[1.1fr_.7fr_.7fr] px-5 py-4 text-sm"><strong>${item}</strong><span class="text-shop-soy">${qty}</span><span class="tabular font-bold text-shop-chili">${budget}</span></div>`);
+    migrateMakroItems();
     migrateMakroLogs();
     renderMakroList();
     document.getElementById('package-list').innerHTML = packages.map((pkg) => `
